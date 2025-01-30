@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Default font for English and unspecified languages */
+.english-text {
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* Arabic text */
+.arabic-text {
+  font-family: 'Tajawal', sans-serif;
+}
+
+/* Malayalam text */
+.malayalam-text {
+  font-family: 'Anek', sans-serif;
+}
+
+
+.text-area-1 {
+  width: 100%;
+  overflow: hidden;
+  resize: none; /* Prevents the user from manually resizing the textarea */
+}
+
+table {
+  font-family: 'Roboto', sans-serif; /* Change 'Roboto' to your chosen font */
+  width: 100%; /* Optional: make the table full width */
+  border-collapse: collapse; /* Optional: collapse borders for a cleaner look */
+}
