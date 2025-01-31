@@ -16,7 +16,7 @@ import { toast } from "sonner";
 import { vendorData } from "../../constants/tableData";
 import { OngoingOrdersTableData } from "../../constants/orderTableData";
 
-const VendorCategory = () => {
+const CancelledOrders = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [editPopupData, setEditPopupData] = useState(null);
   const [searchValue, setSearchValue] = useState("");
@@ -179,14 +179,14 @@ const VendorCategory = () => {
   return (
     <>
       <div className="flex rounded-lg p-4">
-        <h2 className="text-2xl font-semibold text-gray-700">Ongoing Orders</h2>
+        <h2 className="text-2xl font-semibold text-gray-700">Cancelled Orders</h2>
         <div className="ml-auto flex items-center space-x-4">
           <span className="flex items-center">
-            <span
+            {/* <span
               className="bg-[#808080] hover:bg-[#F8BF40] text-white rounded-3xl pt-2 pb-2 pl-4 pr-4 cursor-pointer"
               onClick={toggleModal}>
               Add Order
-            </span>
+            </span> */}
 
             <Modal
               isVisible={isModalVisible}
@@ -293,12 +293,12 @@ const VendorCategory = () => {
             <th className="px-4 py-4 text-left border-r border-gray-400">
               Order Time
             </th>
-            <th className="px-4 py-4 text-left">Serve Time</th>
+            {/* <th className="px-4 py-4 text-left">Serve Time</th> */}
             <th className="px-4 py-4 text-left border-r border-gray-400">
               Table No
             </th>
             <th className="px-4 py-4 text-left">Items</th>
-            <th className="px-4 py-4 text-left">Action</th>
+            {/* <th className="px-4 py-4 text-left">Action</th> */}
           </tr>
         </thead>
         <tbody className="border-[2px] border-opacity-70 border-[#969696]">
@@ -335,9 +335,9 @@ const VendorCategory = () => {
                 <td className="px-4 py-2 border-r border-gray-400">
                 {zone?.orderTime}
                 </td>
-                <td className="px-4 py-2 border-r border-gray-400">
+                {/* <td className="px-4 py-2 border-r border-gray-400">
                 {zone?.serveTime}
-                </td>
+                </td> */}
                   <td className="px-4 py-2 border-r border-gray-400">
                                   {/* <button
                                    
@@ -376,7 +376,7 @@ const VendorCategory = () => {
                 <td className="px-4 py-2 border-r border-gray-400">
                   {zone?.menu}{" x  "}{zone?.quantity}{" "}{zone?.specialInstructions} 
                 </td>
-                <td className="px-4 py-2 border-r border-gray-400">
+                {/* <td className="px-4 py-2 border-r border-gray-400"> */}
                   {/* <button
                     onClick={() => handleEditClick(zone)}
                     className="text-[#808080] hover:text-[#F8BF40]">
@@ -386,14 +386,14 @@ const VendorCategory = () => {
                       className="w-6 h-6 rounded-full mr-2"
                     />
                   </button> */}
-                  <button onClick={() => handleDeleteClick(zone?._id)}>
+                  {/* <button onClick={() => handleDeleteClick(zone?._id)}>
                     <img
                       alt="pics"
                       src="/icons/cancel.svg"
                       className="w-6 h-6 rounded-full mr-2 fill-red-500"
                     />
                   </button>
-                </td>
+                </td> */}
               </tr>
             ))
           )}
@@ -412,4 +412,4 @@ const VendorCategory = () => {
   );
 };
 
-export default VendorCategory;
+export default CancelledOrders;

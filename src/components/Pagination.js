@@ -37,10 +37,10 @@ function Pagination({ currentPage, onPageChange, totalPages }) {
   };
 
   return (
-    <div className="flex justify-center items-center space-x-2 p-4 bg-teal-50">
+    <div className="flex justify-center items-center space-x-2 p-4 bg-[#d3d3d3]">
       {/* Previous Button */}
       <button
-        className={`p-1 bg-teal-500 text-white rounded ${
+        className={`p-1 bg-[#F8BF40] text-white rounded ${
           activePage === 1 ? "opacity-50 cursor-not-allowed" : ""
         }`}
         onClick={() => handlePageChange(activePage - 1)}
@@ -67,7 +67,7 @@ function Pagination({ currentPage, onPageChange, totalPages }) {
 
       {/* Next Button */}
       <button
-        className={`p-1 bg-teal-500 text-white rounded ${
+        className={`p-1 bg-[#F8BF40] text-white rounded ${
           activePage === totalPages ? "opacity-50 cursor-not-allowed" : ""
         }`}
         onClick={() => handlePageChange(activePage + 1)}

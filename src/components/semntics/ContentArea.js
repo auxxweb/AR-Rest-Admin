@@ -34,6 +34,9 @@ import Plans from "../pages/Plans";
 import Dishes from "../pages/Dishes";
 import Payments from "../pages/Payments";
 import TermsAndConditions from "../pages/TermsAndConditions";
+import CompletedOrders from "../pages/CompletedOrders";
+import PaymentPendingOrders from "../pages/PaymentPendingOrders";
+import CancelledOrders from "../pages/CancelledOrders";
 
 function ContentArea() {
   return (
@@ -60,6 +63,9 @@ function ContentArea() {
       <Route path="/bundles/:id" element={<BundleDetails />} />
       <Route path="/result" element={<ResponseAndResult />} />
       <Route path="/result/:id" element={<ResultDetails />} />
+      <Route path="/v-completed" element={<CompletedOrders />} />
+      <Route path="/v-payment-pending" element={<PaymentPendingOrders />} />
+      <Route path="/v-cancelled" element={<CancelledOrders />} />
     </Routes>
   );
 }

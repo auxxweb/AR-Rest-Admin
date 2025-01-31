@@ -14,9 +14,9 @@ import Pagination from "../Pagination";
 import { PUBLIC_USER_FRONTEND_URL } from "../../common/utils";
 import { toast } from "sonner";
 import { vendorData } from "../../constants/tableData";
-import { OngoingOrdersTableData } from "../../constants/orderTableData";
+import { OngoingOrdersTableData, paymentPendingOrdersTableData } from "../../constants/orderTableData";
 
-const VendorCategory = () => {
+const PaymentPendingOrders = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [editPopupData, setEditPopupData] = useState(null);
   const [searchValue, setSearchValue] = useState("");
@@ -179,14 +179,14 @@ const VendorCategory = () => {
   return (
     <>
       <div className="flex rounded-lg p-4">
-        <h2 className="text-2xl font-semibold text-gray-700">Ongoing Orders</h2>
+        <h2 className="text-2xl font-semibold text-gray-700">Payment Pending Orders</h2>
         <div className="ml-auto flex items-center space-x-4">
           <span className="flex items-center">
-            <span
+            {/* <span
               className="bg-[#808080] hover:bg-[#F8BF40] text-white rounded-3xl pt-2 pb-2 pl-4 pr-4 cursor-pointer"
               onClick={toggleModal}>
               Add Order
-            </span>
+            </span> */}
 
             <Modal
               isVisible={isModalVisible}
@@ -293,19 +293,20 @@ const VendorCategory = () => {
             <th className="px-4 py-4 text-left border-r border-gray-400">
               Order Time
             </th>
-            <th className="px-4 py-4 text-left">Serve Time</th>
+            <th className="px-4 py-4 text-left border-r border-gray-400">Served Time</th>
             <th className="px-4 py-4 text-left border-r border-gray-400">
               Table No
             </th>
-            <th className="px-4 py-4 text-left">Items</th>
-            <th className="px-4 py-4 text-left">Action</th>
+            <th className="px-4 py-4 text-left border-r border-gray-400">Items</th>
+            <th className="px-4 py-4 text-left border-r border-gray-400">Payment</th>
+            <th className="px-4 py-4 text-left">Amount</th>
           </tr>
         </thead>
         <tbody className="border-[2px] border-opacity-70 border-[#969696]">
           {isLoading ? (
             <>Loading...</>
           ) : (
-            OngoingOrdersTableData?.map((zone, index) => (
+            paymentPendingOrdersTableData?.map((zone, index) => (
               <tr
                 className="odd:bg-[#FFFC64] even:bg-white border-[2px] border-opacity-50 border-[#9e9696]"
                 key={index}>
@@ -377,6 +378,7 @@ const VendorCategory = () => {
                   {zone?.menu}{" x  "}{zone?.quantity}{" "}{zone?.specialInstructions} 
                 </td>
                 <td className="px-4 py-2 border-r border-gray-400">
+                  {zone?.payment}
                   {/* <button
                     onClick={() => handleEditClick(zone)}
                     className="text-[#808080] hover:text-[#F8BF40]">
@@ -386,13 +388,16 @@ const VendorCategory = () => {
                       className="w-6 h-6 rounded-full mr-2"
                     />
                   </button> */}
-                  <button onClick={() => handleDeleteClick(zone?._id)}>
+                  {/* <button onClick={() => handleDeleteClick(zone?._id)}>
                     <img
                       alt="pics"
                       src="/icons/cancel.svg"
                       className="w-6 h-6 rounded-full mr-2 fill-red-500"
                     />
-                  </button>
+                  </button> */}
+                </td>
+                <td className="px-4 py-2 border-r border-gray-400">
+                  {zone?.amount}
                 </td>
               </tr>
             ))
@@ -412,4 +417,4 @@ const VendorCategory = () => {
   );
 };
 
-export default VendorCategory;
+export default PaymentPendingOrders;

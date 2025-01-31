@@ -304,7 +304,7 @@ const Payments = () => {
               />
             </span>
             <span className="flex items-center">
-              <span className="cursor-pointer bg-[#0EB599] hover:bg-[#068A55] text-white p-2 lg:w-[100px] text-center rounded-3xl">
+              <span className="cursor-pointer bg-[#808080] hover:bg-[#F8BF40] text-white p-2 lg:w-[100px] text-center rounded-3xl">
                 Search
               </span>
             </span>
@@ -343,7 +343,7 @@ const Payments = () => {
           ) : (
                     PaymentTableData?.map((judge, index) => (
               <tr
-                className="odd:bg-teal-100 even:bg-grey border-[2px] border-opacity-50 border-[#9e9696]"
+                className="odd:bg-[#FFFC64] even:bg-grey border-[2px] border-opacity-50 border-[#9e9696]"
                 key={index}
               >
                 <td

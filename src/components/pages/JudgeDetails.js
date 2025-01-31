@@ -258,7 +258,7 @@ const JudgeDetails = () => {
               {/* Update Password Button */}
               <button
                 onClick={() => setIsModalVisible(true)}
-                className="bg-[#0EB599] hover:bg-[#068A55] text-white font-bold py-2 px-6 rounded-3xl"
+                className="bg-[#808080] hover:bg-[#F8BF40] text-white font-bold py-2 px-6 rounded-3xl"
               >
                 UPDATE PASSWORD
               </button>
@@ -308,7 +308,7 @@ const JudgeDetails = () => {
             <button
               disabled={isLoadingUpdatePassword}
               type="submit"
-              className="bg-[#0EB599] hover:bg-[#068A55] text-white font-bold py-2 px-6 rounded-3xl"
+              className="bg-[#808080] hover:bg-[#F8BF40] text-white font-bold py-2 px-6 rounded-3xl"
             >
               {isLoadingUpdatePassword ? "loading..." : "Update"}
             </button>

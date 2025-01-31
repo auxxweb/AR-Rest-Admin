@@ -44,7 +44,7 @@ function Sidebar({ isOpen, setIsOpen }) {
             location?.pathname?.split("/")[1] === ""
               ? "text-[#25e2b6]"
               : "text-[#909294]"
-          }  hover:text-[#75eed2]`}
+          }  hover:text-[#F8BF40]`}
           onClick={() => navigate("/")}>
           <span className="flex items-center ml-2">
             <svg
@@ -66,7 +66,7 @@ function Sidebar({ isOpen, setIsOpen }) {
                 }
               />
             </svg>
-            <span className="text-custom-16 hover:text-[#75eed2] ml-4">
+            <span className="text-custom-16 hover:text-[#F8BF40] ml-4">
               Dashboard
             </span>
           </span>
@@ -74,7 +74,7 @@ function Sidebar({ isOpen, setIsOpen }) {
         <Disclosure>
           {({ open }) => (
             <div >
-              <Disclosure.Button  className="flex items-center justify-between text-custom-16 text-[#909294] hover:text-[#75eed2] lg:2xl px-4 py-2">
+              <Disclosure.Button  className="flex items-center justify-between text-custom-16 text-[#909294] hover:text-[#F8BF40] lg:2xl px-4 py-2">
                 <div 
                 style={{...(location?.pathname?.split("/")[1] === "/zones"? {backgroundColor:"#CFCFCF", borderRadius:"5px",padding:"8px 0"}:{})}}
                 className=" flex mr-14">
@@ -92,8 +92,8 @@ function Sidebar({ isOpen, setIsOpen }) {
                       />
                     </svg>
                   </span>
-                  <span  onClick={() => navigate("/zones")} className="text-custom-16 mt-[-3px] text-[#a5a5a5] hover:text-[#75eed2] ml-4">
-                    Vendor
+                  <span  onClick={() => navigate("/zones")} className="text-custom-16 mt-[-3px] text-[#a5a5a5] hover:text-[#F8BF40] ml-4">
+                    Orders
                   </span>
                 </div>
                 <ChevronUpIcon
@@ -107,15 +107,33 @@ function Sidebar({ isOpen, setIsOpen }) {
                 <ul className="list-disc list-inside">
                   <li
                     onClick={() => navigate("/zones")}
-                    className="cursor-pointer text-[#1DB290] hover:text-[#75eed2]"
+                    className="cursor-pointer text-[#1DB290] hover:text-[#F8BF40]"
                   >
-                    Vendor
+                    New Orders
                   </li>
                   <li
                     onClick={() => navigate("/v-category")}
-                    className="cursor-pointer text-[#909294] hover:text-[#75eed2]"
+                    className="cursor-pointer text-[#909294] hover:text-[#F8BF40]"
                   >
-                    Category
+                    Ongoing Orders
+                  </li>
+                  <li
+                    onClick={() => navigate("/v-completed")}
+                    className="cursor-pointer text-[#909294] hover:text-[#F8BF40]"
+                  >
+                    Completed Orders
+                  </li>
+                  <li
+                    onClick={() => navigate("/v-payment-pending")}
+                    className="cursor-pointer text-[#909294] hover:text-[#F8BF40]"
+                  >
+                  Payment Pending 
+                  </li>
+                  <li
+                    onClick={() => navigate("/v-cancelled")}
+                    className="cursor-pointer text-[#909294] hover:text-[#F8BF40]"
+                  >
+                    Cancelled Orders
                   </li>
                 </ul>
               </Disclosure.Panel>
@@ -125,7 +143,7 @@ function Sidebar({ isOpen, setIsOpen }) {
         <Disclosure>
           {({ open }) => (
             <>
-              <Disclosure.Button className="flex items-center justify-between text-custom-16 text-[#909294] hover:text-[#75eed2] lg:2xl px-4 py-2">
+              <Disclosure.Button className="flex items-center justify-between text-custom-16 text-[#909294] hover:text-[#F8BF40] lg:2xl px-4 py-2">
                 <div className=" flex mr-14">
                   <span className="ml-[-10px]">
                     <svg
@@ -141,7 +159,7 @@ function Sidebar({ isOpen, setIsOpen }) {
                       />
                     </svg>
                   </span>
-                  <span  onClick={() => navigate("/zones")} className="text-custom-16 mt-[-3px] text-[#a5a5a5] hover:text-[#75eed2] ml-4">
+                  <span  onClick={() => navigate("/zones")} className="text-custom-16 mt-[-3px] text-[#a5a5a5] hover:text-[#F8BF40] ml-4">
                    Menu
                   </span>
                 </div>
@@ -156,13 +174,13 @@ function Sidebar({ isOpen, setIsOpen }) {
                 <ul className="list-disc list-inside">
                   <li
                     onClick={() => navigate("/menu-category")}
-                    className="cursor-pointer text-[#1DB290] hover:text-[#75eed2]"
+                    className="cursor-pointer text-[#1DB290] hover:text-[#F8BF40]"
                   >
                     Category
                   </li>
                   <li
                     onClick={() => navigate("/menu-sub-category")}
-                    className="cursor-pointer text-[#909294] hover:text-[#75eed2]"
+                    className="cursor-pointer text-[#909294] hover:text-[#F8BF40]"
                   >
                     Sub-Category
                   </li>
@@ -178,7 +196,7 @@ function Sidebar({ isOpen, setIsOpen }) {
             location?.pathname?.split("/")[1] === "plans"
               ? "text-[#25e2b6]"
               : "text-[#909294]"
-          }  hover:text-[#75eed2]`}>
+          }  hover:text-[#F8BF40]`}>
           <span className="flex items-center ml-2">
             <svg
               width="20"
@@ -210,7 +228,7 @@ function Sidebar({ isOpen, setIsOpen }) {
             location?.pathname?.split("/")[1] === "dishes"
               ? "text-[#25e2b6]"
               : "text-[#909294]"
-          }  hover:text-[#75eed2]`}>
+          }  hover:text-[#F8BF40]`}>
           <span className="flex items-center ml-2">
             <svg
               width="20"
@@ -242,7 +260,7 @@ function Sidebar({ isOpen, setIsOpen }) {
             location?.pathname?.split("/")[1] === "payments"
               ? "text-[#25e2b6]"
               : "text-[#909294]"
-          }  hover:text-[#75eed2]`}>
+          }  hover:text-[#F8BF40]`}>
           <span className="flex items-center ml-2">
             <svg
               width="20"
@@ -274,7 +292,7 @@ function Sidebar({ isOpen, setIsOpen }) {
             location?.pathname?.split("/")[1] === "terms"
               ? "text-[#25e2b6]"
               : "text-[#909294]"
-          }  hover:text-[#75eed2]`}>
+          }  hover:text-[#F8BF40]`}>
           <span className="flex items-center ml-2">
             <svg
               width="20"
@@ -306,7 +324,7 @@ function Sidebar({ isOpen, setIsOpen }) {
             location?.pathname?.split("/")[1] === "bundles"
               ? "text-[#25e2b6]"
               : "text-[#909294]"
-          }  hover:text-[#75eed2]`}>
+          }  hover:text-[#F8BF40]`}>
           <span className="flex items-center ml-2">
             <svg
               width="20"

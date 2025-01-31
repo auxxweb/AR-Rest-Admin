@@ -76,7 +76,7 @@ function Header({ toggleSidebar }) {
   return (
     <header
       className="flex items-center justify-between p-4"
-      style={{ background: "linear-gradient(135deg,rgb(0, 0, 0),rgb(127, 130, 130))" }}
+      style={{ background: "linear-gradient(135deg,rgb(255, 255, 255),rgb(230, 230, 230))" }}
     >
       <button
         className="text-gray-200 focus:outline-none lg:hidden"
@@ -185,7 +185,7 @@ function Header({ toggleSidebar }) {
             <button
               disabled={isLoadingUpdatePassword}
               type="submit"
-              className="bg-[#0EB599] hover:bg-[#068A55] text-white font-bold py-2 px-6 rounded-3xl"
+              className="bg-[#808080] hover:bg-[#F8BF40] text-white font-bold py-2 px-6 rounded-3xl"
             >
               {isLoadingUpdatePassword ? "loading..." : "Update"}
             </button>

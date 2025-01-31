@@ -14,9 +14,9 @@ import Pagination from "../Pagination";
 import { PUBLIC_USER_FRONTEND_URL } from "../../common/utils";
 import { toast } from "sonner";
 import { vendorData } from "../../constants/tableData";
-import { OngoingOrdersTableData } from "../../constants/orderTableData";
+import { completedOrdersTableData, OngoingOrdersTableData } from "../../constants/orderTableData";
 
-const VendorCategory = () => {
+const CompletedOrders = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [editPopupData, setEditPopupData] = useState(null);
   const [searchValue, setSearchValue] = useState("");
@@ -179,7 +179,7 @@ const VendorCategory = () => {
   return (
     <>
       <div className="flex rounded-lg p-4">
-        <h2 className="text-2xl font-semibold text-gray-700">Ongoing Orders</h2>
+        <h2 className="text-2xl font-semibold text-gray-700">Completed Orders</h2>
         <div className="ml-auto flex items-center space-x-4">
           <span className="flex items-center">
             <span
@@ -293,19 +293,19 @@ const VendorCategory = () => {
             <th className="px-4 py-4 text-left border-r border-gray-400">
               Order Time
             </th>
-            <th className="px-4 py-4 text-left">Serve Time</th>
+            <th className="px-4 py-4 text-left border-r border-gray-400">Served Time</th>
             <th className="px-4 py-4 text-left border-r border-gray-400">
               Table No
             </th>
-            <th className="px-4 py-4 text-left">Items</th>
-            <th className="px-4 py-4 text-left">Action</th>
+            <th className="px-4 py-4 text-left border-r border-gray-400">Items</th>
+            <th className="px-4 py-4 text-left">Payment Status</th>
           </tr>
         </thead>
         <tbody className="border-[2px] border-opacity-70 border-[#969696]">
           {isLoading ? (
             <>Loading...</>
           ) : (
-            OngoingOrdersTableData?.map((zone, index) => (
+            completedOrdersTableData?.map((zone, index) => (
               <tr
                 className="odd:bg-[#FFFC64] even:bg-white border-[2px] border-opacity-50 border-[#9e9696]"
                 key={index}>
@@ -386,13 +386,14 @@ const VendorCategory = () => {
                       className="w-6 h-6 rounded-full mr-2"
                     />
                   </button> */}
-                  <button onClick={() => handleDeleteClick(zone?._id)}>
+                  {zone?.payment}
+                  {/* <button onClick={() => handleDeleteClick(zone?._id)}>
                     <img
                       alt="pics"
                       src="/icons/cancel.svg"
                       className="w-6 h-6 rounded-full mr-2 fill-red-500"
                     />
-                  </button>
+                  </button> */}
                 </td>
               </tr>
             ))
@@ -412,4 +413,4 @@ const VendorCategory = () => {
   );
 };
 
-export default VendorCategory;
+export default CompletedOrders;

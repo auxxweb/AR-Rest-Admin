@@ -182,7 +182,7 @@ const MenuSubCategory = () => {
         <div className="ml-auto flex items-center space-x-4">
           <span className="flex items-center">
             <span
-              className="bg-[#0EB599] hover:bg-[#068A55] text-white rounded-3xl pt-2 pb-2 pl-4 pr-4 cursor-pointer"
+              className="bg-[#808080] hover:bg-[#F8BF40] text-white rounded-3xl pt-2 pb-2 pl-4 pr-4 cursor-pointer"
               onClick={toggleModal}>
               Add Sub Category
             </span>
@@ -228,7 +228,7 @@ const MenuSubCategory = () => {
                   <button
                     disabled={isLoadingMutation || isLoadingEdit}
                     type="submit"
-                    className="bg-[#0EB599] hover:bg-[#068A55] text-white font-bold py-2 px-6 rounded-3xl">
+                    className="bg-[#808080] hover:bg-[#F8BF40] text-white font-bold py-2 px-6 rounded-3xl">
                     {isLoadingMutation || isLoadingEdit
                       ? "loading..."
                       : "Submit"}
@@ -273,7 +273,7 @@ const MenuSubCategory = () => {
           />
         </span>
         <span className="flex items-center ">
-          <span className="cursor-pointer bg-[#0EB599] hover:bg-[#068A55] text-white p-2 lg:w-[100px] text-center rounded-3xl">
+          <span className="cursor-pointer bg-[#808080] hover:bg-[#F8BF40] text-white p-2 lg:w-[100px] text-center rounded-3xl">
             Search
           </span>
         </span>
@@ -304,7 +304,7 @@ const MenuSubCategory = () => {
           ) : (
             MenuSubCategoryData?.map((zone, index) => (
               <tr
-                className="odd:bg-teal-100 even:bg-grey border-[2px] border-opacity-50 border-[#9e9696]"
+                className="odd:bg-[#FFFC64] even:bg-grey border-[2px] border-opacity-50 border-[#9e9696]"
                 key={index}>
                 <td className="px-4 py-2 border-r border-gray-400">
                   {index + 1}

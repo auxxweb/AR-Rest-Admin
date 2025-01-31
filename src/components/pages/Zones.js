@@ -15,6 +15,7 @@ import { PUBLIC_USER_FRONTEND_URL } from "../../common/utils";
 import { toast } from "sonner";
 import { vendorData } from "../../constants/tableData";
 import { BiSolidDownArrow } from "react-icons/bi";
+import { newOrdersTableData } from "../../constants/orderTableData";
 
 const Zones = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -179,13 +180,13 @@ const Zones = () => {
   return (
     <>
       <div className="flex rounded-lg p-4">
-        <h2 className="text-2xl font-semibold text-gray-700">Vendors</h2>
+        <h2 className="text-2xl font-semibold text-gray-700">New Orders</h2>
         <div className="ml-auto flex items-center space-x-4">
           <span className="flex items-center">
             <span
-              className="bg-[#0EB599] hover:bg-[#068A55] text-white rounded-3xl pt-2 pb-2 pl-4 pr-4 cursor-pointer"
+              className="bg-[#808080] hover:bg-[#F8BF40] text-white rounded-3xl pt-2 pb-2 pl-4 pr-4 cursor-pointer"
               onClick={toggleModal}>
-              Add Vendor
+              Add Order
             </span>
 
             <Modal
@@ -197,7 +198,7 @@ const Zones = () => {
                   <label
                     htmlFor="zoneName"
                     className="block text-sm font-medium text-gray-700">
-                    Zone Name
+                    Order Items
                   </label>
                   <input
                     type="text"
@@ -212,7 +213,7 @@ const Zones = () => {
                   <label
                     htmlFor="description"
                     className="block text-sm font-medium text-gray-700">
-                    Description
+                    Specal Instructions
                   </label>
                   <input
                     type="text"
@@ -229,7 +230,7 @@ const Zones = () => {
                   <button
                     disabled={isLoadingMutation || isLoadingEdit}
                     type="submit"
-                    className="bg-[#0EB599] hover:bg-[#068A55] text-white font-bold py-2 px-6 rounded-3xl">
+                    className="bg-[#808080] hover:bg-[#F8BF40] text-white font-bold py-2 px-6 rounded-3xl">
                     {isLoadingMutation || isLoadingEdit
                       ? "loading..."
                       : "Submit"}
@@ -274,7 +275,7 @@ const Zones = () => {
           />
         </span>
         <span className="flex items-center ">
-          <span className="cursor-pointer bg-[#0EB599] hover:bg-[#068A55] text-white p-2 lg:w-[100px] text-center rounded-3xl">
+          <span className="cursor-pointer bg-[#808080] hover:bg-[#F8BF40] text-white p-2 lg:w-[100px] text-center rounded-3xl">
             Search
           </span>
         </span>
@@ -287,15 +288,16 @@ const Zones = () => {
               Sl No
             </th>
             <th className="px-4 py-4 text-left border-r border-gray-400">
-              Name
+              Order ID
             </th>
-            <th className="px-4 py-4 text-left border-r border-gray-400">Id</th>
+            {/* <th className="px-4 py-4 text-left border-r border-gray-400">Id</th> */}
             <th className="px-4 py-4 text-left border-r border-gray-400">
-              Description
+              Order Time
             </th>
             <th className="px-4 py-4 text-left border-r border-gray-400">
-              Status
+              Table No
             </th>
+            <th className="px-4 py-4 text-left">Items</th>
             <th className="px-4 py-4 text-left">Action</th>
           </tr>
         </thead>
@@ -303,38 +305,38 @@ const Zones = () => {
           {isLoading ? (
             <>Loading...</>
           ) : (
-            vendorData?.map((zone, index) => (
+            newOrdersTableData?.map((zone, index) => (
               <tr
-                className="odd:bg-grey-100 even:bg-white border-[2px] border-opacity-50 border-[#9e9696]"
+                className="odd:bg-[#FFFC64] even:bg-white border-[2px] border-opacity-50 border-[#9e9696]"
                 key={index}>
                 <td className="px-4 py-2 border-r border-gray-400">
                   {index + 1}
                 </td>
-                <td
+                {/* <td
                   style={{ cursor: "pointer",textDecoration:"none" }}
                   className="px-4 py-2 border-r border-gray-400">
                   <u
                     style={{ cursor: "pointer" }}
                     onMouseOver={({ target }) => (target.style.color = "blue")}
                     onMouseOut={({ target }) => (target.style.color = "black")}>
-                   <div style={{display:"flex",gap:"1rem"}}>
-                    <img
+                   <div style={{display:"flex",gap:"1rem"}}> */}
+                    {/* <img
                       alt="pics"
-                      src={zone?.image}
+                      src={zone?.orderId}
                       className="w-10 h-10 rounded-full mr-2"
-                    />
-                     {zone?.name}{" "}
-                     </div>
-                  </u>
+                    /> */}
+                     {/* {zone?.name}{" "} */}
+                     {/* </div> */}
+                  {/* </u> */}
+                {/* </td> */}
+                <td className="px-4 py-2 border-r border-gray-400">
+                  {zone?.orderId}
                 </td>
                 <td className="px-4 py-2 border-r border-gray-400">
-                  {zone?.id}
-                </td>
-                <td className="px-4 py-2 border-r border-gray-400">
-                <div className="flex -space-x-3">{zone?.description}</div>
+                {zone?.orderTime}
                 </td>
                   <td className="px-4 py-2 border-r border-gray-400">
-                                  <button
+                                  {/* <button
                                    
                                     className={`py-2 px-5 flex space-x-2 items-center ${
                                       zone?.status
@@ -349,20 +351,42 @@ const Zones = () => {
                                 </td>
 
                                 <td className="px-4 py-2 border-r border-gray-400">
-                  <button
-                    // disabled={isLoadingBlock}
-                    onClick={() => handleEditClick(zone)}
-                  >
-                    <img
+                  <button */}
+                    {/* // disabled={isLoadingBlock} */}
+                    {/* onClick={() => handleEditClick(zone)} */}
+                  {/* > */}
+                    {/* <img
                       alt="pics"
                       src="/icons/edit.svg"
+                      className="w-6 h-6 rounded-full mr-2"
+                    /> */}
+                  {/* </button> */}
+                  {/* <button onClick={() => handleDeleteClick(zone?._id)}>
+                    <img
+                      alt="pics"
+                      src="/icons/delete.svg"
+                      className="w-6 h-6 rounded-full mr-2 fill-red-500"
+                    />
+                  </button> */}
+                  {zone?.tableNo}
+                </td>
+                <td className="px-4 py-2 border-r border-gray-400">
+                  {zone?.menu1}{" x  "}{zone?.quantity}{" "}{zone?.specialInstructions} <br /> {zone?.menu2}{"  x  "}{zone?.quantity}{"  "}{zone?.specialInstructions}
+                </td>
+                <td className="px-4 py-2 border-r border-gray-400">
+                  <button
+                    onClick={() => handleEditClick(zone)}
+                    className="text-[#808080] hover:text-[#F8BF40]">
+                    <img
+                      alt="pics"
+                      src="/icons/cook.svg"
                       className="w-6 h-6 rounded-full mr-2"
                     />
                   </button>
                   <button onClick={() => handleDeleteClick(zone?._id)}>
                     <img
                       alt="pics"
-                      src="/icons/delete.svg"
+                      src="/icons/cancel.svg"
                       className="w-6 h-6 rounded-full mr-2 fill-red-500"
                     />
                   </button>

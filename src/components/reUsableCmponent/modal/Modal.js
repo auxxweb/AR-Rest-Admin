@@ -15,7 +15,7 @@ const Modal = ({ isVisible, onClose, children, modalHeader, isScrollable }) => {
           <h3 className="text-lg font-bold">{modalHeader}</h3>
           <button
             onClick={onClose}
-            className="text-gray-600 text-md font-label border-2 rounded-full w-13 px-2 border-[#0EB599] hover:border-[#068A55] hover:text-[#068A55]"
+            className="text-gray-600 text-md font-label border-2 rounded-full w-13 px-2 border-[#808080] hover:border-[#F8BF40] hover:text-[#F8BF40]"
           >
           close  x
           </button>

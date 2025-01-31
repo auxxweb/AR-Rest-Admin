@@ -231,7 +231,7 @@ const Participants = () => {
           {" "}
           <span className="flex items-center">
             <span
-              className="bg-[#0EB599] hover:bg-[#068A55] text-white rounded-3xl pt-2 pb-2 pl-4 pr-4 cursor-pointer"
+              className="bg-[#808080] hover:bg-[#F8BF40] text-white rounded-3xl pt-2 pb-2 pl-4 pr-4 cursor-pointer"
               onClick={toggleModal}
             >
               Add Participant
@@ -412,7 +412,7 @@ const Participants = () => {
                 <button
                   disabled={isLoadingMutation || isLoadingEdit}
                   type="submit"
-                  className="bg-[#0EB599] hover:bg-[#068A55] text-white font-bold py-2 px-6 rounded-3xl"
+                  className="bg-[#808080] hover:bg-[#F8BF40] text-white font-bold py-2 px-6 rounded-3xl"
                 >
                   Submit
                   {/* {isLoadingMutation || isLoadingEdit ? "loading..." : "Submit"} */}
@@ -471,7 +471,7 @@ const Participants = () => {
               <button
                 onClick={handleFilterClick}
                 type="submit"
-                className="bg-[#0EB599] hover:bg-[#068A55] text-white font-bold py-2 px-6 rounded-3xl"
+                className="bg-[#808080] hover:bg-[#F8BF40] text-white font-bold py-2 px-6 rounded-3xl"
               >
                 Apply
               </button>
@@ -490,7 +490,7 @@ const Participants = () => {
             />
           </span>
           <span className="flex items-center">
-            <span  className="cursor-pointer bg-[#0EB599] hover:bg-[#068A55] text-white p-2 lg:w-[100px] text-center rounded-3xl">
+            <span  className="cursor-pointer bg-[#808080] hover:bg-[#F8BF40] text-white p-2 lg:w-[100px] text-center rounded-3xl">
               Search
             </span>
           </span>
@@ -513,7 +513,7 @@ const Participants = () => {
           ) : (
             data?.participant?.map((participant, index) => (
               <tr
-                 className="odd:bg-teal-100 even:bg-grey border-[2px] border-opacity-50 border-[#9e9696]"
+                 className="odd:bg-[#FFFC64] even:bg-grey border-[2px] border-opacity-50 border-[#9e9696]"
                 key={index}
               >
                 <td
