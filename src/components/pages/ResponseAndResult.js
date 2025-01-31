@@ -48,7 +48,7 @@ const ResponseAndResult = () => {
           />
         </span>
         <span className="flex items-center">
-          <span className="cursor-pointer bg-[#0EB599] hover:bg-[#068A55] text-white p-2 lg:w-[100px] text-center rounded-3xl">
+          <span className="cursor-pointer bg-[#808080] hover:bg-[#F8BF40] text-white p-2 lg:w-[100px] text-center rounded-3xl">
             Search
           </span>
         </span>

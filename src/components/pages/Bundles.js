@@ -38,19 +38,21 @@ const Bundles = () => {
   const [questions, setQuestions] = useState([]);
 
   const limit = 10;
-  const { data, refetch } = useGetBundlesQuery({
-    limit,
-    page: currentPage,
-    search: searchValue,
-  });
+  const isLoading = false;
+  const data = [{}];
+  // const { data, refetch } = useGetBundlesQuery({
+  //   limit,
+  //   page: currentPage,
+  //   search: searchValue,
+  // });
   const [addBundle, { isLoading: isLoadingMutation }] = useAddBundleMutation();
   const [deleteBundle, { isLoading: isLoadingDelete }] =
     useDeleteBundleMutation();
   const [editBundle, { isLoading: isLoadingEdit }] = useEditBundleMutation();
 
   useEffect(() => {
-    refetchQuestions();
-    refetch();
+    // refetchQuestions();
+    // refetch();
   }, []);
 
   // const [selectedDesignation, setSelectedDesignation] =
@@ -96,7 +98,7 @@ const Bundles = () => {
         }
         const res = await editBundle?.(body);
         if (res?.data?.success) {
-          refetch({ limit, page: currentPage, search: searchValue });
+          // refetch({ limit, page: currentPage, search: searchValue });
           toggleModal();
           setEditPopupData(null);
         } else {
@@ -129,7 +131,7 @@ const Bundles = () => {
         }
         const res = await addBundle?.(body);
         if (res?.data?.success) {
-          refetch({ limit, page: currentPage, search: searchValue });
+          // refetch({ limit, page: currentPage, search: searchValue });
           toggleModal();
         } else {
           toast.error(res.data.message, {
@@ -192,7 +194,7 @@ const Bundles = () => {
       };
       const deleteres = await deleteBundle?.(body);
       if (deleteres?.data?.success) {
-        refetch();
+        // refetch();
         setSelectedBundleId(null);
         setShowDeletePopup(false);
       } else {
@@ -232,11 +234,11 @@ const Bundles = () => {
   return (
     <>
       <div className="flex rounded-lg p-4">
-        <h2 className="text-2xl font-semibold text-[#212529]">Bundles</h2>
+        <h2 className="text-2xl font-semibold text-[#212529]">Settings</h2>
         <div className="ml-auto flex items-center space-x-4">
           <span className="flex items-center">
             <span
-              className="bg-[#0EB599] hover:bg-[#068A55] text-white rounded-3xl pt-2 pb-2 pl-4 pr-4 cursor-pointer"
+              className="bg-[#808080] hover:bg-[#F8BF40] text-white rounded-3xl pt-2 pb-2 pl-4 pr-4 cursor-pointer"
               onClick={toggleModal}
             >
               Add Bundle
@@ -284,7 +286,7 @@ const Bundles = () => {
           />
         </span>
         <span className="flex items-center">
-          <span className="cursor-pointer bg-[#0EB599] hover:bg-[#068A55] text-white p-2 lg:w-[100px] text-center rounded-3xl">
+          <span className="cursor-pointer bg-[#808080] hover:bg-[#F8BF40] text-white p-2 lg:w-[100px] text-center rounded-3xl">
             Search
           </span>
         </span>
@@ -441,7 +443,7 @@ const Bundles = () => {
                     {questions.map((question) => (
                       <li
                         key={question.value}
-                        className="bg-[#1DB290] flex items-center justify-between text-white rounded-full py-0.5 px-2 text-xs font-light"
+                        className="bg-[#000000] flex items-center justify-between text-white rounded-full py-0.5 px-2 text-xs font-light"
                       >
                         <span>{question.label}</span>
                         <button
@@ -463,7 +465,7 @@ const Bundles = () => {
             <button
               disabled={isLoadingEdit || isLoadingMutation}
               type="submit"
-              className="bg-[#0EB599] hover:bg-[#068A55] text-white font-bold py-2 px-6 rounded-3xl"
+              className="bg-[#808080] hover:bg-[#F8BF40] text-white font-bold py-2 px-6 rounded-3xl"
             >
               Submit
             </button>

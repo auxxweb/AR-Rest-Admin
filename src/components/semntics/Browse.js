@@ -82,7 +82,7 @@ function Browse() {
 
           <main
             className={`flex-1 overflow-y-auto  p-4 ${
-              location.pathname === "/" ? "bg-white" : "bg-[#e9fffb]"
+              location.pathname === "/" ? "bg-white" : "bg-[#d3d3d3]"
             }`}
           >
             <ContentArea />

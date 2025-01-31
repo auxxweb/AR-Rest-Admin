@@ -9,7 +9,7 @@ const DashBoard = () => {
       <div className=" w-full">
         <DashBoardSection2 />
       </div>
-      <DashBoard3Chart />
+      {/* <DashBoard3Chart /> */}
 
     </div>
   );

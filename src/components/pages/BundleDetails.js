@@ -212,7 +212,7 @@ const BundleDetails = () => {
             </div>
           </div>
           <button onClick={() => handleEditClick(data?.bundle)}
-          className="bg-[#0EB599] hover:bg-[#068A55] text-white rounded-3xl pt-2 pb-2 pl-4 pr-4 cursor-pointer"
+          className="bg-[#808080] hover:bg-[#F8BF40] text-white rounded-3xl pt-2 pb-2 pl-4 pr-4 cursor-pointer"
               >
               Insert new Question
             </button>
@@ -303,7 +303,7 @@ const BundleDetails = () => {
                     {questions.map((question) => (
                       <li
                         key={question.value}
-                        className="bg-[#1DB290] flex items-center justify-between text-white rounded-full py-0.5 px-2 text-xs font-light"
+                        className="bg-[#000000] flex items-center justify-between text-white rounded-full py-0.5 px-2 text-xs font-light"
                       >
                         <span>{question.label}</span>
                         <button
@@ -325,7 +325,7 @@ const BundleDetails = () => {
             <button
               disabled={isLoadingEdit}
               type="submit"
-              className="bg-[#0EB599] hover:bg-[#068A55] text-white font-bold py-2 px-6 rounded-3xl"
+              className="bg-[#808080] hover:bg-[#F8BF40] text-white font-bold py-2 px-6 rounded-3xl"
             >
               Submit
             </button>

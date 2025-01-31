@@ -32,18 +32,21 @@ const Participants = () => {
   const [currentPage, setCurrentPage] = useState(null);
   const [searchValue, setSearchValue] = useState("");
   const limit = 10;
+  const isLoading = false;
+  const data = [{}];
+  const zoneList = [{}];
   const [deleteParticipant, { isLoading: isLoadingDelete }] =
     useDeleteParticipantMutation();
-  const { data, isLoading, refetch } = useGetParticipantQuery({
-    limit,
-    page: currentPage,
-    search: searchValue,
-    zones: selectedZones,
-  });
-  const { data: zoneList, refetch: ZoneListsRefetch } = useGetZonesListQuery();
-  useEffect(() => {
-    ZoneListsRefetch();
-  }, [])
+  // const { data, isLoading, refetch } = useGetParticipantQuery({
+  //   limit,
+  //   page: currentPage,
+  //   search: searchValue,
+  //   zones: selectedZones,
+  // });
+  // const { data: zoneList, refetch: ZoneListsRefetch } = useGetZonesListQuery();
+  // useEffect(() => {
+  //   ZoneListsRefetch();
+  // }, [])
   const [addParticipant, { isLoading: isLoadingMutation }] =
     useAddParticipantMutation();
   const [editParticipant, { isLoading: isLoadingEdit }] =
@@ -78,8 +81,8 @@ const Participants = () => {
         formData?.append("participantId", editPopupData?._id);
         const res = await editParticipant?.(formData);
         if (res?.data?.success) {
-          refetch();
-          ZoneListsRefetch();
+          // refetch();
+          // ZoneListsRefetch();
           toggleModal();
           setEditPopupData(null);
         } else {
@@ -96,8 +99,8 @@ const Participants = () => {
       } else {
         const res = await addParticipant?.(formData);
         if (res?.data?.success) {
-          refetch();
-          ZoneListsRefetch();
+          // refetch();
+          // ZoneListsRefetch();
           toggleModal();
         } else {
           toast.error(res.data.message,{
@@ -204,7 +207,7 @@ const Participants = () => {
       };
       const deleteres = await deleteParticipant?.(body);
       if (deleteres?.data?.success) {
-        refetch();
+        // refetch();
         setSelectedParticipantId(null);
         setShowDeletePopup(false);
       } else {
@@ -226,15 +229,15 @@ const Participants = () => {
   return (
     <>
       <div className="flex rounded-lg p-4">
-        <h2 className="text-2xl font-semibold text-gray-700">Participants</h2>
+        <h2 className="text-2xl font-semibold text-gray-700">Table Management</h2>
         <div className="ml-auto flex items-center space-x-4">
           {" "}
           <span className="flex items-center">
             <span
-              className="bg-[#0EB599] hover:bg-[#068A55] text-white rounded-3xl pt-2 pb-2 pl-4 pr-4 cursor-pointer"
+              className="bg-[#808080] hover:bg-[#F8BF40] text-white rounded-3xl pt-2 pb-2 pl-4 pr-4 cursor-pointer"
               onClick={toggleModal}
             >
-              Add Participant
+              Add Table
             </span>
           </span>
           <Modal
@@ -412,7 +415,7 @@ const Participants = () => {
                 <button
                   disabled={isLoadingMutation || isLoadingEdit}
                   type="submit"
-                  className="bg-[#0EB599] hover:bg-[#068A55] text-white font-bold py-2 px-6 rounded-3xl"
+                  className="bg-[#808080] hover:bg-[#F8BF40] text-white font-bold py-2 px-6 rounded-3xl"
                 >
                   Submit
                   {/* {isLoadingMutation || isLoadingEdit ? "loading..." : "Submit"} */}
@@ -449,7 +452,7 @@ const Participants = () => {
                       {filterZonesList.map((zone) => (
                         <li
                           key={zone.value}
-                          className="bg-[#1DB290] flex items-center justify-between text-white rounded-full py-0.5 px-2 text-xs font-light"
+                          className="bg-[#000000] flex items-center justify-between text-white rounded-full py-0.5 px-2 text-xs font-light"
                         >
                           <span>{zone.label}</span>
                           <button
@@ -471,7 +474,7 @@ const Participants = () => {
               <button
                 onClick={handleFilterClick}
                 type="submit"
-                className="bg-[#0EB599] hover:bg-[#068A55] text-white font-bold py-2 px-6 rounded-3xl"
+                className="bg-[#808080] hover:bg-[#F8BF40] text-white font-bold py-2 px-6 rounded-3xl"
               >
                 Apply
               </button>
@@ -490,7 +493,7 @@ const Participants = () => {
             />
           </span>
           <span className="flex items-center">
-            <span  className="cursor-pointer bg-[#0EB599] hover:bg-[#068A55] text-white p-2 lg:w-[100px] text-center rounded-3xl">
+            <span  className="cursor-pointer bg-[#808080] hover:bg-[#F8BF40] text-white p-2 lg:w-[100px] text-center rounded-3xl">
               Search
             </span>
           </span>

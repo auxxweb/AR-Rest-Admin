@@ -22,11 +22,13 @@ const Zones = () => {
   const [selectedZoneId, setSelectedZoneId] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const limit = 10;
-  const { data, isLoading, refetch } = useGetZonesQuery({
-    limit,
-    page: currentPage,
-    search: searchValue,
-  });
+  const isLoading = false;
+  const data = [{}];
+  // const { data, isLoading, refetch } = useGetZonesQuery({
+  //   limit,
+  //   page: currentPage,
+  //   search: searchValue,
+  // });
   const [addZone, { isLoading: isLoadingMutation }] = useAddZoneMutation();
   const [copied, setCopied] = useState("");
 
@@ -56,7 +58,7 @@ const Zones = () => {
       }
         const res = await EditZone?.(editBody);
         if (res?.data?.success) {
-          refetch({ page: 1 });
+          // refetch({ page: 1 });
           toggleModal();
           setEditPopupData(null);
         } else {
@@ -75,7 +77,7 @@ const Zones = () => {
         
         const res = await addZone?.(body);
         if (res?.data?.success) {
-          refetch();
+          // refetch();
           toggleModal();
         } else {
           toast.error(res.data.message, {
@@ -119,7 +121,7 @@ const Zones = () => {
           },
           dismissible: true,
         });
-        refetch();
+        // refetch();
         setSelectedZoneId(null);
         setShowDeletePopup(false);
       } else {
@@ -180,15 +182,15 @@ const Zones = () => {
   return (
     <>
       <div className="flex rounded-lg p-4">
-        <h2 className="text-2xl font-semibold text-gray-700">Zones</h2>
+        <h2 className="text-2xl font-semibold text-gray-700">New Orders</h2>
         <div className="ml-auto flex items-center space-x-4">
           <span className="flex items-center">
-            <span
-              className="bg-[#0EB599] hover:bg-[#068A55] text-white rounded-3xl pt-2 pb-2 pl-4 pr-4 cursor-pointer"
+            {/* <span
+              className="bg-[#808080] hover:bg-[#F8BF40] text-white rounded-3xl pt-2 pb-2 pl-4 pr-4 cursor-pointer"
               onClick={toggleModal}
             >
             Add Zone
-            </span>
+            </span> */}
 
             <Modal
               isVisible={isModalVisible}
@@ -234,7 +236,7 @@ const Zones = () => {
                   <button
                     disabled={isLoadingMutation || isLoadingEdit}
                     type="submit"
-                    className="bg-[#0EB599] hover:bg-[#068A55] text-white font-bold py-2 px-6 rounded-3xl"
+                    className="bg-[#808080] hover:bg-[#F8BF40] text-white font-bold py-2 px-6 rounded-3xl"
                   >
                     {isLoadingMutation || isLoadingEdit
                       ? "loading..."
@@ -282,7 +284,7 @@ const Zones = () => {
           />
         </span>
         <span className="flex items-center ">
-          <span className="cursor-pointer bg-[#0EB599] hover:bg-[#068A55] text-white p-2 lg:w-[100px] text-center rounded-3xl">
+          <span className="cursor-pointer bg-[#808080] hover:bg-[#F8BF40] text-white p-2 lg:w-[100px] text-center rounded-3xl">
             Search
           </span>
         </span>

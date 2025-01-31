@@ -39,13 +39,14 @@ const Judges = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [copied, setCopied] = useState("");
   const limit = 10;
-
-  const { data, isLoading, refetch } = useGetJudgesQuery({
-    limit,
-    page: currentPage,
-    search: searchValue,
-    zones: selectedZones,
-  });
+  const isLoading = false;
+  const data = [{}];
+  // const { data, isLoading, refetch } = useGetJudgesQuery({
+  //   limit,
+  //   page: currentPage,
+  //   search: searchValue,
+  //   zones: selectedZones,
+  // });
   const { data: zoneList, refetch: ZoneListsRefetch } = useGetZonesListQuery();
   const [addJudge, { isLoading: isLoadingMutation }] = useAddJudgeMutation({});
   const [deleteJudge, { isLoading: isLoadingDelete }] =
@@ -58,7 +59,7 @@ const Judges = () => {
   };
 
   useEffect(() => {
-    ZoneListsRefetch();
+    // ZoneListsRefetch();
   }, []);
 
   const onSubmit = async (event) => {
@@ -87,8 +88,8 @@ const Judges = () => {
         formData?.append("judgeId", editPopupData?._id);
         const res = await EditJudge?.(formData);
         if (res?.data?.success) {
-          refetch();
-          ZoneListsRefetch();
+          // refetch();
+          // ZoneListsRefetch();
           setZonesList({});
           toggleModal();
           setEditPopupData(null);
@@ -106,8 +107,8 @@ const Judges = () => {
       } else {
         const res = await addJudge?.(formData);
         if (res?.data?.success) {
-          refetch();
-          ZoneListsRefetch();
+          // refetch();
+          // ZoneListsRefetch();
           setZonesList({});
           toggleModal();
         } else {
@@ -145,7 +146,7 @@ const Judges = () => {
       };
       const deleteres = await deleteJudge?.(body);
       if (deleteres?.data?.success) {
-        refetch();
+        // refetch();
         setSelectedJudgeId(null);
         setShowDeletePopup(false);
       } else {
@@ -183,7 +184,7 @@ const Judges = () => {
       };
       const deleteres = await blockJudge?.(body);
       if (deleteres?.data?.success) {
-        refetch();
+        // refetch();
         setShowBlockPopup(false);
       } else {
         toast.error(deleteres.data.message, {
@@ -285,11 +286,11 @@ const Judges = () => {
   return (
     <>
       <div className="flex rounded-lg p-4">
-        <h2 className="text-2xl font-semibold text-gray-700">Judges</h2>
+        <h2 className="text-2xl font-semibold text-gray-700">Menu</h2>
         <div className="ml-auto flex items-center space-x-4">
           <span className="flex items-center">
             <span
-              className="bg-[#0EB599] hover:bg-[#068A55] text-white rounded-3xl pt-2 pb-2 pl-4 pr-4 cursor-pointer"
+              className="bg-[#808080] hover:bg-[#F8BF40] text-white rounded-3xl pt-2 pb-2 pl-4 pr-4 cursor-pointer"
               onClick={toggleModal}
             >
               Add Judge
@@ -345,7 +346,7 @@ const Judges = () => {
                           {zonesList.map((zone) => (
                             <li
                               key={zone.value}
-                              className="bg-[#1DB290] flex items-center justify-between text-white rounded-full py-0.5 px-2 text-xs font-light"
+                              className="bg-[#000000] flex items-center justify-between text-white rounded-full py-0.5 px-2 text-xs font-light"
                             >
                               <span>{zone.label}</span>
                               <button
@@ -486,7 +487,7 @@ const Judges = () => {
                   <button
                     disabled={isLoadingMutation || isLoadingEdit}
                     type="submit"
-                    className="bg-[#0EB599] hover:bg-[#068A55] text-white font-bold py-2 px-6 rounded-3xl"
+                    className="bg-[#808080] hover:bg-[#F8BF40] text-white font-bold py-2 px-6 rounded-3xl"
                   >
                     {isLoadingMutation || isLoadingEdit
                       ? "loading..."
@@ -569,7 +570,7 @@ const Judges = () => {
                         {filterZonesList.map((zone) => (
                           <li
                             key={zone.value}
-                            className="bg-[#1DB290] flex items-center justify-between text-white rounded-full py-0.5 px-2 text-xs font-light"
+                            className="bg-[#000000] flex items-center justify-between text-white rounded-full py-0.5 px-2 text-xs font-light"
                           >
                             <span>{zone.label}</span>
                             <button
@@ -591,7 +592,7 @@ const Judges = () => {
                 <button
                   onClick={handleFilterClick}
                   type="submit"
-                  className="bg-[#0EB599] hover:bg-[#068A55] text-white font-bold py-2 px-6 rounded-3xl"
+                  className="bg-[#808080] hover:bg-[#F8BF40] text-white font-bold py-2 px-6 rounded-3xl"
                 >
                   Apply
                 </button>
@@ -610,7 +611,7 @@ const Judges = () => {
               />
             </span>
             <span className="flex items-center">
-              <span className="cursor-pointer bg-[#0EB599] hover:bg-[#068A55] text-white p-2 lg:w-[100px] text-center rounded-3xl">
+              <span className="cursor-pointer bg-[#808080] hover:bg-[#F8BF40] text-white p-2 lg:w-[100px] text-center rounded-3xl">
                 Search
               </span>
             </span>
@@ -737,7 +738,7 @@ const Judges = () => {
                     className={`py-2 px-5 flex space-x-2 items-center ${
                       judge?.isBlocked
                         ? " text-[#FF0404] border-[#FF0404]"
-                        : "  border-[#1DB290] text-[#1DB290]"
+                        : "  border-[#000000] text-[#000000]"
                     } rounded-full  border `}
                   >
                     {" "}
