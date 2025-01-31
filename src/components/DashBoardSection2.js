@@ -81,7 +81,7 @@ const DashBoardSection2 = () => {
         </div>
 
         {/* Right Column (Grid of 6 items in 2 rows, 3 columns) */}
-        {/* <div className="w-full grid sm:grid-cols-2 md:grid-cols-3 gap-4">
+        <div className="w-full grid sm:grid-cols-2 md:grid-cols-3 gap-4">
           {dashboardData?.map((ele, index) => (
             <div className="bg-white p-6 rounded-2xl flex items-center space-x-3 justify-between shadow-md border border-gray-300">
               <div className="flex flex-col ">
@@ -94,7 +94,7 @@ const DashBoardSection2 = () => {
               </div>
             </div>
           ))}
-        </div> */}
+        </div>
       </div>
     </>
   );

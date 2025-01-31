@@ -1,5 +1,8 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { useEditBundleMutation, useGetBundleDetailQuery } from "../../api/bundle";
+import {
+  useEditBundleMutation,
+  useGetBundleDetailQuery,
+} from "../../api/bundle";
 import Modal from "../reUsableCmponent/modal/Modal";
 import { useState } from "react";
 import Select from "react-select";
@@ -10,30 +13,33 @@ import { toast } from "sonner";
 import { getTextDirection } from "../../common/utils";
 
 const BundleDetails = () => {
-  
-  
   const navigate = useNavigate();
   const location = useLocation();
   const bundleId = location.pathname?.split("/")[2];
   const [showDeletePopup, setShowDeletePopup] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [editPopupData, setEditPopupData] = useState(null);
-  const { data,refetch } = useGetBundleDetailQuery(bundleId);
+  const { data, refetch } = useGetBundleDetailQuery(bundleId);
   const { data: questionList, refetch: refetchQuestions } =
     useGetQuestionsListQuery();
-    const options = questionList?.questions?.map((question) => {
-      return {
-        value: question?._id,
-        label: question?.question,
-        question: question?.question,
-        questionId: question?.questionId,
-      };
-    });
-    const [questions, setQuestions] = useState([]);
-    const [editBundle, { isLoading: isLoadingEdit }] = useEditBundleMutation();
+  const tempQuestions = questionList?.questions?.map((question) => {
+    return {
+      value: question?._id,
+      label: question?.question,
+      question: question?.question,
+      questionId: question?.questionId,
+    };
+  });
+  const options = tempQuestions?.filter(
+    (item1) =>
+      !data?.bundle?.questions.some((item2) => item2._id === item1.value)
+  );
 
-    
-    const handleDeleteClick = (id) => {
+  const [questions, setQuestions] = useState([]);
+  const [newQuestions, setNewQuestions] = useState([]);
+  const [editBundle, { isLoading: isLoadingEdit }] = useEditBundleMutation();
+
+  const handleDeleteClick = (id) => {
     setEditPopupData(id);
     setShowDeletePopup(true);
   };
@@ -45,6 +51,7 @@ const BundleDetails = () => {
   const toggleModal = () => {
     setIsModalVisible(!isModalVisible);
     setQuestions([]);
+    setNewQuestions([]);
     setEditPopupData(null);
   };
   const handleEditClick = (bundle) => {
@@ -58,7 +65,7 @@ const BundleDetails = () => {
     });
     setQuestions(selectedQuestions);
   };
-  
+
   const customFilterOption = (option, inputValue) => {
     const { question, questionId } = option.data;
     if (!inputValue) return true;
@@ -79,7 +86,7 @@ const BundleDetails = () => {
           id: editPopupData?._id,
           questions: selectedQuestions,
         };
-        if(selectedQuestions.length <= 0){
+        if (selectedQuestions.length <= 0) {
           toast.error("Please select minimum one question", {
             position: "top-right",
             duration: 2000,
@@ -89,7 +96,7 @@ const BundleDetails = () => {
             },
             dismissible: true,
           });
-          return
+          return;
         }
         const res = await editBundle?.(body);
         if (res?.data?.success) {
@@ -113,11 +120,12 @@ const BundleDetails = () => {
     }
   };
   const handleChange = (selectedOptions) => {
-    setQuestions(selectedOptions || []);
+    setQuestions([...questions, ...selectedOptions]);
+    setNewQuestions(selectedOptions);
   };
 
   const handleDelete = async () => {
-    if(data?.bundle?.questions?.length <= 1){
+    if (data?.bundle?.questions?.length <= 1) {
       toast.error("Cannot delete last remaining question", {
         position: "top-right",
         duration: 2000,
@@ -127,11 +135,11 @@ const BundleDetails = () => {
         },
         dismissible: true,
       });
-      return
+      return;
     }
     const remainingQuestions = data?.bundle?.questions
-    ?.filter((option) => option?._id !== editPopupData)
-    .map((option) => option?._id);
+      ?.filter((option) => option?._id !== editPopupData)
+      .map((option) => option?._id);
 
     const body = {
       id: data?.bundle?._id,
@@ -153,12 +161,16 @@ const BundleDetails = () => {
         dismissible: true,
       });
     }
-
   };
 
   const handleRemoveQuestion = (questionToRemove) => {
     setQuestions(
       questions.filter((question) => question.value !== questionToRemove.value)
+    );
+    setNewQuestions(
+      newQuestions?.filter(
+        (question) => question.value !== questionToRemove.value
+      )
     );
   };
   return (
@@ -170,7 +182,8 @@ const BundleDetails = () => {
         height="22"
         viewBox="0 0 13 22"
         fill="none"
-        xmlns="http://www.w3.org/2000/svg">
+        xmlns="http://www.w3.org/2000/svg"
+      >
         <path
           fillRule="evenodd"
           clipRule="evenodd"
@@ -204,18 +217,18 @@ const BundleDetails = () => {
                 <span className="font-semibold text-gray-600">
                   No Of Questions:
                 </span>
-                <span
-                  className="text-green-500 ml-6">
+                <span className="text-green-500 ml-6">
                   {data?.bundle?.questions?.length}
                 </span>
               </div>
             </div>
           </div>
-          <button onClick={() => handleEditClick(data?.bundle)}
-          className="bg-[#808080] hover:bg-[#F8BF40] text-white rounded-3xl pt-2 pb-2 pl-4 pr-4 cursor-pointer"
-              >
-              Insert new Question
-            </button>
+          <button
+            onClick={() => handleEditClick(data?.bundle)}
+            className="bg-[#0EB599] hover:bg-[#068A55] text-white rounded-3xl pt-2 pb-2 pl-4 pr-4 cursor-pointer"
+          >
+            Insert new Question
+          </button>
         </div>
       </div>
       <div className="overflow-x-auto">
@@ -232,12 +245,21 @@ const BundleDetails = () => {
             {data?.bundle?.questions?.map((question, index) => (
               <tr
                 className="font-light odd:bg-teal-100 even:bg-white border-[2px] border-opacity-50 border-[#969696]"
-                key={index}>
+                key={index}
+              >
                 <td className="w-6 px-4 py-2">{question?.questionId}</td>
-                <td className="px-4 py-2 " dir={getTextDirection(question?.question)}>
+                <td
+                  className="px-4 py-2 "
+                  dir={getTextDirection(question?.question)}
+                >
                   {question?.question}
                 </td>
-                <td className="px-4 py-2 " dir={getTextDirection(question?.answer)}>{question?.answer}</td>
+                <td
+                  className="px-4 py-2 "
+                  dir={getTextDirection(question?.answer)}
+                >
+                  {question?.answer}
+                </td>
                 <td className="px-4 py-2 text-center">
                   <button onClick={() => handleDeleteClick(question?._id)}>
                     <img
@@ -260,13 +282,15 @@ const BundleDetails = () => {
           <button
             onClick={handleDeleteModalClose}
             type="submit"
-            className="border border-green-500 text-green-600 hover:bg-green-700 hover:text-white font-bold  py-2 m-2 px-8 rounded-2xl">
+            className="border border-green-500 text-green-600 hover:bg-green-700 hover:text-white font-bold  py-2 m-2 px-8 rounded-2xl"
+          >
             No
           </button>
           <button
             disabled={isLoadingEdit}
             onClick={handleDelete}
-            className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 m-2 px-8 rounded-2xl">
+            className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 m-2 px-8 rounded-2xl"
+          >
             YES
           </button>
         </div>
@@ -289,7 +313,7 @@ const BundleDetails = () => {
                 className="border-2  border-gray-400"
                 options={options}
                 onChange={handleChange}
-                value={questions}
+                value={newQuestions}
                 isMulti
                 hideSelectedOptions
                 closeMenuOnSelect={true} // Keep the dropdown open for multiple selections
@@ -297,27 +321,29 @@ const BundleDetails = () => {
                 components={{ MultiValue: () => null }} // Hide selected options in input
                 filterOption={customFilterOption}
               />
-              { <div className="pt-2">
-                {questions.length > 0 && (
-                  <ul className="flex flex-wrap gap-1">
-                    {questions.map((question) => (
-                      <li
-                        key={question.value}
-                        className="bg-[#000000] flex items-center justify-between text-white rounded-full py-0.5 px-2 text-xs font-light"
-                      >
-                        <span>{question.label}</span>
-                        <button
-                          type="button"
-                          onClick={() => handleRemoveQuestion(question)}
-                          className="ml-2"
+              {
+                <div className="pt-2">
+                  {newQuestions.length > 0 && (
+                    <ul className="flex flex-wrap gap-1">
+                      {newQuestions.map((question) => (
+                        <li
+                          key={question.value}
+                          className="bg-[#1DB290] flex items-center justify-between text-white rounded-full py-0.5 px-2 text-xs font-light"
                         >
-                          <IoIosClose className="text-lg" />
-                        </button>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </div> }
+                          <span>{question.label}</span>
+                          <button
+                            type="button"
+                            onClick={() => handleRemoveQuestion(question)}
+                            className="ml-2"
+                          >
+                            <IoIosClose className="text-lg" />
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              }
             </div>
           </div>
 
@@ -325,7 +351,7 @@ const BundleDetails = () => {
             <button
               disabled={isLoadingEdit}
               type="submit"
-              className="bg-[#808080] hover:bg-[#F8BF40] text-white font-bold py-2 px-6 rounded-3xl"
+              className="bg-[#0EB599] hover:bg-[#068A55] text-white font-bold py-2 px-6 rounded-3xl"
             >
               Submit
             </button>

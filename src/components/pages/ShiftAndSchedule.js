@@ -15,12 +15,12 @@ const ShiftAndSchedule = () => {
         </h2>
         <div className="ml-auto flex items-center space-x-4">
           {" "}
-          <span className="rounded-3xl p-3 px-8 cursor-pointer hover:bg-[#1ae69b] bg-[#808080] flex items-center justify-center text-white">
+          <span className="rounded-3xl p-3 px-8 cursor-pointer hover:bg-[#1ae69b] bg-[#0EB599] flex items-center justify-center text-white">
             Shifts
           </span>
           <span className="flex items-center">
             <span
-              className="bg-[#808080] hover:bg-[#1ae69b] text-white rounded-full p-3 cursor-pointer"
+              className="bg-[#0EB599] hover:bg-[#1ae69b] text-white rounded-full p-3 cursor-pointer"
               onClick={toggleModal}
             >
               + Assign Schedule
@@ -291,7 +291,7 @@ const ShiftAndSchedule = () => {
           <span className="flex items-center">
             <span
               // Call selectRole when the Search button is clicked
-              className="cursor-pointer bg-[#808080] text-white p-2 lg:w-[228px] rounded text-center"
+              className="cursor-pointer bg-[#0EB599] text-white p-2 lg:w-[228px] rounded text-center"
             >
               Search
             </span>

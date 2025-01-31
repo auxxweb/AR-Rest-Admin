@@ -21,8 +21,9 @@ import copy from "copy-to-clipboard";
 import { LuCopyCheck } from "react-icons/lu";
 import JudgeAvatar from "../../assets/images/person-placeholder.png";
 import { toast } from "sonner";
+import { PlansTableData } from "../../constants/tableData";
 
-const Judges = () => {
+const Plans = () => {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState([]);
   const [isFilterPopupOpen, setIsFilterPopupOpen] = useState(false);
@@ -39,14 +40,15 @@ const Judges = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [copied, setCopied] = useState("");
   const limit = 10;
+  const isLoading=false
 
-  const { data, isLoading, refetch } = useGetJudgesQuery({
-    limit,
-    page: currentPage,
-    search: searchValue,
-    zones: selectedZones,
-  });
-  const { data: zoneList, refetch: ZoneListsRefetch } = useGetZonesListQuery();
+//   const { data, isLoading, refetch } = useGetJudgesQuery({
+//     limit,
+//     page: currentPage,
+//     search: searchValue,
+//     zones: selectedZones,
+//   });
+  // const { data: zoneList, refetch: ZoneListsRefetch } = useGetZonesListQuery();
   const [addJudge, { isLoading: isLoadingMutation }] = useAddJudgeMutation({});
   const [deleteJudge, { isLoading: isLoadingDelete }] =
     useDeleteJudgeMutation();
@@ -57,9 +59,9 @@ const Judges = () => {
     setIsModalVisible(!isModalVisible);
   };
 
-  useEffect(() => {
-    ZoneListsRefetch();
-  }, []);
+  // useEffect(() => {
+  //   ZoneListsRefetch();
+  // }, []);
 
   const onSubmit = async (event) => {
     event.preventDefault(); // Prevent the default form submission
@@ -87,8 +89,8 @@ const Judges = () => {
         formData?.append("judgeId", editPopupData?._id);
         const res = await EditJudge?.(formData);
         if (res?.data?.success) {
-          refetch();
-          ZoneListsRefetch();
+         //  refetch();
+          // ZoneListsRefetch();
           setZonesList({});
           toggleModal();
           setEditPopupData(null);
@@ -106,8 +108,8 @@ const Judges = () => {
       } else {
         const res = await addJudge?.(formData);
         if (res?.data?.success) {
-          refetch();
-          ZoneListsRefetch();
+         //  refetch();
+          // ZoneListsRefetch();
           setZonesList({});
           toggleModal();
         } else {
@@ -145,7 +147,7 @@ const Judges = () => {
       };
       const deleteres = await deleteJudge?.(body);
       if (deleteres?.data?.success) {
-        refetch();
+       //  refetch();
         setSelectedJudgeId(null);
         setShowDeletePopup(false);
       } else {
@@ -183,7 +185,7 @@ const Judges = () => {
       };
       const deleteres = await blockJudge?.(body);
       if (deleteres?.data?.success) {
-        refetch();
+       //  refetch();
         setShowBlockPopup(false);
       } else {
         toast.error(deleteres.data.message, {
@@ -248,9 +250,9 @@ const Judges = () => {
     }
   };
 
-  const selectOption = zoneList?.zones?.map((zone) => {
-    return { value: zone?._id, label: zone?.name };
-  });
+  // const selectOption = zoneList?.zones?.map((zone) => {
+  //   return { value: zone?._id, label: zone?.name };
+  // });
 
   const toggleFilterPopup = () => {
     setIsFilterPopupOpen(!isFilterPopupOpen);
@@ -285,14 +287,14 @@ const Judges = () => {
   return (
     <>
       <div className="flex rounded-lg p-4">
-        <h2 className="text-2xl font-semibold text-gray-700">Judges</h2>
+        <h2 className="text-2xl font-semibold text-gray-700">Plans</h2>
         <div className="ml-auto flex items-center space-x-4">
           <span className="flex items-center">
             <span
               className="bg-[#0EB599] hover:bg-[#068A55] text-white rounded-3xl pt-2 pb-2 pl-4 pr-4 cursor-pointer"
               onClick={toggleModal}
             >
-              Add Judge
+              Add Plans
             </span>
 
             <Modal
@@ -330,7 +332,7 @@ const Judges = () => {
                     </label>
                     <Select
                       className="border-gray-400"
-                      options={selectOption}
+                      options={[]}
                       onChange={handleChange}
                       value={zonesList}
                       isMulti={false}
@@ -546,61 +548,6 @@ const Judges = () => {
       </div>
       <div>
         <div className="flex rounded-lg p-4 pr-0 pt-0">
-          <FilterPopup
-            filterHeader="Zone"
-            isOpen={isFilterPopupOpen}
-            togglePopup={toggleFilterPopup}
-          >
-            <div className="space-y-4">
-              {/* Example Filter Option 1 */}
-              {selectOption && (
-                <div className="m-4 w-60">
-                  <Select
-                    className="border-gray-400"
-                    options={selectOption}
-                    onChange={handleFilterChange}
-                    value={filterZonesList}
-                    isMulti
-                    hideSelectedOptions
-                    closeMenuOnSelect={false} // Keep the dropdown open for multiple selections
-                    placeholder="Select Zones"
-                    components={{ MultiValue: () => null }} // Hide selected options in input
-                  />
-                  <div className="pt-2">
-                    {filterZonesList.length > 0 && (
-                      <ul className="flex flex-wrap gap-1">
-                        {filterZonesList.map((zone) => (
-                          <li
-                            key={zone.value}
-                            className="bg-[#1DB290] flex items-center justify-between text-white rounded-full py-0.5 px-2 text-xs font-light"
-                          >
-                            <span>{zone.label}</span>
-                            <button
-                              type="button"
-                              onClick={() => handleRemoveZone(zone)}
-                              className="ml-2"
-                            >
-                              <IoIosClose className="text-lg" />
-                            </button>
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                  </div>
-                </div>
-              )}
-              {/* Apply Filters Button */}
-              <div className="flex justify-center">
-                <button
-                  onClick={handleFilterClick}
-                  type="submit"
-                  className="bg-[#0EB599] hover:bg-[#068A55] text-white font-bold py-2 px-6 rounded-3xl"
-                >
-                  Apply
-                </button>
-              </div>
-            </div>
-          </FilterPopup>
           <div className="ml-auto lg:mr-4 flex items-center space-x-4 justify-end pt-3">
             {/* Parent div for span elements */}
             <span className="flex items-center justify-center">
@@ -628,22 +575,25 @@ const Judges = () => {
               Sl No
             </th>
             <th className="px-4 py-4 text-left border-r border-gray-400">
-              Image
-            </th>
-            <th className="px-4 py-4 text-left border-r border-gray-400">
               Name
             </th>
             <th className="px-4 py-4 text-left border-r border-gray-400">
-              Zone
+              Id
             </th>
             <th className="px-4 py-4 text-left border-r border-gray-400">
-              Email
+              Image
             </th>
             <th className="px-4 py-4 text-left border-r border-gray-400">
-              Main Judge
+              Description
             </th>
             <th className="px-4 py-4 text-left border-r border-gray-400">
-              Password
+              Validity
+            </th>
+            <th className="px-4 py-4 text-left border-r border-gray-400">
+              ActualPrice
+            </th>
+            <th className="px-4 py-4 text-left border-r border-gray-400">
+              OfferPrice
             </th>
             <th className="px-4 py-4 text-left border-r border-gray-400">
               Status
@@ -655,7 +605,7 @@ const Judges = () => {
           {isLoading ? (
             <>Loading...</>
           ) : (
-            data?.judge?.map((judge, index) => (
+            PlansTableData?.map((judge, index) => (
               <tr
                 className="odd:bg-teal-100 even:bg-grey border-[2px] border-opacity-50 border-[#9e9696]"
                 key={index}
@@ -665,16 +615,6 @@ const Judges = () => {
                   className="px-4 py-2 border-r border-gray-400"
                 >
                   {index + 1}
-                </td>
-                <td
-                  onClick={() => navigate(`/judges/${judge?._id}`)}
-                  className="px-4 py-2 border-r border-gray-400"
-                >
-                  <img
-                    alt="img"
-                    src={judge?.image ?? JudgeAvatar}
-                    className="w-14 h-14 rounded-full mr-2 mt-2"
-                  />
                 </td>
                 <td
                   onClick={() => navigate(`/judges/${judge?._id}`)}
@@ -692,59 +632,49 @@ const Judges = () => {
                   onClick={() => navigate(`/judges/${judge?._id}`)}
                   className="px-4 py-2 border-r border-gray-400"
                 >
-                  {judge?.zone?.name}
+                  {judge?.id}
                 </td>
                 <td
                   onClick={() => navigate(`/judges/${judge?._id}`)}
                   className="px-4 py-2 border-r border-gray-400"
                 >
-                  {judge?.email}
+                  <img
+                    alt="img"
+                    src={judge?.image ?? JudgeAvatar}
+                    className="w-14 h-14 rounded-full mr-2 mt-2"
+                  />
+                </td>
+              
+                
+                <td className="px-4 py-2 border-r border-gray-400">
+                  <ul className="list-disc pl-5 space-y-1">
+                    {judge?.description?.split(",")?.map((desc, index) => (
+                      <li key={index} className="text-sm text-gray-700">
+                        {desc}
+                      </li>
+                    ))}
+                  </ul>
                 </td>
                 <td className="px-4 py-2 border-r border-gray-400">
-                  <div className="flex ml-3 -space-x-2">
-                    {judge?.isMain ? "YES" : "NO"}
-                  </div>
+                  {judge?.validity}{judge?.validityType}
                 </td>
                 <td className="px-4 py-2 border-r border-gray-400">
-                  <div className="flex">
-                    <button
-                      className="flex mb-4 text-black"
-                      onClick={() => handleCopy(judge?.password)}
-                    >
-                      {copied === judge?.password ? (
-                        <LuCopyCheck title="Copied" className="h-6 w-6 mr-3" />
-                      ) : (
-                        <IoMdCopy title="Copy" className="h-6 w-6 mr-3" />
-                      )}{" "}
-                      {showPassword?.includes(judge?._id)
-                        ? judge?.password
-                        : "*".repeat(judge?.password.length)}
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => handleShowPassword(judge?._id)}
-                    >
-                      <div className="ml-3 mb-6 w-2 h-2">
-                        {showPassword?.includes(judge?._id) ? (
-                          <PiEyeSlashFill />
-                        ) : (
-                          <PiEyeFill />
-                        )}
-                      </div>
-                    </button>
-                  </div>
+              ₹{judge?.actualPrice}
+                </td>
+                <td className="px-4 py-2 border-r border-gray-400">
+              ₹{judge?.offerPrice}
                 </td>
                 <td className="px-4 py-2 border-r border-gray-400">
                   <button
                     onClick={() => handleShowBlockJudgePopup(judge?._id)}
                     className={`py-2 px-5 flex space-x-2 items-center ${
-                      judge?.isBlocked
+                      judge?.status
                         ? " text-[#FF0404] border-[#FF0404]"
                         : "  border-[#1DB290] text-[#1DB290]"
                     } rounded-full  border `}
                   >
                     {" "}
-                    <span>{judge?.isBlocked ? "Blocked" : "Unblocked"}</span>
+                    <span>{judge?.status ? "Blocked" : "Unblocked"}</span>
                     <BiSolidDownArrow className="text-black" />
                   </button>
                 </td>
@@ -778,11 +708,12 @@ const Judges = () => {
           itemsPerPage={limit}
           currentPage={currentPage}
           onPageChange={handlePageChange}
-          totalPages={data?.totalPages}
+          totalPages={PlansTableData?.length}
         />
       </div>
     </>
   );
 };
 
-export default Judges;
+export default Plans;
+ 

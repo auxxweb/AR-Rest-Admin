@@ -14,7 +14,7 @@ import { Route, Routes } from "react-router-dom";
 // import SettingAndConfi from "../pages/SettingAndConfi";
 import JudgeDetails from "../pages/JudgeDetails";
 import DashBoard from "../pages/DashBoard";
-import Vendor from "../pages/Vendor";
+import Zones from "../pages/Zones";
 import Login from "../pages/Login";
 import Judges from "../pages/judges";
 import Participants from "../pages/participants";
@@ -27,6 +27,13 @@ import ResponseAndResult from "../pages/ResponseAndResult";
 import ForgotPassword from "../pages/forgotPassword";
 import ChangePassword from "../pages/changePassword";
 import ResultDetails from "../pages/resultDetails";
+import VendorCategory from "../pages/VendorCategory";
+import MenuCategory from "../pages/MenuCategory";
+import MenuSubCategory from "../pages/MenuSubCategory";
+import Plans from "../pages/Plans";
+import Dishes from "../pages/Dishes";
+import Payments from "../pages/Payments";
+import TermsAndConditions from "../pages/TermsAndConditions";
 
 function ContentArea() {
   return (
@@ -36,10 +43,14 @@ function ContentArea() {
       <Route path="/login" element={<Login />} />
       <Route path="/forgotPassword" element={<ForgotPassword />} />
       <Route path="/changePassword/:forgotId" element={<ChangePassword />} />
-      <Route path="/vendor" element={<Vendor />} />
-      {/* <Route path="/vendorCategory" element={<Zones />} /> */}
-
-      <Route path="/judges" element={<Judges />} />
+      <Route path="/zones" element={<Zones />} />
+      <Route path="/v-category" element={<VendorCategory />} />
+      <Route path="/menu-category" element={<MenuCategory />} />
+      <Route path="/menu-sub-category" element={<MenuSubCategory />} />
+      <Route path="/dishes" element={<Dishes />} />
+      <Route path="/plans" element={<Plans />} />
+      <Route path="/terms" element={<TermsAndConditions />} />
+      <Route path="/payments" element={<Payments />} />
       <Route path="/judges/:id" element={<JudgeDetails />} />
       <Route path="/participants" element={<Participants />} />
       <Route path="/participants/:id" element={<ParticipantDetails />} />

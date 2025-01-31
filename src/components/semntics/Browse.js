@@ -15,10 +15,27 @@ function Browse() {
     return `/${pathParts[0]}`;
   };
   const basePath = getBasePath(location.pathname);
+
+  const parseJwt = () => {
+    try {
+      return JSON.parse(atob(userData.split(".")[1]));
+    } catch (e) {
+      return null;
+    }
+  };
   useEffect(() => {
     if (publicRoutes.includes(basePath)) {
       if (userData) {
-        navigate("/");
+        const decodedJwt = parseJwt(userData);
+        if (decodedJwt.exp * 1000 < Date.now()) {
+          try {
+            navigate("/login");
+          } catch (error) {
+            console.log(error.response.data.message);
+          }
+        } else {
+          navigate("/");
+        }
       } else {
         navigate(location.pathname);
       }
@@ -30,7 +47,6 @@ function Browse() {
     //eslint-disable-next-line
   }, []);
 
-
   useEffect(() => {
     // Function to detect language and apply appropriate classes
     const applyLanguageClasses = () => {
@@ -40,11 +56,11 @@ function Browse() {
         // Arabic character range
         if (/[ء-ي]/.test(text)) {
           element.classList.add("arabic-text");
-        } 
+        }
         // Malayalam character range
         else if (/[\u0D00-\u0D7F]/.test(text)) {
           element.classList.add("malayalam-text");
-        } 
+        }
         // Default to English
         else {
           element.classList.add("english-text");
@@ -66,7 +82,7 @@ function Browse() {
   if (publicRoutes.includes(basePath)) {
     return (
       <div className="flex-1 flex flex-col">
-        <ContentArea /> 
+        <ContentArea />
       </div>
     );
   } else {
@@ -82,7 +98,7 @@ function Browse() {
 
           <main
             className={`flex-1 overflow-y-auto  p-4 ${
-              location.pathname === "/" ? "bg-white" : "bg-[#d3d3d3]"
+              location.pathname === "/" ? "bg-white" : "bg-[#CFCFCF]"
             }`}
           >
             <ContentArea />
@@ -92,4 +108,5 @@ function Browse() {
     );
   }
 }
+
 export default Browse;

@@ -124,12 +124,12 @@ const QuestionDetails = () => {
           <div className="space-x-4">
             <button
               onClick={() => setIsModalVisible(true)}
-              className="bg-[#808080] text-white px-4 py-1 rounded-md hover:bg-[#1ae69b]">
+              className="bg-[#0EB599] text-white px-4 py-1 rounded-md hover:bg-[#1ae69b]">
               Edit
             </button>
             <button
               onClick={() => setShowDeletePopup(true)}
-              className="bg-[#808080] text-white px-4 py-1 rounded-md hover:bg-[#1ae69b]">
+              className="bg-[#0EB599] text-white px-4 py-1 rounded-md hover:bg-[#1ae69b]">
               Delete
             </button>
           </div>
@@ -203,7 +203,7 @@ const QuestionDetails = () => {
             <button
               disabled={isLoadingEdit}
               type="submit"
-              className="bg-[#808080] hover:bg-blue-[#1ae69b] text-white font-bold py-2 px-4 rounded">
+              className="bg-[#0EB599] hover:bg-blue-[#1ae69b] text-white font-bold py-2 px-4 rounded">
               Update
             </button>
           </div>

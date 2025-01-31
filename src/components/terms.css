@@ -1,0 +1,67 @@
+/* Add this to your CSS file */
+
+.rich-text-editor {
+  margin: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+    rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+  border-radius: 9px;
+
+  background-color: white;
+}
+.react-quill {
+  min-height: 35vh; /* Set the minimum height to 35% of the viewport height */
+  height: auto; /* Allow the height to auto-adjust based on content */
+  padding: 10px; /* Optional: Padding inside the editor */
+  border: 1px solid #ccc; /* Border for the editor */
+  border-radius: 8px; /* Optional: Rounded corners */
+}
+
+.rich-text-editor h2 {
+  text-align: center;
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+}
+
+.react-quill {
+  min-height: 300px; /* Set the minimum height for the editor */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+.react-quill .ql-editor {
+  min-height: 35vh;
+}
+.sub-btn-div {
+  display: flex;
+  justify-content: center;
+}
+
+.submit-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 1rem;
+  background-color: #0da682;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s;
+  margin-bottom: 10px;
+  min-width: 10rem;
+}
+
+.submit-btn:hover {
+  background-color: #45a049;
+}
+
+.submit-btn:active {
+  background-color: #388e3c;
+}
+
+.submit-btn:focus {
+  outline: none;
+}

@@ -2,8 +2,8 @@ import axios from "axios";
 import { getUserCredential } from "../common/utils";
 import { toast } from "sonner";
 
-//  const BE_API_KEY = "http://localhost:5000";
-const BE_API_KEY = process.env.REACT_APP_BE_API_KEY
+ const BE_API_KEY = "http://localhost:5000";
+// const BE_API_KEY = process.env.REACT_APP_BE_API_KEY
 
 const customApiHandler =
   () =>

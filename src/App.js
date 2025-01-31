@@ -11,7 +11,6 @@ function App() {
       <Provider store={store}>
         <Browse />
         {/* Wrap your app in BrowserRouter */}
-        
         <Toaster />
       </Provider>
     </BrowserRouter>

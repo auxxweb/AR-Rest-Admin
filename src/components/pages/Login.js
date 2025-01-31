@@ -1,4 +1,5 @@
-import { useState } from "react";
+/* eslint-disable react-hooks/rules-of-hooks */
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLoginMutation } from "../../api/auth";
 import { getUserCredential } from "../../common/utils";
@@ -12,6 +13,8 @@ const Login = () => {
   const [login, { isLoading }] = useLoginMutation();
 
   if (userData) return <>Loading</>;
+
+
 
   const onSubmit = async (event) => {
     event.preventDefault(); // Prevent the default form submission
@@ -46,6 +49,10 @@ const Login = () => {
     }
   };
 
+  useEffect(()=>{
+      navigate("/");
+  },[])
+
   return (
     <>
       <div
@@ -63,7 +70,7 @@ const Login = () => {
           </div>
           <div className="w-full max-w-lg ">
             <form
-              // onSubmit={onSubmit}
+              onSubmit={onSubmit}
               className="bg-white border space-y-3 sm:space-y-4 border-[#C19D5C] shadow-lg rounded-lg text-center py-8 sm:py-10 px-3 sm:px-8  w-full"
             >
               <h1 className=" text-4xl sm:text-5xl text-[#C19D5C] font-semibold">
@@ -141,7 +148,6 @@ const Login = () => {
                   disabled={isLoading}
                   className="w-full  py-3 max-w-[217px] hover:-translate-y-1 transform transition rounded-lg bg-gradient-to-r from-[#C19D5C] to-[#5F4D2D]  text-white  "
                   type="submit"
-                  onClick={()=> navigate("/")}
                 >
                   Log In
                 </button>

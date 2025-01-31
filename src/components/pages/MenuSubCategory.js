@@ -13,10 +13,9 @@ import {
 import Pagination from "../Pagination";
 import { PUBLIC_USER_FRONTEND_URL } from "../../common/utils";
 import { toast } from "sonner";
-import { vendorData } from "../../constants/tableData";
-import { BiSolidDownArrow } from "react-icons/bi";
+import { MenuCategoryData, MenuSubCategoryData, vendorData } from "../../constants/tableData";
 
-const Zones = () => {
+const MenuSubCategory = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [editPopupData, setEditPopupData] = useState(null);
   const [searchValue, setSearchValue] = useState("");
@@ -179,13 +178,13 @@ const Zones = () => {
   return (
     <>
       <div className="flex rounded-lg p-4">
-        <h2 className="text-2xl font-semibold text-gray-700">Vendors</h2>
+        <h2 className="text-2xl font-semibold text-gray-700">Sub Category</h2>
         <div className="ml-auto flex items-center space-x-4">
           <span className="flex items-center">
             <span
               className="bg-[#0EB599] hover:bg-[#068A55] text-white rounded-3xl pt-2 pb-2 pl-4 pr-4 cursor-pointer"
               onClick={toggleModal}>
-              Add Vendor
+              Add Sub Category
             </span>
 
             <Modal
@@ -303,60 +302,64 @@ const Zones = () => {
           {isLoading ? (
             <>Loading...</>
           ) : (
-            vendorData?.map((zone, index) => (
+            MenuSubCategoryData?.map((zone, index) => (
               <tr
-                className="odd:bg-grey-100 even:bg-white border-[2px] border-opacity-50 border-[#9e9696]"
+                className="odd:bg-teal-100 even:bg-grey border-[2px] border-opacity-50 border-[#9e9696]"
                 key={index}>
                 <td className="px-4 py-2 border-r border-gray-400">
                   {index + 1}
                 </td>
                 <td
-                  style={{ cursor: "pointer",textDecoration:"none" }}
+                  style={{ cursor: "pointer" }}
                   className="px-4 py-2 border-r border-gray-400">
                   <u
-                    style={{ cursor: "pointer" }}
+                    style={{ cursor: "pointer",textDecoration: "none" }}
                     onMouseOver={({ target }) => (target.style.color = "blue")}
                     onMouseOut={({ target }) => (target.style.color = "black")}>
-                   <div style={{display:"flex",gap:"1rem"}}>
-                    <img
-                      alt="pics"
-                      src={zone?.image}
-                      className="w-10 h-10 rounded-full mr-2"
-                    />
-                     {zone?.name}{" "}
-                     </div>
+                    <div style={{ display: "flex", gap: "1rem" }}>
+                      <img
+                        alt="pics"
+                        src={zone?.image}
+                        className="w-10 h-10 rounded-full mr-2"
+                      />
+                      {zone?.name}{" "}
+                    </div>
                   </u>
                 </td>
                 <td className="px-4 py-2 border-r border-gray-400">
                   {zone?.id}
                 </td>
                 <td className="px-4 py-2 border-r border-gray-400">
-                <div className="flex -space-x-3">{zone?.description}</div>
+                  <div className="flex -space-x-3">{zone?.description}</div>
                 </td>
-                  <td className="px-4 py-2 border-r border-gray-400">
-                                  <button
-                                   
-                                    className={`py-2 px-5 flex space-x-2 items-center ${
-                                      zone?.status
-                                        ? " text-[#FF0404] border-[#FF0404]"
-                                        : "  border-[#1DB290] text-[#1DB290]"
-                                    } rounded-full  border `}
-                                  >
-                                    {" "}
-                                    <span>{zone?.status ? "Blocked" : "Unblocked"}</span>
-                                    <BiSolidDownArrow className="text-black" />
-                                  </button>
-                                </td>
+                <td className="px-4 py-2 border-r border-gray-400">
+                  <span
+                    style={{
+                      border: `solid 2px ${zone?.status ? "green" : "red"}`,
+                      backgroundColor: ` ${
+                        zone?.status
+                          ? "rgba(0, 255, 0, 0.5)"
+                          : "rgba(255, 0, 0, 0.5)"
+                      }`
+                    }}
+                    className="inline-block rounded-full p-1 border border-gray-400 text-sm w-[145px] text-center">
+                    {zone.status ? "Active" : "Blocked"}
+                  </span>
+                </td>
 
-                                <td className="px-4 py-2 border-r border-gray-400">
+                <td className="px-4 py-2">
                   <button
-                    // disabled={isLoadingBlock}
-                    onClick={() => handleEditClick(zone)}
-                  >
+                    style={{ color: "black" }}
+                    onClick={() => handleEditClick(zone)}>
+                    {" "}
                     <img
                       alt="pics"
                       src="/icons/edit.svg"
-                      className="w-6 h-6 rounded-full mr-2"
+                      className="w-6 h-6 rounded-full mr-2 "
+                      style={{
+                        filter:
+                          "invert(20%) sepia(94%) saturate(7496%) hue-rotate(347deg) brightness(102%) contrast(104%)"
+                      }}
                     />
                   </button>
                   <button onClick={() => handleDeleteClick(zone?._id)}>
@@ -364,6 +367,10 @@ const Zones = () => {
                       alt="pics"
                       src="/icons/delete.svg"
                       className="w-6 h-6 rounded-full mr-2 fill-red-500"
+                      style={{
+                        filter:
+                          "invert(20%) sepia(94%) saturate(7496%) hue-rotate(347deg) brightness(102%) contrast(104%)"
+                      }}
                     />
                   </button>
                 </td>
@@ -385,4 +392,4 @@ const Zones = () => {
   );
 };
 
-export default Zones;
+export default MenuSubCategory;

@@ -37,7 +37,7 @@ function Header({ toggleSidebar }) {
         position: "top-right",
         duration: 2000,  
         style: {
-          backgroundColor: "#fb0909", // Custom green color for success
+          backgroundColor: "#CFCFCF", // Custom green color for success
           color: "#FFFFFF", // Text color
         },
       });
@@ -76,7 +76,7 @@ function Header({ toggleSidebar }) {
   return (
     <header
       className="flex items-center justify-between p-4"
-      style={{ background: "linear-gradient(135deg,rgb(255, 255, 255),rgb(241, 241, 241))" }}
+      style={{ background: "linear-gradient(135deg,rgb(0, 0, 0),rgb(127, 130, 130))" }}
     >
       <button
         className="text-gray-200 focus:outline-none lg:hidden"
@@ -98,7 +98,7 @@ function Header({ toggleSidebar }) {
         </svg>
       </button>
 
-      <img src="/arodlogo.svg" alt="Description of Image" width="65" height="73" />
+      <img src="/quranLogo.svg" alt="Description of Image" width="55" height="43" />
 
 
       <div className="flex items-center space-x-2">
@@ -185,7 +185,7 @@ function Header({ toggleSidebar }) {
             <button
               disabled={isLoadingUpdatePassword}
               type="submit"
-              className="bg-[#808080] hover:bg-[#F8BF40] text-white font-bold py-2 px-6 rounded-3xl"
+              className="bg-[#0EB599] hover:bg-[#068A55] text-white font-bold py-2 px-6 rounded-3xl"
             >
               {isLoadingUpdatePassword ? "loading..." : "Update"}
             </button>

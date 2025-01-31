@@ -101,7 +101,7 @@ function Leaves() {
           <span className="flex items-center">
             <span
               onClick={selectRole} // Call selectRole when the Search button is clicked
-              className="cursor-pointer bg-[#808080] text-white p-2 lg:w-[228px] rounded text-center"
+              className="cursor-pointer bg-[#0EB599] text-white p-2 lg:w-[228px] rounded text-center"
             >
               Search
             </span>

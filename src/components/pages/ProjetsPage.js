@@ -38,7 +38,7 @@ const ProjetsPage = () => {
           {" "}
           <span
             onClick={() => setGrid(true)}
-            className="cursor-pointer hover:bg-[#1ae69b] bg-[#808080] h-10 w-10 rounded-md flex items-center justify-center text-white"
+            className="cursor-pointer hover:bg-[#1ae69b] bg-[#0EB599] h-10 w-10 rounded-md flex items-center justify-center text-white"
           >
             <svg
               width="20"
@@ -72,7 +72,7 @@ const ProjetsPage = () => {
           </span>
           <span className="flex items-center">
             <span
-              className="bg-[#808080] text-white rounded-full p-3 cursor-pointer"
+              className="bg-[#0EB599] text-white rounded-full p-3 cursor-pointer"
               onClick={toggleModal}
             >
               + Add Project
@@ -146,7 +146,7 @@ const ProjetsPage = () => {
           <span className="flex items-center">
             <span
               onClick={selectRole} // Call selectRole when the Search button is clicked
-              className="cursor-pointer bg-[#808080] text-white p-2 lg:w-[260px] text-center"
+              className="cursor-pointer bg-[#0EB599] text-white p-2 lg:w-[260px] text-center"
             >
               Search
             </span>

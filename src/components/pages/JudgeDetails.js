@@ -244,7 +244,7 @@ const JudgeDetails = () => {
                 className={`py-2 px-5 flex space-x-2 items-center ${
                   data?.judge?.isBlocked
                     ? " text-[#FF0404] border-[#FF0404]"
-                    : "  border-[#000000] text-[#000000]"
+                    : "  border-[#1DB290] text-[#1DB290]"
                 } rounded-full  border `}
               >
                 <span>
@@ -258,7 +258,7 @@ const JudgeDetails = () => {
               {/* Update Password Button */}
               <button
                 onClick={() => setIsModalVisible(true)}
-                className="bg-[#808080] hover:bg-[#F8BF40] text-white font-bold py-2 px-6 rounded-3xl"
+                className="bg-[#0EB599] hover:bg-[#068A55] text-white font-bold py-2 px-6 rounded-3xl"
               >
                 UPDATE PASSWORD
               </button>
@@ -308,7 +308,7 @@ const JudgeDetails = () => {
             <button
               disabled={isLoadingUpdatePassword}
               type="submit"
-              className="bg-[#808080] hover:bg-[#F8BF40] text-white font-bold py-2 px-6 rounded-3xl"
+              className="bg-[#0EB599] hover:bg-[#068A55] text-white font-bold py-2 px-6 rounded-3xl"
             >
               {isLoadingUpdatePassword ? "loading..." : "Update"}
             </button>
@@ -319,6 +319,9 @@ const JudgeDetails = () => {
         <h3 className="flex self-center text-lg font-bold">
           Are you sure want to Block/Unblock?
         </h3>
+        <h6 className="flex self-center text-lg text-red font-semibold">
+          Judges cannot be unblocked while the competition is live.
+        </h6>
         <div className="flex justify-center p-6">
           <button
             disabled={isLoadingBlock}
