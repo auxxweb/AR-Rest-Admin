@@ -190,13 +190,13 @@ const MenuCategory = () => {
             <Modal
               isVisible={isModalVisible}
               onClose={handleModalClose}
-              modalHeader={editPopupData ? "Edit Zone" : "Add Zone"}>
+              modalHeader={editPopupData ? "Edit Category" : "Add Category"}>
               <form onSubmit={onSubmit} className="space-y-4">
                 <div>
                   <label
                     htmlFor="zoneName"
                     className="block text-sm font-medium text-gray-700">
-                    Zone Name
+                    Name
                   </label>
                   <input
                     type="text"

@@ -182,11 +182,11 @@ const CompletedOrders = () => {
         <h2 className="text-2xl font-semibold text-gray-700">Completed Orders</h2>
         <div className="ml-auto flex items-center space-x-4">
           <span className="flex items-center">
-            <span
+            {/* <span
               className="bg-[#808080] hover:bg-[#F8BF40] text-white rounded-3xl pt-2 pb-2 pl-4 pr-4 cursor-pointer"
               onClick={toggleModal}>
               Add Order
-            </span>
+            </span> */}
 
             <Modal
               isVisible={isModalVisible}

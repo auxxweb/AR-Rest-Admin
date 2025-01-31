@@ -190,7 +190,7 @@ const MenuSubCategory = () => {
             <Modal
               isVisible={isModalVisible}
               onClose={handleModalClose}
-              modalHeader={editPopupData ? "Edit Zone" : "Add Zone"}>
+              modalHeader={editPopupData ? "Edit Sub-Category" : "Add Sub-Category"}>
               <form onSubmit={onSubmit} className="space-y-4">
                 <div>
                   <label

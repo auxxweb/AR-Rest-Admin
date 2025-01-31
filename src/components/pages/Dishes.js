@@ -299,21 +299,21 @@ const Dishes = () => {
             <Modal
               isVisible={isModalVisible}
               onClose={handleModalClose}
-              modalHeader={editPopupData ? "Edit Judge" : "Add Judge"}>
+              modalHeader={editPopupData ? "Edit Dish" : "Add Dish"}>
               <form onSubmit={onSubmit} className="space-y-4">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                   <div>
                     <label
                       htmlFor="name"
                       className="block text-sm font-medium text-gray-700">
-                      Full name
+                      Item Name
                     </label>
                     <input
                       type="text"
                       name="name"
                       id="name"
                       className="mt-1 block w-full border-2 p-1 border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                      placeholder="Full name"
+                      placeholder="Item name"
                       required
                       defaultValue={
                         editPopupData?.name ? editPopupData?.name : ""
@@ -324,7 +324,7 @@ const Dishes = () => {
                     <label
                       htmlFor="zone"
                       className="block text-sm font-medium text-gray-700">
-                      Zone
+                      Category
                     </label>
                     <Select
                       className="border-gray-400"
@@ -334,7 +334,7 @@ const Dishes = () => {
                       isMulti={false}
                       // hideSelectedOptions
                       closeMenuOnSelect={true} // Keep the dropdown open for multiple selections
-                      placeholder="Select Zones"
+                      placeholder="Select Category"
                       components={{ MultiValue: () => null }} // Hide selected options in input
                     />
                     {/* <div className="pt-2">
@@ -362,11 +362,11 @@ const Dishes = () => {
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                  <div>
+                  {/* <div>
                     <label
                       htmlFor="email"
                       className="block text-sm font-medium text-gray-700">
-                      Email address
+                      Type  
                     </label>
                     <input
                       type="email"
@@ -379,19 +379,19 @@ const Dishes = () => {
                         editPopupData?.email ? editPopupData?.email : ""
                       }
                     />
-                  </div>
+                  </div> */}
                   <div>
                     <label
                       htmlFor="phone"
                       className="block text-sm font-medium text-gray-700">
-                      Phone number
+                      Price
                     </label>
                     <input
                       type="number"
                       name="phone"
                       id="phone"
                       className="mt-1 block w-full border-2 p-1 border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                      placeholder="Phone number"
+                      placeholder="Enter Price"
                       required
                       defaultValue={
                         editPopupData?.phone ? editPopupData?.phone : ""
@@ -405,14 +405,14 @@ const Dishes = () => {
                     <label
                       htmlFor="address"
                       className="block text-sm font-medium text-gray-700">
-                      Address
+                      Description
                     </label>
                     <input
                       type="text"
                       name="address"
                       id="address"
                       className="mt-1 h-28 block w-full border-2 p-1 border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                      placeholder="Address"
+                      placeholder="Description"
                       required
                       defaultValue={
                         editPopupData?.address ? editPopupData?.address : ""
@@ -424,7 +424,7 @@ const Dishes = () => {
                       <label
                         htmlFor="gender"
                         className="block text-sm font-medium text-gray-700">
-                        Gender
+                        Category
                       </label>
                       <select
                         name="gender"
@@ -433,8 +433,8 @@ const Dishes = () => {
                         defaultValue={
                           editPopupData?.gender ? editPopupData?.gender : ""
                         }>
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
+                        <option value="male">Veg</option>
+                        <option value="female">Non-Veg</option>
                       </select>
                     </div>
                     <div className="mt-5">
@@ -460,7 +460,7 @@ const Dishes = () => {
                     </div>
                   </div>
                 </div>
-                <div className="flex flex-row">
+                {/* <div className="flex flex-row">
                   <input
                     type="checkbox"
                     name="isMain"
@@ -473,7 +473,7 @@ const Dishes = () => {
                   <label className="block text-m font-medium text-gray-700">
                     Main Judge
                   </label>
-                </div>
+                </div> */}
                 <div className="flex justify-center p-6">
                   <button
                     disabled={isLoadingMutation || isLoadingEdit}

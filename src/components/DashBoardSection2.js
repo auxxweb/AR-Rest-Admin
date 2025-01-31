@@ -51,18 +51,18 @@ const DashBoardSection2 = () => {
   const dashboardData = [
     {
       logo: zones,
-      count: data?.data?.zones,
-      title: "Zones",
+      count: 234,
+      title: "Items",
     },
     {
       logo: judges,
-      count: data?.data?.judges,
-      title: "Judges",
+      count: 39,
+      title: "Orders",
     },
     {
       logo: participats,
-      count: data?.data?.participants,
-      title: "Participants",
+      count: 3,
+      title: "Current Offers",
     },
   ];
 

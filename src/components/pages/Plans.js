@@ -287,14 +287,14 @@ const Plans = () => {
   return (
     <>
       <div className="flex rounded-lg p-4">
-        <h2 className="text-2xl font-semibold text-gray-700">Plans</h2>
+        <h2 className="text-2xl font-semibold text-gray-700">Offers</h2>
         <div className="ml-auto flex items-center space-x-4">
           <span className="flex items-center">
             <span
               className="bg-[#808080] hover:bg-[#F8BF40] text-white rounded-3xl pt-2 pb-2 pl-4 pr-4 cursor-pointer"
               onClick={toggleModal}
             >
-              Add Plans
+              Add Offers
             </span>
 
             <Modal
@@ -309,7 +309,7 @@ const Plans = () => {
                       htmlFor="name"
                       className="block text-sm font-medium text-gray-700"
                     >
-                      Full name
+                      Offer Title
                     </label>
                     <input
                       type="text"
@@ -323,7 +323,7 @@ const Plans = () => {
                       }
                     />
                   </div>
-                  <div>
+                  {/* <div>
                     <label
                       htmlFor="zone"
                       className="block text-sm font-medium text-gray-700"
@@ -340,7 +340,7 @@ const Plans = () => {
                       closeMenuOnSelect={true} // Keep the dropdown open for multiple selections
                       placeholder="Select Zones"
                       components={{ MultiValue: () => null }} // Hide selected options in input
-                    />
+                    /> */}
                     {/* <div className="pt-2">
                       {zonesList.length > 0 && (
                         <ul className="flex flex-wrap gap-1">
@@ -362,7 +362,7 @@ const Plans = () => {
                         </ul>
                       )}
                     </div> */}
-                  </div>
+                  {/* </div> */}
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
@@ -371,14 +371,14 @@ const Plans = () => {
                       htmlFor="email"
                       className="block text-sm font-medium text-gray-700"
                     >
-                      Email address
+                      Validity
                     </label>
                     <input
                       type="email"
                       name="email"
                       id="email"
                       className="mt-1 block w-full border-2 p-1 border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                      placeholder="Email address"
+                      placeholder="validity"
                       required
                       defaultValue={
                         editPopupData?.email ? editPopupData?.email : ""
@@ -390,14 +390,14 @@ const Plans = () => {
                       htmlFor="phone"
                       className="block text-sm font-medium text-gray-700"
                     >
-                      Phone number
+                      Actual Price
                     </label>
                     <input
                       type="number"
                       name="phone"
                       id="phone"
                       className="mt-1 block w-full border-2 p-1 border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                      placeholder="Phone number"
+                      placeholder="Actual Price"
                       required
                       defaultValue={
                         editPopupData?.phone ? editPopupData?.phone : ""
@@ -412,14 +412,14 @@ const Plans = () => {
                       htmlFor="address"
                       className="block text-sm font-medium text-gray-700"
                     >
-                      Address
+                      Description
                     </label>
                     <input
                       type="text"
                       name="address"
                       id="address"
                       className="mt-1 h-28 block w-full border-2 p-1 border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                      placeholder="Address"
+                      placeholder="Description"
                       required
                       defaultValue={
                         editPopupData?.address ? editPopupData?.address : ""
@@ -427,25 +427,25 @@ const Plans = () => {
                     />
                   </div>
                   <div>
-                    <div>
-                      <label
-                        htmlFor="gender"
-                        className="block text-sm font-medium text-gray-700"
-                      >
-                        Gender
-                      </label>
-                      <select
-                        name="gender"
-                        id="gender"
-                        className="mt-1 block w-full border-2 p-1 border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                        defaultValue={
-                          editPopupData?.gender ? editPopupData?.gender : ""
-                        }
-                      >
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                      </select>
-                    </div>
+                  <div>
+                    <label
+                      htmlFor="phone"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Offer Price
+                    </label>
+                    <input
+                      type="number"
+                      name="phone"
+                      id="phone"
+                      className="mt-1 block w-full border-2 p-1 border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                      placeholder="Offer Price"
+                      required
+                      defaultValue={
+                        editPopupData?.phone ? editPopupData?.phone : ""
+                      }
+                    />
+                  </div>
                     <div className="mt-5">
                       <label
                         htmlFor="image"
@@ -470,7 +470,7 @@ const Plans = () => {
                     </div>
                   </div>
                 </div>
-                <div className="flex flex-row">
+                {/* <div className="flex flex-row">
                   <input
                     type="checkbox"
                     name="isMain"
@@ -483,7 +483,7 @@ const Plans = () => {
                   <label className="block text-m font-medium text-gray-700">
                     Main Judge
                   </label>
-                </div>
+                </div> */}
                 <div className="flex justify-center p-6">
                   <button
                     disabled={isLoadingMutation || isLoadingEdit}
@@ -575,7 +575,7 @@ const Plans = () => {
               Sl No
             </th>
             <th className="px-4 py-4 text-left border-r border-gray-400">
-              Name
+              Offer Title
             </th>
             <th className="px-4 py-4 text-left border-r border-gray-400">
               Id
@@ -590,10 +590,10 @@ const Plans = () => {
               Validity
             </th>
             <th className="px-4 py-4 text-left border-r border-gray-400">
-              ActualPrice
+              Actual Price
             </th>
             <th className="px-4 py-4 text-left border-r border-gray-400">
-              OfferPrice
+              Offer Price
             </th>
             <th className="px-4 py-4 text-left border-r border-gray-400">
               Status

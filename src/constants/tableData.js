@@ -419,26 +419,26 @@ export const MenuSubCategoryData = [
 export const PlansTableData = [
   {
     sl: 1,
-    name: "Basic",
+    name: "Comobo Fiesta",
     id: "BP-001",
     image: "/constants/planIcon2.png",
     actualPrice: 999,
     offerPrice: 799,
     description:
-      "Manage up to 5 restaurants ,Basic analytics dashboard ,Daily revenue reports ,Email notifications ,10GB cloud storage for backups ,Email support",
+      "Offers in Bergers, Pasta non-veg, Chicken Lolipops,  Chinies Dishes",
     validity: 1,
     validityType: "month",
     status: true
   },
   {
     sl: 1,
-    name: "Pro",
+    name: "New Membership",
     id: "PP-002",
     image: "/constants/planIcon.png",
     actualPrice: 2999,
     offerPrice: 2499,
     description:
-      "Manage up to 5 restaurants ,Basic analytics dashboard ,Daily revenue reports ,Email notifications ,10GB cloud storage for backups ,Email support",
+      "Offers in Bergers, Pasta non-veg, Chicken Lolipops,  Chinies Dishes",
     validity: 6,
     validityType: "month",
     status: false
@@ -448,10 +448,10 @@ export const PlansTableData = [
     name: "Enterprise",
     id: "EP-002",
     image: "/constants/planIcon2.png",
-    actualPrice: 7999,
-    offerPrice: 6999,
+    actualPrice: 999,
+    offerPrice: 699,
     description:
-      "Manage up to 5 restaurants ,Basic analytics dashboard ,Daily revenue reports ,Email notifications ,10GB cloud storage for backups ,Email support",
+      "Offers in Bergers, Pasta non-veg, Chicken Lolipops,  Chinies Dishes",
     validity: 1,
     validityType: "year",
     status: true
@@ -635,4 +635,32 @@ export const PaymentTableData =[
   status:"completed",
   plan:"Gold Plan"
 },
+]
+
+
+export const tableStatus = [
+ {
+   no:"TB41",
+    status: "Active",
+    floor: "1st Floor",
+    tableNo: 1,
+    seats: 4,
+    category: "AC",
+ },
+ {
+   no: "TB12",
+    status: "Available",
+    floor: "1st Floor",
+    tableNo: 1,
+    seats: 4,
+    category: "AC",
+ },
+ {
+   no: "TB11",
+    status: "Reserved",
+    floor: "3rd Floor",
+    tableNo: 1,
+    seats: 4,
+    category: "Non-AC",
+ },
 ]

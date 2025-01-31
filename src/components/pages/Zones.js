@@ -192,13 +192,28 @@ const Zones = () => {
             <Modal
               isVisible={isModalVisible}
               onClose={handleModalClose}
-              modalHeader={editPopupData ? "Edit Zone" : "Add Zone"}>
+              modalHeader={editPopupData ? "Edit Zone" : "Add Order"}>
               <form onSubmit={onSubmit} className="space-y-4">
                 <div>
                   <label
                     htmlFor="zoneName"
                     className="block text-sm font-medium text-gray-700">
                     Order Items
+                  </label>
+                  <input
+                    type="text"
+                    name="name"
+                    id="name"
+                    className="mt-1 block w-full border-2 p-1 border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                    required
+                    defaultValue={editPopupData ? editPopupData?.name : null}
+                  />
+                </div>
+                <div>
+                  <label
+                    htmlFor="zoneName"
+                    className="block text-sm font-medium text-gray-700">
+                    Quantity
                   </label>
                   <input
                     type="text"

@@ -21,7 +21,7 @@ import copy from "copy-to-clipboard";
 import { LuCopyCheck } from "react-icons/lu";
 import JudgeAvatar from "../../assets/images/person-placeholder.png";
 import { toast } from "sonner";
-import { PaymentTableData, PlansTableData } from "../../constants/tableData";
+import { PaymentTableData, PlansTableData, tableStatus } from "../../constants/tableData";
 
 const Payments = () => {
   const navigate = useNavigate();
@@ -287,8 +287,212 @@ const Payments = () => {
   return (
     <>
       <div className="flex rounded-lg p-4 pb-0">
-        <h2 className="text-2xl font-semibold text-gray-700">Payments</h2>
-       
+        <h2 className="text-2xl font-semibold text-gray-700">Table Management</h2>
+        <div className="ml-auto flex items-center space-x-4">
+          <span className="flex items-center">
+            <span
+              className="bg-[#808080] hover:bg-[#F8BF40] text-white rounded-3xl pt-2 pb-2 pl-4 pr-4 cursor-pointer"
+              onClick={toggleModal}>
+              Add New Table
+            </span>
+
+            <Modal
+              isVisible={isModalVisible}
+              onClose={handleModalClose}
+              modalHeader={editPopupData ? "Edit Table" : "Add New Table"}>
+              <form onSubmit={onSubmit} className="space-y-4">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                  <div>
+                    <label
+                      htmlFor="name"
+                      className="block text-sm font-medium text-gray-700">
+                      Table No.
+                    </label>
+                    <input
+                      type="text"
+                      name="name"
+                      id="name"
+                      className="mt-1 block w-full border-2 p-1 border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                      placeholder="Item name"
+                      required
+                      defaultValue={
+                        editPopupData?.name ? editPopupData?.name : ""
+                      }
+                    />
+                  </div>
+                  <div>
+                    <label
+                      htmlFor="zone"
+                      className="block text-sm font-medium text-gray-700">
+                      Floor
+                    </label>
+                    <Select
+                      className="border-gray-400"
+                      options={[]}
+                      onChange={handleChange}
+                      value={zonesList}
+                      isMulti={false}
+                      // hideSelectedOptions
+                      closeMenuOnSelect={true} // Keep the dropdown open for multiple selections
+                      placeholder="Select Floor"
+                      components={{ MultiValue: () => null }} // Hide selected options in input
+                    />
+                    {/* <div className="pt-2">
+                      {zonesList.length > 0 && (
+                        <ul className="flex flex-wrap gap-1">
+                          {zonesList.map((zone) => (
+                            <li
+                              key={zone.value}
+                              className="bg-[#1DB290] flex items-center justify-between text-white rounded-full py-0.5 px-2 text-xs font-light"
+                            >
+                              <span>{zone.label}</span>
+                              <button
+                                type="button"
+                                onClick={() => handleRemoveZone(zone)}
+                                className="ml-2"
+                              >
+                                <IoIosClose className="text-lg" />
+                              </button>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </div> */}
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                  {/* <div>
+                    <label
+                      htmlFor="email"
+                      className="block text-sm font-medium text-gray-700">
+                      Type  
+                    </label>
+                    <input
+                      type="email"
+                      name="email"
+                      id="email"
+                      className="mt-1 block w-full border-2 p-1 border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                      placeholder="Email address"
+                      required
+                      defaultValue={
+                        editPopupData?.email ? editPopupData?.email : ""
+                      }
+                    />
+                  </div> */}
+                  <div>
+                    <label
+                      htmlFor="phone"
+                      className="block text-sm font-medium text-gray-700">
+                      Seating
+                    </label>
+                    <input
+                      type="number"
+                      name="phone"
+                      id="phone"
+                      className="mt-1 block w-full border-2 p-1 border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                      placeholder="Enter Seats"
+                      required
+                      defaultValue={
+                        editPopupData?.phone ? editPopupData?.phone : ""
+                      }
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+               
+                  <div>
+                    <div>
+                      <label
+                        htmlFor="gender"
+                        className="block text-sm font-medium text-gray-700">
+                        Category
+                      </label>
+                      <select
+                        name="gender"
+                        id="gender"
+                        className="mt-1 block w-full border-2 p-1 border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        defaultValue={
+                          editPopupData?.gender ? editPopupData?.gender : ""
+                        }>
+                        <option value="male">AC</option>
+                        <option value="female">Non-Ac</option>
+                      </select>
+                    </div>
+                        
+                  </div>
+                </div>
+                {/* <div className="flex flex-row">
+                  <input
+                    type="checkbox"
+                    name="isMain"
+                    id="isMain"
+                    className="mr-2 border-2 p-1 border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                    defaultChecked={
+                      editPopupData ? editPopupData?.isMain : false
+                    }
+                  />
+                  <label className="block text-m font-medium text-gray-700">
+                    Main Judge
+                  </label>
+                </div> */}
+                <div className="flex justify-center p-6">
+                  <button
+                    disabled={isLoadingMutation || isLoadingEdit}
+                    type="submit"
+                    className="bg-[#808080] hover:bg-[#F8BF40] text-white font-bold py-2 px-6 rounded-3xl">
+                    {isLoadingMutation || isLoadingEdit
+                      ? "loading..."
+                      : "Submit"}
+                  </button>
+                </div>
+              </form>
+            </Modal>
+            <Modal isVisible={showDeletePopup} onClose={handleDeleteModalClose}>
+              <h3 className="flex self-center text-lg font-bold">
+                Are you sure want to Delete?
+              </h3>
+              <div className="flex justify-center p-6">
+                <button
+                  onClick={handleDeleteModalClose}
+                  type="submit"
+                  className="border border-green-500 text-green-600 hover:bg-green-700 hover:text-white font-bold  py-2 m-2 px-8 rounded-2xl">
+                  No
+                </button>
+                <button
+                  disabled={isLoadingDelete}
+                  onClick={handleDelete}
+                  className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 m-2 px-8 rounded-2xl">
+                  YES
+                </button>
+              </div>
+            </Modal>
+            <Modal isVisible={showBlockPopup} onClose={handleBlockModalClose}>
+              <h3 className="flex self-center text-lg font-bold">
+                Are you sure want to Block/Unblock?
+              </h3>
+              <h6 className="flex self-center text-sm text-red-500">
+                Judges cannot be unblocked while the competition is live.
+              </h6>
+              <div className="flex justify-center p-6">
+                <button
+                  disabled={isLoadingBlock}
+                  onClick={handleBlockModalClose}
+                  type="submit"
+                  className="border border-green-500 text-green-600 hover:bg-green-700 hover:text-white font-bold  py-2 m-2 px-8 rounded-2xl">
+                  No
+                </button>
+                <button
+                  disabled={isLoadingBlock}
+                  onClick={handleBlockJudge}
+                  className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 m-2 px-8 rounded-2xl">
+                  {isLoadingBlock ? "loading" : "YES"}
+                </button>
+              </div>
+            </Modal>
+          </span>
+        </div>
       </div>
       <div>
         <div className="flex rounded-lg p-4 pr-0 pt-0">
@@ -319,20 +523,20 @@ const Payments = () => {
               Sl No
             </th>
             <th className="px-4 py-4 text-left border-r border-gray-400">
-              Payment ID
+              Table No
             </th>
             <th className="px-4 py-4 text-left border-r border-gray-400">
-              Vender Details
+              Floor
             </th>
             <th className="px-4 py-4 text-left border-r border-gray-400">
-              Date & Time
+              Seats
             </th>
 
             <th className="px-4 py-4 text-left border-r border-gray-400">
               Status
             </th>
             <th className="px-4 py-4 text-left border-r border-gray-400">
-              Plan
+              Category
             </th>
             {/* <th className="px-4 py-4 text-left">Action</th> */}
           </tr>
@@ -341,19 +545,19 @@ const Payments = () => {
           {isLoading ? (
             <>Loading...</>
           ) : (
-                    PaymentTableData?.map((judge, index) => (
+                    tableStatus?.map((judge, index) => (
               <tr
                 className="odd:bg-[#FFFC64] even:bg-grey border-[2px] border-opacity-50 border-[#9e9696]"
                 key={index}
               >
                 <td
-                  onClick={() => navigate(`/judges/${judge?._id}`)}
+                  // onClick={() => navigate(`/judges/${judge?.}`)}
                   className="px-4 py-2 border-r border-gray-400"
                 >
                   {index + 1}
                 </td>
                 <td
-                  onClick={() => navigate(`/judges/${judge?._id}`)}
+                  // onClick={() => navigate(`/judges/${judge?._id}`)}
                   className="px-4 py-2 border-r border-gray-400"
                 >
                   <u
@@ -361,27 +565,27 @@ const Payments = () => {
                     onMouseOver={({ target }) => (target.style.color = "blue")}
                     onMouseOut={({ target }) => (target.style.color = "black")}
                   >
-                    {judge?.id}
+                    {judge?.no}
                   </u>
                 </td>
                 <td
-                  onClick={() => navigate(`/judges/${judge?._id}`)}
+                  // onClick={() => navigate(`/judges/${judge?._id}`)}
                   className="px-4 py-2 border-r border-gray-400"
                 >
-                  {judge?.vendor}
+                  {judge?.floor}
                 </td>
               
                 
                 <td className="px-4 py-2 border-r border-gray-400">
                   <ul className="list-disc pl-5 space-y-1">
-                   {judge?.dateAndTime}
+                   {judge?.seats}
                   </ul>
                 </td>
                 <td className="px-4 py-2 border-r border-gray-400">
                   {judge?.status}
                 </td>
                 <td className="px-4 py-2 border-r border-gray-400">
-              {judge?.plan}
+              {judge?.category}
                 </td>
               </tr>
             ))
