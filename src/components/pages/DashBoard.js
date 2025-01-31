@@ -1,15 +1,17 @@
 import React from "react";
-import DashBoardSection2 from "../DashBoardSection2";
+import DashBoard1Top from "../DashBoard1Top";
+// import DashBoardSection2 from "../DashBoardSection2";
 import DashBoard3Chart from "../DashBoard3Chart";
 
 const DashBoard = () => {
   return (
     <div className="bg-white">
-        {/* <DashBoard1Top /> */}
+        <DashBoard1Top />
       <div className=" w-full">
-        <DashBoardSection2 />
+        {/* <DashBoardSection2 /> */}
+
       </div>
-      {/* <DashBoard3Chart /> */}
+      <DashBoard3Chart />
 
     </div>
   );

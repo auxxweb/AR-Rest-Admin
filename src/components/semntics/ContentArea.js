@@ -14,7 +14,7 @@ import { Route, Routes } from "react-router-dom";
 // import SettingAndConfi from "../pages/SettingAndConfi";
 import JudgeDetails from "../pages/JudgeDetails";
 import DashBoard from "../pages/DashBoard";
-import Zones from "../pages/Zones";
+import Vendor from "../pages/Vendor";
 import Login from "../pages/Login";
 import Judges from "../pages/judges";
 import Participants from "../pages/participants";
@@ -36,7 +36,9 @@ function ContentArea() {
       <Route path="/login" element={<Login />} />
       <Route path="/forgotPassword" element={<ForgotPassword />} />
       <Route path="/changePassword/:forgotId" element={<ChangePassword />} />
-      <Route path="/zones" element={<Zones />} />
+      <Route path="/vendor" element={<Vendor />} />
+      {/* <Route path="/vendorCategory" element={<Zones />} /> */}
+
       <Route path="/judges" element={<Judges />} />
       <Route path="/judges/:id" element={<JudgeDetails />} />
       <Route path="/participants" element={<Participants />} />
