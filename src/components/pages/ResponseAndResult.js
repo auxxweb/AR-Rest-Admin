@@ -86,7 +86,7 @@ const ResponseAndResult = () => {
           <tbody className="border-[2px] border-opacity-50 border-[#969696]">
             {data?.results?.map((result, index) => (
               <tr
-                className=" odd:bg-[#FFFC64] even:bg-white border-[2px] border-opacity-50 border-[#969696]"
+                className=" odd:bg-[#FCD199] even:bg-white border-[2px] border-opacity-50 border-[#969696]"
                 key={index}
               >
                 <td

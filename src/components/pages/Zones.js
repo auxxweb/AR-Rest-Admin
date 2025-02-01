@@ -183,83 +183,40 @@ const Zones = () => {
         <h2 className="text-2xl font-semibold text-gray-700">New Orders</h2>
         <div className="ml-auto flex items-center space-x-4">
           <span className="flex items-center">
-            <span
+            {/* <span
               className="bg-[#808080] hover:bg-[#F8BF40] text-white rounded-3xl pt-2 pb-2 pl-4 pr-4 cursor-pointer"
               onClick={toggleModal}>
               Add Order
-            </span>
+            </span> */}
 
             <Modal
               isVisible={isModalVisible}
               onClose={handleModalClose}
-              modalHeader={editPopupData ? "Edit Zone" : "Add Order"}>
-              <form onSubmit={onSubmit} className="space-y-4">
-                <div>
-                  <label
-                    htmlFor="zoneName"
-                    className="block text-sm font-medium text-gray-700">
-                    Order Items
-                  </label>
-                  <input
-                    type="text"
-                    name="name"
-                    id="name"
-                    className="mt-1 block w-full border-2 p-1 border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                    required
-                    defaultValue={editPopupData ? editPopupData?.name : null}
-                  />
-                </div>
-                <div>
-                  <label
-                    htmlFor="zoneName"
-                    className="block text-sm font-medium text-gray-700">
-                    Quantity
-                  </label>
-                  <input
-                    type="text"
-                    name="name"
-                    id="name"
-                    className="mt-1 block w-full border-2 p-1 border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                    required
-                    defaultValue={editPopupData ? editPopupData?.name : null}
-                  />
-                </div>
-                <div>
-                  <label
-                    htmlFor="description"
-                    className="block text-sm font-medium text-gray-700">
-                    Specal Instructions
-                  </label>
-                  <input
-                    type="text"
-                    name="description"
-                    id="description"
-                    className="mt-1 block w-full h-20 border-2 p-1 border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                    required
-                    defaultValue={
-                      editPopupData ? editPopupData?.description : null
-                    }
-                  />
-                </div>
-                <div className="flex justify-center p-6">
-                  <button
-                    disabled={isLoadingMutation || isLoadingEdit}
-                    type="submit"
-                    className="bg-[#808080] hover:bg-[#F8BF40] text-white font-bold py-2 px-6 rounded-3xl">
-                    {isLoadingMutation || isLoadingEdit
-                      ? "loading..."
-                      : "Submit"}
-                  </button>
-                </div>
-              </form>
+              modalHeader={"Move to kitchen"}>
+                  <h3 className="flex justify-center self-center text-md font-bold">
+                Move to Kitchen
+              </h3>
+             
+              <div className="flex justify-center p-6">
+                <button
+                  onClick={handleModalClose}
+                  type="submit"
+                  className="border border-green-500 text-green-600 hover:bg-green-700 hover:text-white font-bold  py-2 m-2 px-8 rounded-2xl">
+                  Cancel
+                </button>
+                <button
+                  disabled={isLoadingDelete}
+                  onClick={handleModalClose}
+                  className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 m-2 px-8 rounded-2xl">
+                  Confirm
+                </button>
+              </div>
             </Modal>
             <Modal isVisible={showDeletePopup} onClose={handleDeleteModalClose}>
               <h3 className="flex justify-center self-center text-md font-bold">
-                Are you sure want to Delete?
+                Are you sure want to Reject?
               </h3>
-              <h3 className="flex justify-center self-center text-md font-bold">
-                This will also delete the judges and participants in this zone.
-              </h3>
+             
               <div className="flex justify-center p-6">
                 <button
                   onClick={handleDeleteModalClose}
@@ -269,7 +226,7 @@ const Zones = () => {
                 </button>
                 <button
                   disabled={isLoadingDelete}
-                  onClick={handleDelete}
+                  onClick={handleDeleteModalClose}
                   className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 m-2 px-8 rounded-2xl">
                   YES
                 </button>
@@ -322,7 +279,7 @@ const Zones = () => {
           ) : (
             newOrdersTableData?.map((zone, index) => (
               <tr
-                className="odd:bg-[#FFFC64] even:bg-white border-[2px] border-opacity-50 border-[#9e9696]"
+                className="odd:bg-[#FCD199] even:bg-white border-[2px] border-opacity-50 border-[#9e9696]"
                 key={index}>
                 <td className="px-4 py-2 border-r border-gray-400">
                   {index + 1}
@@ -351,38 +308,7 @@ const Zones = () => {
                 {zone?.orderTime}
                 </td>
                   <td className="px-4 py-2 border-r border-gray-400">
-                                  {/* <button
-                                   
-                                    className={`py-2 px-5 flex space-x-2 items-center ${
-                                      zone?.status
-                                        ? " text-[#FF0404] border-[#FF0404]"
-                                        : "  border-[#1DB290] text-[#1DB290]"
-                                    } rounded-full  border `}
-                                  >
-                                    {" "}
-                                    <span>{zone?.status ? "Blocked" : "Unblocked"}</span>
-                                    <BiSolidDownArrow className="text-black" />
-                                  </button>
-                                </td>
-
-                                <td className="px-4 py-2 border-r border-gray-400">
-                  <button */}
-                    {/* // disabled={isLoadingBlock} */}
-                    {/* onClick={() => handleEditClick(zone)} */}
-                  {/* > */}
-                    {/* <img
-                      alt="pics"
-                      src="/icons/edit.svg"
-                      className="w-6 h-6 rounded-full mr-2"
-                    /> */}
-                  {/* </button> */}
-                  {/* <button onClick={() => handleDeleteClick(zone?._id)}>
-                    <img
-                      alt="pics"
-                      src="/icons/delete.svg"
-                      className="w-6 h-6 rounded-full mr-2 fill-red-500"
-                    />
-                  </button> */}
+                               
                   {zone?.tableNo}
                 </td>
                 <td className="px-4 py-2 border-r border-gray-400">

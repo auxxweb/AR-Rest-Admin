@@ -313,7 +313,7 @@ const Bundles = () => {
           <tbody className="border-[2px] border-opacity-50 border-[#969696]">
             {data?.bundles?.map((bundle, index) => (
               <tr
-                className="odd:bg-[#FFFC64] even:bg-grey border-[2px] border-opacity-50 border-[#9e9696]"
+                className="odd:bg-[#FCD199] even:bg-grey border-[2px] border-opacity-50 border-[#9e9696]"
                 key={index}
               >
                 <td
@@ -441,7 +441,7 @@ const Bundles = () => {
                     {questions.map((question) => (
                       <li
                         key={question.value}
-                        className="bg-[#1DB290] flex items-center justify-between text-white rounded-full py-0.5 px-2 text-xs font-light"
+                        className="bg-[#E88B13] flex items-center justify-between text-white rounded-full py-0.5 px-2 text-xs font-light"
                       >
                         <span>{question.label}</span>
                         <button

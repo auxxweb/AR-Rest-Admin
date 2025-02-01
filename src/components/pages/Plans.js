@@ -347,7 +347,7 @@ const Plans = () => {
                           {zonesList.map((zone) => (
                             <li
                               key={zone.value}
-                              className="bg-[#1DB290] flex items-center justify-between text-white rounded-full py-0.5 px-2 text-xs font-light"
+                              className="bg-[#E88B13] flex items-center justify-between text-white rounded-full py-0.5 px-2 text-xs font-light"
                             >
                               <span>{zone.label}</span>
                               <button
@@ -607,7 +607,7 @@ const Plans = () => {
           ) : (
             PlansTableData?.map((judge, index) => (
               <tr
-                className="odd:bg-[#FFFC64] even:bg-grey border-[2px] border-opacity-50 border-[#9e9696]"
+                className="odd:bg-[#FCD199] even:bg-grey border-[2px] border-opacity-50 border-[#9e9696]"
                 key={index}
               >
                 <td
@@ -670,7 +670,7 @@ const Plans = () => {
                     className={`py-2 px-5 flex space-x-2 items-center ${
                       judge?.status
                         ? " text-[#FF0404] border-[#FF0404]"
-                        : "  border-[#1DB290] text-[#1DB290]"
+                        : "  border-[#E88B13] text-[#E88B13]"
                     } rounded-full  border `}
                   >
                     {" "}

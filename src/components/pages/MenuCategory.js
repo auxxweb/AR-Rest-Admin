@@ -14,6 +14,7 @@ import Pagination from "../Pagination";
 import { PUBLIC_USER_FRONTEND_URL } from "../../common/utils";
 import { toast } from "sonner";
 import { MenuCategoryData, vendorData } from "../../constants/tableData";
+import { BiSolidDownArrow } from "react-icons/bi";
 
 const MenuCategory = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -24,6 +25,10 @@ const MenuCategory = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const limit = 10;
   const isLoading = false;
+   const [showBlockPopup, setShowBlockPopup] = useState(false);
+    const handleBlockModalClose = () => {
+      setShowBlockPopup(false);
+    };
   // const { data, isLoading, refetch } = useGetZonesQuery({
   //   limit,
   //   page: currentPage,
@@ -102,6 +107,20 @@ const MenuCategory = () => {
     setShowDeletePopup(true);
     setSelectedZoneId(id);
   };
+
+  const [imagePreview, setImagePreview] = useState(null);
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   const handleDelete = async () => {
     try {
       const body = {
@@ -182,7 +201,7 @@ const MenuCategory = () => {
         <div className="ml-auto flex items-center space-x-4">
           <span className="flex items-center">
             <span
-              className="bg-[#808080] hover:bg-[#F8BF40] text-white rounded-3xl pt-2 pb-2 pl-4 pr-4 cursor-pointer"
+              className="bg-[#E88B13] hover:bg-[#E88B13] text-white rounded-3xl pt-2 pb-2 pl-4 pr-4 cursor-pointer"
               onClick={toggleModal}>
               Add Category
             </span>
@@ -191,57 +210,219 @@ const MenuCategory = () => {
               isVisible={isModalVisible}
               onClose={handleModalClose}
               modalHeader={editPopupData ? "Edit Category" : "Add Category"}>
-              <form onSubmit={onSubmit} className="space-y-4">
-                <div>
-                  <label
-                    htmlFor="zoneName"
-                    className="block text-sm font-medium text-gray-700">
-                    Name
-                  </label>
-                  <input
-                    type="text"
-                    name="name"
-                    id="name"
-                    className="mt-1 block w-full border-2 p-1 border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                    required
-                    defaultValue={editPopupData ? editPopupData?.name : null}
-                  />
-                </div>
-                <div>
-                  <label
-                    htmlFor="description"
-                    className="block text-sm font-medium text-gray-700">
-                    Description
-                  </label>
-                  <input
-                    type="text"
-                    name="description"
-                    id="description"
-                    className="mt-1 block w-full h-20 border-2 p-1 border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                    required
-                    defaultValue={
-                      editPopupData ? editPopupData?.description : null
-                    }
-                  />
-                </div>
-                <div className="flex justify-center p-6">
-                  <button
-                    disabled={isLoadingMutation || isLoadingEdit}
-                    type="submit"
-                    className="bg-[#808080] hover:bg-[#F8BF40] text-white font-bold py-2 px-6 rounded-3xl">
-                    {isLoadingMutation || isLoadingEdit
-                      ? "loading..."
-                      : "Submit"}
-                  </button>
-                </div>
-              </form>
+              <div
+                style={{
+                  maxHeight: "80vh",
+                  overflowY: "auto",
+                  padding: "24px",
+                  backgroundColor: "#fff",
+                  borderRadius: "12px",
+                  boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
+                  position: "relative"
+                }}>
+                {/* Close Button */}
+                <button
+                  type="button"
+                  onClick={handleModalClose}
+                  style={{
+                    position: "absolute",
+                    top: "16px",
+                    right: "16px",
+                    fontSize: "20px",
+                    color: "#666",
+                    background: "none",
+                    border: "none",
+                    cursor: "pointer"
+                  }}>
+                  ×
+                </button>
+
+                <form
+                  onSubmit={onSubmit}
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "16px"
+                  }}>
+                  {/* Zone Name */}
+                  <div>
+                    <label
+                      htmlFor="name"
+                      style={{
+                        display: "block",
+                        fontSize: "14px",
+                        fontWeight: "500",
+                        color: "#333"
+                      }}>
+                      Category Name
+                    </label>
+                    <input
+                      type="text"
+                      name="name"
+                      id="name"
+                      required
+                      defaultValue={editPopupData ? editPopupData?.name : ""}
+                      style={{
+                        width: "100%",
+                        padding: "10px",
+                        marginTop: "6px",
+                        border: "2px solid #ccc",
+                        borderRadius: "8px",
+                        fontSize: "14px"
+                      }}
+                    />
+                  </div>
+
+                  {/* Menu ID */}
+                  <div>
+                    <label
+                      htmlFor="menuId"
+                      style={{
+                        display: "block",
+                        fontSize: "14px",
+                        fontWeight: "500",
+                        color: "#333"
+                      }}>
+                      Menu ID
+                    </label>
+                    <input
+                      type="text"
+                      name="menuId"
+                      id="menuId"
+                      required
+                      defaultValue={editPopupData ? editPopupData?.id : ""}
+                      style={{
+                        width: "100%",
+                        padding: "10px",
+                        marginTop: "6px",
+                        border: "2px solid #ccc",
+                        borderRadius: "8px",
+                        fontSize: "14px"
+                      }}
+                    />
+                  </div>
+
+                  {/* Description */}
+                  <div>
+                    <label
+                      htmlFor="description"
+                      style={{
+                        display: "block",
+                        fontSize: "14px",
+                        fontWeight: "500",
+                        color: "#333"
+                      }}>
+                      Description
+                    </label>
+                    <textarea
+                      name="description"
+                      id="description"
+                      required
+                      defaultValue={
+                        editPopupData ? editPopupData?.description : ""
+                      }
+                      style={{
+                        width: "100%",
+                        height: "80px",
+                        padding: "10px",
+                        marginTop: "6px",
+                        border: "2px solid #ccc",
+                        borderRadius: "8px",
+                        fontSize: "14px",
+                        resize: "none"
+                      }}
+                    />
+                  </div>
+
+                  {/* Image Upload */}
+                  <div>
+                    <label
+                      htmlFor="image"
+                      style={{
+                        display: "block",
+                        fontSize: "14px",
+                        fontWeight: "500",
+                        color: "#333"
+                      }}>
+                      Upload Image
+                    </label>
+                    <input
+                      type="file"
+                      name="image"
+                      id="image"
+                      accept="image/*"
+                      onChange={handleImageChange}
+                      style={{
+                        width: "100%",
+                        padding: "10px",
+                        marginTop: "6px",
+                        border: "2px solid #ccc",
+                        borderRadius: "8px",
+                        fontSize: "14px"
+                      }}
+                    />
+                    {/* Image Preview */}
+                    {imagePreview && (
+                      <div style={{ marginTop: "8px" }}>
+                        <img
+                          src={imagePreview}
+                          alt="Preview"
+                          style={{
+                            width: "100%",
+                            height: "80px",
+                            objectFit: "cover",
+                            borderRadius: "8px"
+                          }}
+                        />
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Submit Button */}
+                  <div style={{ textAlign: "center" }}>
+                    <button
+                      disabled={isLoadingMutation || isLoadingEdit}
+                      type="submit"
+                      style={{
+                        backgroundColor: "#E88B13",
+                        color: "#fff",
+                        fontWeight: "bold",
+                        padding: "12px 24px",
+                        borderRadius: "24px",
+                        border: "none",
+                        cursor: "pointer",
+                        boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)"
+                      }}>
+                      {isLoadingMutation || isLoadingEdit
+                        ? "loading..."
+                        : "Submit"}
+                    </button>
+                  </div>
+                </form>
+              </div>
             </Modal>
+            <Modal isVisible={showBlockPopup} onClose={handleBlockModalClose}>
+              <h3 className="flex self-center text-lg font-bold">
+                Are you sure want to Block/Unblock?
+              </h3>
+              <div className="flex justify-center p-6">
+                <button
+                  onClick={handleBlockModalClose}
+                  type="submit"
+                  className="border border-green-500 text-green-600 hover:bg-green-700 hover:text-white font-bold  py-2 m-2 px-8 rounded-2xl">
+                  No
+                </button>
+                <button
+                  onClick={handleBlockModalClose}
+                  className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 m-2 px-8 rounded-2xl">
+                  YES
+                </button>
+              </div>
+            </Modal>
+
             <Modal isVisible={showDeletePopup} onClose={handleDeleteModalClose}>
               <h3 className="flex justify-center self-center text-md font-bold">
                 Are you sure want to Delete?
-              </h3>
-              <h3 className="flex justify-center self-center text-md font-bold">
-                This will also delete the judges and participants in this zone.
               </h3>
               <div className="flex justify-center p-6">
                 <button
@@ -252,7 +433,7 @@ const MenuCategory = () => {
                 </button>
                 <button
                   disabled={isLoadingDelete}
-                  onClick={handleDelete}
+                  onClick={handleDeleteModalClose}
                   className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 m-2 px-8 rounded-2xl">
                   YES
                 </button>
@@ -273,7 +454,7 @@ const MenuCategory = () => {
           />
         </span>
         <span className="flex items-center ">
-          <span className="cursor-pointer bg-[#808080] hover:bg-[#F8BF40] text-white p-2 lg:w-[100px] text-center rounded-3xl">
+          <span className="cursor-pointer bg-[#E88B13] hover:bg-[#E88B13] text-white p-2 lg:w-[100px] text-center rounded-3xl">
             Search
           </span>
         </span>
@@ -304,7 +485,7 @@ const MenuCategory = () => {
           ) : (
             MenuCategoryData?.map((zone, index) => (
               <tr
-                className="odd:bg-[#FFFC64] even:bg-grey border-[2px] border-opacity-50 border-[#9e9696]"
+                className="odd:bg-[#FCD199] even:bg-white border-[2px] border-opacity-50 border-[#9e9696]"
                 key={index}>
                 <td className="px-4 py-2 border-r border-gray-400">
                   {index + 1}
@@ -313,7 +494,7 @@ const MenuCategory = () => {
                   style={{ cursor: "pointer" }}
                   className="px-4 py-2 border-r border-gray-400">
                   <u
-                    style={{ cursor: "pointer",textDecoration: "none" }}
+                    style={{ cursor: "pointer", textDecoration: "none" }}
                     onMouseOver={({ target }) => (target.style.color = "blue")}
                     onMouseOut={({ target }) => (target.style.color = "black")}>
                     <div style={{ display: "flex", gap: "1rem" }}>
@@ -332,34 +513,28 @@ const MenuCategory = () => {
                 <td className="px-4 py-2 border-r border-gray-400">
                   <div className="flex -space-x-3">{zone?.description}</div>
                 </td>
-                <td className="px-4 py-2 border-r border-gray-400">
-                  <span
-                    style={{
-                      border: `solid 2px ${zone?.status ? "green" : "red"}`,
-                      backgroundColor: ` ${
-                        zone?.status
-                          ? "rgba(0, 255, 0, 0.5)"
-                          : "rgba(255, 0, 0, 0.5)"
-                      }`
-                    }}
-                    className="inline-block rounded-full p-1 border border-gray-400 text-sm w-[145px] text-center">
-                    {zone.status ? "Active" : "Blocked"}
-                  </span>
-                </td>
+                            <td className="px-4 py-2 border-r border-gray-400">
+                              <button
+                              onClick={()=>setShowBlockPopup(true)}
+                                className={`py-2 px-5 flex space-x-2 items-center ${
+                                  zone?.status
+                                    ? " text-[#FF0404] border-[#FF0404]"
+                                    : "  border-[#15d057] text-[#15d057]"
+                                } rounded-full  border `}>
+                                {" "}
+                                <span>{zone?.status ? "Blocked" : "Unblocked"}</span>
+                                <BiSolidDownArrow className="text-black" />
+                              </button>
+                            </td>
 
-                <td className="px-4 py-2">
+                <td className="px-4 py-2 border-r border-gray-400">
                   <button
-                    style={{ color: "black" }}
+                    // disabled={isLoadingBlock}
                     onClick={() => handleEditClick(zone)}>
-                    {" "}
                     <img
                       alt="pics"
                       src="/icons/edit.svg"
-                      className="w-6 h-6 rounded-full mr-2 "
-                      style={{
-                        filter:
-                          "invert(20%) sepia(94%) saturate(7496%) hue-rotate(347deg) brightness(102%) contrast(104%)"
-                      }}
+                      className="w-6 h-6 rounded-full mr-2"
                     />
                   </button>
                   <button onClick={() => handleDeleteClick(zone?._id)}>
@@ -367,10 +542,6 @@ const MenuCategory = () => {
                       alt="pics"
                       src="/icons/delete.svg"
                       className="w-6 h-6 rounded-full mr-2 fill-red-500"
-                      style={{
-                        filter:
-                          "invert(20%) sepia(94%) saturate(7496%) hue-rotate(347deg) brightness(102%) contrast(104%)"
-                      }}
                     />
                   </button>
                 </td>

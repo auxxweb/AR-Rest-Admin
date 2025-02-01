@@ -1,5 +1,5 @@
 // BarChart.js
-import React, { useEffect } from "react";
+import React from "react";
 import { Bar } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -10,29 +10,18 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import { useGetDashboardDetailQuery } from "../../api/dashboard";
 
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend
-);
+ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 const BarChart = () => {
-  const { data, refetch } = useGetDashboardDetailQuery();
-  useEffect(() => {
-    refetch();
-  }, []);
+  // Static data for the chart
   const barData = {
-    labels: data?.data?.zoneBasedParticipants?.map((data) => data?.label),
+    labels: ["ABC Foods", "XYZ Supplies", "Gourmet Plus", "Fresh Bites", "Tasty Treats"],
     datasets: [
       {
-        label: "Participants",
-        data: data?.data?.zoneBasedParticipants?.map((data) => data?.count),
-        backgroundColor: "#058A55",
+        label: "Dishes",
+        data: [50, 70, 40, 90, 60], // Constant values
+        backgroundColor: "#E88B13",
       },
     ],
   };
@@ -44,19 +33,19 @@ const BarChart = () => {
         beginAtZero: true,
         title: {
           display: true,
-          text: "Participants",
+          text: "Dishes",
         },
       },
       x: {
         title: {
           display: true,
-          text: "Zone",
+          text: "Vendor",
         },
       },
     },
     plugins: {
       legend: {
-        display: false, // Hides the legend
+        display: false,
       },
     },
     borderColor: "#058A55",

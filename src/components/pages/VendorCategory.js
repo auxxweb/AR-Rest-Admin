@@ -239,10 +239,7 @@ const VendorCategory = () => {
             </Modal>
             <Modal isVisible={showDeletePopup} onClose={handleDeleteModalClose}>
               <h3 className="flex justify-center self-center text-md font-bold">
-                Are you sure want to Delete?
-              </h3>
-              <h3 className="flex justify-center self-center text-md font-bold">
-                This will also delete the judges and participants in this zone.
+                Are you sure want to Reject?
               </h3>
               <div className="flex justify-center p-6">
                 <button
@@ -253,7 +250,7 @@ const VendorCategory = () => {
                 </button>
                 <button
                   disabled={isLoadingDelete}
-                  onClick={handleDelete}
+                  onClick={handleDeleteModalClose}
                   className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 m-2 px-8 rounded-2xl">
                   YES
                 </button>
@@ -307,7 +304,7 @@ const VendorCategory = () => {
           ) : (
             OngoingOrdersTableData?.map((zone, index) => (
               <tr
-                className="odd:bg-[#FFFC64] even:bg-white border-[2px] border-opacity-50 border-[#9e9696]"
+                className="odd:bg-[#FCD199] even:bg-white border-[2px] border-opacity-50 border-[#9e9696]"
                 key={index}>
                 <td className="px-4 py-2 border-r border-gray-400">
                   {index + 1}
@@ -344,7 +341,7 @@ const VendorCategory = () => {
                                     className={`py-2 px-5 flex space-x-2 items-center ${
                                       zone?.status
                                         ? " text-[#FF0404] border-[#FF0404]"
-                                        : "  border-[#1DB290] text-[#1DB290]"
+                                        : "  border-[#E88B13] text-[#E88B13]"
                                     } rounded-full  border `}
                                   >
                                     {" "}

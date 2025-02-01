@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useGetDashboardDetailQuery } from "../api/dashboard";
-import participats from "../assets/images/participats.png";
-import judges from "../assets/images/judges.png";
-import zones from "../assets/images/zones.png";
+import participats from "../assets/images/vendor1.png";
+import judges from "../assets/images/menu1.png";
+import zones from "../assets/images/dishes.png";
 const DashBoardSection2 = () => {
   const [currentTime, setCurrentTime] = useState(new Date());
-  const { data,refetch} = useGetDashboardDetailQuery();
+  // const { data,refetch} = useGetDashboardDetailQuery();
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -17,7 +17,7 @@ const DashBoardSection2 = () => {
   }, []);
   
   useEffect(() => {
-    refetch();
+    // refetch();
   }, []);
   // Format the time as HH:MM:SS AM/PM
   const formattedTime = currentTime.toLocaleTimeString("en-US", {
@@ -51,24 +51,24 @@ const DashBoardSection2 = () => {
   const dashboardData = [
     {
       logo: zones,
-      count: 234,
-      title: "Items",
+      count: 250,
+      title: "Dishes",
     },
     {
       logo: judges,
-      count: 39,
-      title: "Orders",
+      count: 150,
+      title: "Menu",
     },
     {
       logo: participats,
-      count: 3,
-      title: "Current Offers",
+      count: 50,
+      title: "Vendors",
     },
   ];
 
   return (
     <>
-      <div className="flex flex-col space-y-4 ">
+      <div style={{margin:"0 20px"}} className="flex flex-col space-y-4 ">
         <div className="w-full px-2 py-5 text-left bg-white shadow-md border border-gray-300 gap-5 sm:gap-10  mr-4 flex items-center justify-center rounded-2xl">
           <div className="text-left">
             <div className="flex justify-center items-center text-xl text-gray-500 ">

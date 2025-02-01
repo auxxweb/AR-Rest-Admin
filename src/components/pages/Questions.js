@@ -235,7 +235,7 @@ const Questions = () => {
             {data?.questions?.map((question, index) => (
               <tr
                 onClick={() => navigate(`/questions/${question?._id}`)}
-                className=" odd:bg-[#FFFC64] even:bg-white border-[2px] border-opacity-50 border-[#969696]"
+                className=" odd:bg-[#FCD199] even:bg-white border-[2px] border-opacity-50 border-[#969696]"
                 key={index}>
                 <td className="px-4 py-2 border-r border-gray-400">{index + 1}</td>
                 <td className="px-4 py-2  border-r border-gray-400" dir={getTextDirection(question?.question)}>{question?.question}</td>

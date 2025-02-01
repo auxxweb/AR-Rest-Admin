@@ -343,7 +343,7 @@ const Payments = () => {
                           {zonesList.map((zone) => (
                             <li
                               key={zone.value}
-                              className="bg-[#1DB290] flex items-center justify-between text-white rounded-full py-0.5 px-2 text-xs font-light"
+                              className="bg-[#E88B13] flex items-center justify-between text-white rounded-full py-0.5 px-2 text-xs font-light"
                             >
                               <span>{zone.label}</span>
                               <button
@@ -462,7 +462,7 @@ const Payments = () => {
                 </button>
                 <button
                   disabled={isLoadingDelete}
-                  onClick={handleDelete}
+                  onClick={handleDeleteModalClose}
                   className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 m-2 px-8 rounded-2xl">
                   YES
                 </button>
@@ -538,6 +538,7 @@ const Payments = () => {
             <th className="px-4 py-4 text-left border-r border-gray-400">
               Category
             </th>
+            <th className="px-4 py-4 text-left">Action</th>
             {/* <th className="px-4 py-4 text-left">Action</th> */}
           </tr>
         </thead>
@@ -547,7 +548,7 @@ const Payments = () => {
           ) : (
                     tableStatus?.map((judge, index) => (
               <tr
-                className="odd:bg-[#FFFC64] even:bg-grey border-[2px] border-opacity-50 border-[#9e9696]"
+                className="odd:bg-[#FCD199] even:bg-grey border-[2px] border-opacity-50 border-[#9e9696]"
                 key={index}
               >
                 <td
@@ -586,6 +587,24 @@ const Payments = () => {
                 </td>
                 <td className="px-4 py-2 border-r border-gray-400">
               {judge?.category}
+                </td>
+                <td className="px-4 py-2 border-r border-gray-400">
+                  <button
+                    disabled={isLoadingBlock}
+                    onClick={() => handleEditClick(judge)}>
+                    <img
+                      alt="pics"
+                      src="/icons/edit.svg"
+                      className="w-6 h-6 rounded-full mr-2"
+                    />
+                  </button>
+                  <button onClick={() => handleDeleteClick(judge?._id)}>
+                    <img
+                      alt="pics"
+                      src="/icons/delete.svg"
+                      className="w-6 h-6 rounded-full mr-2 fill-red-500"
+                    />
+                  </button>
                 </td>
               </tr>
             ))

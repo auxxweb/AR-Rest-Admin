@@ -449,7 +449,7 @@ const Participants = () => {
                       {filterZonesList.map((zone) => (
                         <li
                           key={zone.value}
-                          className="bg-[#1DB290] flex items-center justify-between text-white rounded-full py-0.5 px-2 text-xs font-light"
+                          className="bg-[#E88B13] flex items-center justify-between text-white rounded-full py-0.5 px-2 text-xs font-light"
                         >
                           <span>{zone.label}</span>
                           <button
@@ -513,7 +513,7 @@ const Participants = () => {
           ) : (
             data?.participant?.map((participant, index) => (
               <tr
-                 className="odd:bg-[#FFFC64] even:bg-grey border-[2px] border-opacity-50 border-[#9e9696]"
+                 className="odd:bg-[#FCD199] even:bg-grey border-[2px] border-opacity-50 border-[#9e9696]"
                 key={index}
               >
                 <td

@@ -291,201 +291,155 @@ const Dishes = () => {
         <div className="ml-auto flex items-center space-x-4">
           <span className="flex items-center">
             <span
-              className="bg-[#808080] hover:bg-[#F8BF40] text-white rounded-3xl pt-2 pb-2 pl-4 pr-4 cursor-pointer"
+              className="bg-[#E88B13] hover:bg-[#E88B13] text-white rounded-3xl pt-2 pb-2 pl-4 pr-4 cursor-pointer"
               onClick={toggleModal}>
               Add Dishes
             </span>
 
             <Modal
-              isVisible={isModalVisible}
-              onClose={handleModalClose}
-              modalHeader={editPopupData ? "Edit Dish" : "Add Dish"}>
-              <form onSubmit={onSubmit} className="space-y-4">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                  <div>
-                    <label
-                      htmlFor="name"
-                      className="block text-sm font-medium text-gray-700">
-                      Item Name
-                    </label>
-                    <input
-                      type="text"
-                      name="name"
-                      id="name"
-                      className="mt-1 block w-full border-2 p-1 border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                      placeholder="Item name"
-                      required
-                      defaultValue={
-                        editPopupData?.name ? editPopupData?.name : ""
-                      }
-                    />
-                  </div>
-                  <div>
-                    <label
-                      htmlFor="zone"
-                      className="block text-sm font-medium text-gray-700">
-                      Category
-                    </label>
-                    <Select
-                      className="border-gray-400"
-                      options={[]}
-                      onChange={handleChange}
-                      value={zonesList}
-                      isMulti={false}
-                      // hideSelectedOptions
-                      closeMenuOnSelect={true} // Keep the dropdown open for multiple selections
-                      placeholder="Select Category"
-                      components={{ MultiValue: () => null }} // Hide selected options in input
-                    />
-                    {/* <div className="pt-2">
-                      {zonesList.length > 0 && (
-                        <ul className="flex flex-wrap gap-1">
-                          {zonesList.map((zone) => (
-                            <li
-                              key={zone.value}
-                              className="bg-[#1DB290] flex items-center justify-between text-white rounded-full py-0.5 px-2 text-xs font-light"
-                            >
-                              <span>{zone.label}</span>
-                              <button
-                                type="button"
-                                onClick={() => handleRemoveZone(zone)}
-                                className="ml-2"
-                              >
-                                <IoIosClose className="text-lg" />
-                              </button>
-                            </li>
-                          ))}
-                        </ul>
-                      )}
-                    </div> */}
-                  </div>
-                </div>
+  isVisible={isModalVisible}
+  onClose={handleModalClose}
+  modalHeader={editPopupData ? "Edit Dish" : "Add Dish"}
+>
+  <form onSubmit={onSubmit} className="space-y-6">
+    {/* Dish Name */}
+    <div>
+      <label htmlFor="dishName" className="block text-sm font-semibold text-gray-700">
+        Dish Name
+      </label>
+      <input
+        type="text"
+        name="dishName"
+        id="dishName"
+        className="mt-1 block w-full border rounded-lg p-2 border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+        placeholder="Dish Name"
+        required
+        defaultValue={editPopupData?.dishName || ""}
+      />
+    </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                  {/* <div>
-                    <label
-                      htmlFor="email"
-                      className="block text-sm font-medium text-gray-700">
-                      Type  
-                    </label>
-                    <input
-                      type="email"
-                      name="email"
-                      id="email"
-                      className="mt-1 block w-full border-2 p-1 border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                      placeholder="Email address"
-                      required
-                      defaultValue={
-                        editPopupData?.email ? editPopupData?.email : ""
-                      }
-                    />
-                  </div> */}
-                  <div>
-                    <label
-                      htmlFor="phone"
-                      className="block text-sm font-medium text-gray-700">
-                      Price
-                    </label>
-                    <input
-                      type="number"
-                      name="phone"
-                      id="phone"
-                      className="mt-1 block w-full border-2 p-1 border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                      placeholder="Enter Price"
-                      required
-                      defaultValue={
-                        editPopupData?.phone ? editPopupData?.phone : ""
-                      }
-                    />
-                  </div>
-                </div>
+    {/* Description */}
+    <div>
+      <label htmlFor="description" className="block text-sm font-semibold text-gray-700">
+        Description
+      </label>
+      <textarea
+        name="description"
+        id="description"
+        className="mt-1 block w-full border rounded-lg p-2 border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm h-28"
+        placeholder="Description"
+        required
+        defaultValue={editPopupData?.description || ""}
+      ></textarea>
+    </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                  <div>
-                    <label
-                      htmlFor="address"
-                      className="block text-sm font-medium text-gray-700">
-                      Description
-                    </label>
-                    <input
-                      type="text"
-                      name="address"
-                      id="address"
-                      className="mt-1 h-28 block w-full border-2 p-1 border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                      placeholder="Description"
-                      required
-                      defaultValue={
-                        editPopupData?.address ? editPopupData?.address : ""
-                      }
-                    />
-                  </div>
-                  <div>
-                    <div>
-                      <label
-                        htmlFor="gender"
-                        className="block text-sm font-medium text-gray-700">
-                        Category
-                      </label>
-                      <select
-                        name="gender"
-                        id="gender"
-                        className="mt-1 block w-full border-2 p-1 border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                        defaultValue={
-                          editPopupData?.gender ? editPopupData?.gender : ""
-                        }>
-                        <option value="male">Veg</option>
-                        <option value="female">Non-Veg</option>
-                      </select>
-                    </div>
-                    <div className="mt-5">
-                      <label
-                        htmlFor="image"
-                        className="block text-sm font-medium text-gray-700">
-                        Image
-                      </label>
-                      <input
-                        type="file"
-                        name="image"
-                        id="image"
-                        className="mt-1 block w-full border-2 p-1 border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                        onChange={handlePreviewImage}
-                      />
-                      {imageUrl && (
-                        <img
-                          className="mt-2 w-20 h-auto"
-                          src={imageUrl}
-                          alt="previewImage"
-                        />
-                      )}
-                    </div>
-                  </div>
-                </div>
-                {/* <div className="flex flex-row">
-                  <input
-                    type="checkbox"
-                    name="isMain"
-                    id="isMain"
-                    className="mr-2 border-2 p-1 border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                    defaultChecked={
-                      editPopupData ? editPopupData?.isMain : false
-                    }
-                  />
-                  <label className="block text-m font-medium text-gray-700">
-                    Main Judge
-                  </label>
-                </div> */}
-                <div className="flex justify-center p-6">
-                  <button
-                    disabled={isLoadingMutation || isLoadingEdit}
-                    type="submit"
-                    className="bg-[#808080] hover:bg-[#F8BF40] text-white font-bold py-2 px-6 rounded-3xl">
-                    {isLoadingMutation || isLoadingEdit
-                      ? "loading..."
-                      : "Submit"}
-                  </button>
-                </div>
-              </form>
-            </Modal>
+    {/* Price & Offer Price */}
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+      <div>
+        <label htmlFor="price" className="block text-sm font-semibold text-gray-700">
+          Price
+        </label>
+        <input
+          type="number"
+          name="price"
+          id="price"
+          className="mt-1 block w-full border rounded-lg p-2 border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          placeholder="Price"
+          required
+          defaultValue={editPopupData?.price || ""}
+        />
+      </div>
+      <div>
+        <label htmlFor="offerPrice" className="block text-sm font-semibold text-gray-700">
+          Offer Price
+        </label>
+        <input
+          type="number"
+          name="offerPrice"
+          id="offerPrice"
+          className="mt-1 block w-full border rounded-lg p-2 border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          placeholder="Offer Price"
+          defaultValue={editPopupData?.offerPrice || ""}
+        />
+      </div>
+    </div>
+
+    {/* Type & Count */}
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+      <div>
+        <label htmlFor="type" className="block text-sm font-semibold text-gray-700">
+          Type
+        </label>
+        <input
+          type="text"
+          name="type"
+          id="type"
+          className="mt-1 block w-full border rounded-lg p-2 border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          placeholder="Type"
+          required
+          defaultValue={editPopupData?.type || ""}
+        />
+      </div>
+      <div>
+        <label htmlFor="count" className="block text-sm font-semibold text-gray-700">
+          Count
+        </label>
+        <input
+          type="number"
+          name="count"
+          id="count"
+          className="mt-1 block w-full border rounded-lg p-2 border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          placeholder="Count"
+          required
+          defaultValue={editPopupData?.count || ""}
+        />
+      </div>
+    </div>
+
+    {/* AR Enabled */}
+    <div className="flex items-center gap-2">
+      <input
+        type="checkbox"
+        name="arEnabled"
+        id="arEnabled"
+        className="rounded border-gray-300 focus:ring-indigo-500"
+        defaultChecked={editPopupData?.ar || false}
+      />
+      <label htmlFor="arEnabled" className="text-sm font-medium text-gray-700">
+        AR Enabled
+      </label>
+    </div>
+
+    {/* Image Upload */}
+    <div className="mt-4">
+      <label htmlFor="image" className="block text-sm font-semibold text-gray-700">
+        Upload Image
+      </label>
+      <input
+        type="file"
+        name="image"
+        id="image"
+        className="mt-1 block w-full border rounded-lg p-2 border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+        onChange={handlePreviewImage}
+      />
+      {(imageUrl || editPopupData) && (
+        <img className="mt-2 w-24 h-24 object-cover rounded-lg" src={imageUrl ?? editPopupData?.Image} alt="Preview" />
+      )}
+    </div>
+
+    {/* Submit Button */}
+    <div className="flex justify-center pt-6">
+      <button
+        disabled={isLoadingMutation || isLoadingEdit}
+        type="submit"
+        className="bg-[#E88B13] hover:bg-[#d77a0f] text-white font-bold py-2 px-8 rounded-full transition-all duration-300 shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
+      >
+        {isLoadingMutation || isLoadingEdit ? "Loading..." : "Submit"}
+      </button>
+    </div>
+  </form>
+</Modal>
+
             <Modal isVisible={showDeletePopup} onClose={handleDeleteModalClose}>
               <h3 className="flex self-center text-lg font-bold">
                 Are you sure want to Delete?
@@ -499,7 +453,7 @@ const Dishes = () => {
                 </button>
                 <button
                   disabled={isLoadingDelete}
-                  onClick={handleDelete}
+                  onClick={handleDeleteModalClose}
                   className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 m-2 px-8 rounded-2xl">
                   YES
                 </button>
@@ -509,9 +463,6 @@ const Dishes = () => {
               <h3 className="flex self-center text-lg font-bold">
                 Are you sure want to Block/Unblock?
               </h3>
-              <h6 className="flex self-center text-sm text-red-500">
-                Judges cannot be unblocked while the competition is live.
-              </h6>
               <div className="flex justify-center p-6">
                 <button
                   disabled={isLoadingBlock}
@@ -522,7 +473,7 @@ const Dishes = () => {
                 </button>
                 <button
                   disabled={isLoadingBlock}
-                  onClick={handleBlockJudge}
+                  onClick={handleBlockModalClose}
                   className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 m-2 px-8 rounded-2xl">
                   {isLoadingBlock ? "loading" : "YES"}
                 </button>
@@ -545,7 +496,7 @@ const Dishes = () => {
               />
             </span>
             <span className="flex items-center">
-              <span className="cursor-pointer bg-[#808080] hover:bg-[#F8BF40] text-white p-2 lg:w-[100px] text-center rounded-3xl">
+              <span className="cursor-pointer bg-[#E88B13] hover:bg-[#E88B13] text-white p-2 lg:w-[100px] text-center rounded-3xl">
                 Search
               </span>
             </span>
@@ -574,6 +525,7 @@ const Dishes = () => {
             <th className="px-4 py-4 text-left border-r border-gray-400">
               Type
             </th>
+            <th className="px-4 py-4 text-left border-r border-gray-400">AR</th>
             <th className="px-4 py-4 text-left border-r border-gray-400">
               Rating
             </th>
@@ -584,9 +536,9 @@ const Dishes = () => {
           {isLoading ? (
             <>Loading...</>
           ) : (
-                    DishesData?.map((judge, index) => (
+            DishesData?.map((judge, index) => (
               <tr
-                className="odd:bg-[#FFFC64] even:bg-grey border-[2px] border-opacity-50 border-[#9e9696]"
+                className="odd:bg-[#FCD199] even:bg-white border-[2px] border-opacity-50 border-[#9e9696]"
                 key={index}>
                 <td
                   onClick={() => navigate(`/judges/${judge?._id}`)}
@@ -612,7 +564,6 @@ const Dishes = () => {
                     className="w-14 h-14 rounded-full mr-2 mt-2"
                   />
                 </td>
-               
 
                 <td className="px-4 py-2 border-r border-gray-400">
                   <ul className="list-disc pl-5 space-y-1">
@@ -624,10 +575,33 @@ const Dishes = () => {
                   </ul>
                 </td>
                 <td className="px-4 py-2 border-r border-gray-400">
-                ₹{judge?.price}
+                  ₹{judge?.price}
                 </td>
                 <td className="px-4 py-2 border-r border-gray-400">
-                 <div style={{backgroundColor:`${judge?.type ==="veg"?"green":"grey"}`,padding:"7px 0px",borderRadius:"9px",display:"flex",justifyContent:"center"}}>{judge?.type}</div> 
+                  <div
+                    style={{
+                      backgroundColor: `${
+                        judge?.type === "veg" ? "green" : "grey"
+                      }`,
+                      padding: "7px 0px",
+                      borderRadius: "9px",
+                      display: "flex",
+                      justifyContent: "center"
+                    }}>
+                    {judge?.type}
+                  </div>
+                </td>
+                <td className="px-4 py-2 border-r border-gray-400">
+                  <button
+                    className={`py-2 px-5 flex space-x-2 items-center ${
+                      judge?.ar
+                        ? " text-[#FF0404] border-[#FF0404]"
+                        : "  border-[#15d057] text-[#15d057]"
+                    } rounded-full  border `}>
+                    {" "}
+                    <span>{judge?.ar ? "Disabled" : "Enabled"}</span>
+                    <BiSolidDownArrow className="text-black" />
+                  </button>
                 </td>
                 <td className="px-4 py-2 border-r border-gray-400">
                   {judge?.rating}
