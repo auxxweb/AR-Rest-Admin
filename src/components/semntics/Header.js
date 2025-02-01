@@ -76,7 +76,7 @@ function Header({ toggleSidebar }) {
   return (
     <header
       className="flex items-center justify-between p-4"
-      style={{ background: "linear-gradient(135deg,rgb(255, 255, 255),rgb(230, 230, 230))" }}
+      style={{ background: "linear-gradient(135deg, #ead5b5, #fbf9f6)" }}
     >
       <button
         className="text-gray-200 focus:outline-none lg:hidden"
