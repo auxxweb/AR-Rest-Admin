@@ -238,7 +238,7 @@ const MenuCategory = () => {
                 </button>
 
                 <form
-                  onSubmit={onSubmit}
+                  onSubmit={handleModalClose}
                   style={{
                     display: "flex",
                     flexDirection: "column",
@@ -382,7 +382,7 @@ const MenuCategory = () => {
                   <div style={{ textAlign: "center" }}>
                     <button
                       disabled={isLoadingMutation || isLoadingEdit}
-                      type="submit"
+                      onClick={handleModalClose}
                       style={{
                         backgroundColor: "#E88B13",
                         color: "#fff",

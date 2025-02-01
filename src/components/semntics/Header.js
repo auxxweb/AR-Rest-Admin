@@ -79,7 +79,7 @@ function Header({ toggleSidebar }) {
       style={{ background: "linear-gradient(135deg, #ead5b5, #fbf9f6)" }}
     >
       <button
-        className="text-gray-200 focus:outline-none lg:hidden"
+        className="text-black-200 focus:outline-none lg:hidden"
         onClick={toggleSidebar}
       >
         <svg

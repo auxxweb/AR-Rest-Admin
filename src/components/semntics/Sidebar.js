@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 import React from "react";
 import { Disclosure, Transition } from "@headlessui/react";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -6,6 +7,13 @@ import { ChevronUpIcon } from "@heroicons/react/24/outline";
 function Sidebar({ isOpen, setIsOpen }) {
   const navigate = useNavigate();
   const location = useLocation();
+
+    // Function to handle item click and close sidebar
+    const handleItemClick = () => {
+      if (window.innerWidth < 1024) {
+        setIsOpen(false);
+      }
+    };
 
   return (
     <Transition
@@ -21,7 +29,7 @@ function Sidebar({ isOpen, setIsOpen }) {
       <div>
         {/* Close button for mobile */}
         <button
-          className="lg:hidden text-white focus:outline-none absolute right-4 top-4"
+          className="lg:hidden text-black focus:outline-none absolute right-4 top-4"
           onClick={() => setIsOpen(false)}>
           <svg
             className="w-6 h-6"
@@ -66,7 +74,7 @@ function Sidebar({ isOpen, setIsOpen }) {
                 }
               />
             </svg>
-            <span className="text-custom-16 hover:text-[#F8BF40] ml-4">
+            <span onClick={handleItemClick} className="text-custom-16 hover:text-[#F8BF40] ml-4">
               Dashboard
             </span>
           </span>
@@ -92,7 +100,7 @@ function Sidebar({ isOpen, setIsOpen }) {
                       />
                     </svg>
                   </span>
-                  <span  onClick={() => navigate("/zones")} className="text-custom-16 mt-[-3px] text-[#a5a5a5] hover:text-[#F8BF40] ml-4">
+                  <span  onClick={() => {navigate("/zones"),handleItemClick()}} className="text-custom-16 mt-[-3px] text-[#a5a5a5] hover:text-[#F8BF40] ml-4">
                     Orders
                   </span>
                 </div>
@@ -106,31 +114,31 @@ function Sidebar({ isOpen, setIsOpen }) {
               <Disclosure.Panel className="bg-[#ffff] text-custom-16 rounded-md px-4 py-2">
                 <ul className="list-disc list-inside">
                   <li
-                    onClick={() => navigate("/zones")}
+                    onClick={() => {navigate("/zones"),handleItemClick()}}
                     className="cursor-pointer text-[#E88B13] hover:text-[#F8BF40]"
                   >
                     New Orders
                   </li>
                   <li
-                    onClick={() => navigate("/v-category")}
+                    onClick={() => {navigate("/v-category"),handleItemClick()}}
                     className="cursor-pointer text-[#909294] hover:text-[#F8BF40]"
                   >
                     Ongoing Orders
                   </li>
                   <li
-                    onClick={() => navigate("/v-completed")}
+                    onClick={() =>{ navigate("/v-completed"),handleItemClick()}}
                     className="cursor-pointer text-[#909294] hover:text-[#F8BF40]"
                   >
                     Completed Orders
                   </li>
                   <li
-                    onClick={() => navigate("/v-payment-pending")}
+                    onClick={() =>{ navigate("/v-payment-pending"),handleItemClick()}}
                     className="cursor-pointer text-[#909294] hover:text-[#F8BF40]"
                   >
                   Payment Pending 
                   </li>
                   <li
-                    onClick={() => navigate("/v-cancelled")}
+                    onClick={() => {navigate("/v-cancelled"),handleItemClick()}}
                     className="cursor-pointer text-[#909294] hover:text-[#F8BF40]"
                   >
                     Cancelled Orders
@@ -159,7 +167,7 @@ function Sidebar({ isOpen, setIsOpen }) {
                       />
                     </svg>
                   </span>
-                  <span  onClick={() => navigate("/zones")} className="text-custom-16 mt-[-3px] text-[#a5a5a5] hover:text-[#F8BF40] ml-4">
+                  <span  onClick={() => {navigate("/zones"),handleItemClick()}} className="text-custom-16 mt-[-3px] text-[#a5a5a5] hover:text-[#F8BF40] ml-4">
                    Menu
                   </span>
                 </div>
@@ -173,13 +181,13 @@ function Sidebar({ isOpen, setIsOpen }) {
               <Disclosure.Panel className="bg-[#ffff] text-custom-16 rounded-md px-4 py-2">
                 <ul className="list-disc list-inside">
                   <li
-                    onClick={() => navigate("/menu-category")}
+                    onClick={() =>{ navigate("/menu-category"),handleItemClick()}}
                     className="cursor-pointer text-[#E88B13] hover:text-[#F8BF40]"
                   >
                     Category
                   </li>
                   <li
-                    onClick={() => navigate("/menu-sub-category")}
+                    onClick={() => {navigate("/menu-sub-category"),handleItemClick()}}
                     className="cursor-pointer text-[#909294] hover:text-[#F8BF40]"
                   >
                     Sub-Category
@@ -192,7 +200,7 @@ function Sidebar({ isOpen, setIsOpen }) {
 
        
         <div
-          onClick={() => navigate("/dishes")}
+          onClick={() => {navigate("/dishes"),handleItemClick()}}
           className={`cursor-pointer flex items-center ${
             location?.pathname?.split("/")[1] === "dishes"
               ? "text-[#E88B13]"
@@ -224,7 +232,7 @@ function Sidebar({ isOpen, setIsOpen }) {
           </span>
         </div>
         <div
-          onClick={() => navigate("/payments")}
+          onClick={() =>{ navigate("/payments"),handleItemClick()}}
           className={`cursor-pointer flex items-center ${
             location?.pathname?.split("/")[1] === "payments"
               ? "text-[#E88B13]"
@@ -320,7 +328,7 @@ function Sidebar({ isOpen, setIsOpen }) {
           </span>
         </div> */}
  <div
-          onClick={() => navigate("/plans")}
+          onClick={() => {navigate("/plans"),handleItemClick()}}
           className={`cursor-pointer flex items-center ${
             location?.pathname?.split("/")[1] === "plans"
               ? "text-[#E88B13]"

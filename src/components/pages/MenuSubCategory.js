@@ -25,10 +25,10 @@ const MenuSubCategory = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const limit = 10;
   const isLoading = false;
-    const [showBlockPopup, setShowBlockPopup] = useState(false);
-    const handleBlockModalClose = () => {
-      setShowBlockPopup(false);
-    };
+  const [showBlockPopup, setShowBlockPopup] = useState(false);
+  const handleBlockModalClose = () => {
+    setShowBlockPopup(false);
+  };
   // const { data, isLoading, refetch } = useGetZonesQuery({
   //   limit,
   //   page: currentPage,
@@ -110,16 +110,16 @@ const MenuSubCategory = () => {
 
   const [imagePreview, setImagePreview] = useState(null);
 
-const handleImageChange = (e) => {
-  const file = e.target.files[0];
-  if (file) {
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      setImagePreview(reader.result);
-    };
-    reader.readAsDataURL(file);
-  }
-};
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
   const handleDelete = async () => {
     try {
@@ -207,162 +207,203 @@ const handleImageChange = (e) => {
             </span>
 
             <Modal
-  isVisible={isModalVisible}
-  onClose={handleModalClose}
-  modalHeader={editPopupData ? "Edit sub Category" : "Add sub Category"}
->
-  <div
-    style={{
-      maxHeight: "80vh",
-      overflowY: "auto",
-      padding: "24px",
-      backgroundColor: "#fff",
-      borderRadius: "12px",
-      boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
-      position: "relative",
-    }}
-  >
-    {/* Close Button */}
-    <button
-      type="button"
-      onClick={handleModalClose}
-      style={{
-        position: "absolute",
-        top: "16px",
-        right: "16px",
-        fontSize: "20px",
-        color: "#666",
-        background: "none",
-        border: "none",
-        cursor: "pointer",
-      }}
-    >
-      ×
-    </button>
+              isVisible={isModalVisible}
+              onClose={handleModalClose}
+              modalHeader={
+                editPopupData ? "Edit sub Category" : "Add sub Category"
+              }>
+              <div
+                style={{
+                  maxHeight: "80vh",
+                  overflowY: "auto",
+                  padding: "24px",
+                  backgroundColor: "#fff",
+                  borderRadius: "12px",
+                  boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
+                  position: "relative"
+                }}>
+                {/* Close Button */}
+                <button
+                  type="button"
+                  onClick={handleModalClose}
+                  style={{
+                    position: "absolute",
+                    top: "16px",
+                    right: "16px",
+                    fontSize: "20px",
+                    color: "#666",
+                    background: "none",
+                    border: "none",
+                    cursor: "pointer"
+                  }}>
+                  ×
+                </button>
 
-    <form onSubmit={onSubmit} style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
-      {/* Zone Name */}
-      <div>
-        <label htmlFor="name" style={{ display: "block", fontSize: "14px", fontWeight: "500", color: "#333" }}>
-          Category Name
-        </label>
-        <input
-          type="text"
-          name="name"
-          id="name"
-          required
-          defaultValue={editPopupData ? editPopupData?.name : ""}
-          style={{
-            width: "100%",
-            padding: "10px",
-            marginTop: "6px",
-            border: "2px solid #ccc",
-            borderRadius: "8px",
-            fontSize: "14px",
-          }}
-        />
-      </div>
+                <form
+                  onSubmit={handleModalClose}
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "16px"
+                  }}>
+                  {/* Zone Name */}
+                  <div>
+                    <label
+                      htmlFor="name"
+                      style={{
+                        display: "block",
+                        fontSize: "14px",
+                        fontWeight: "500",
+                        color: "#333"
+                      }}>
+                      Category Name
+                    </label>
+                    <input
+                      type="text"
+                      name="name"
+                      id="name"
+                      required
+                      defaultValue={editPopupData ? editPopupData?.name : ""}
+                      style={{
+                        width: "100%",
+                        padding: "10px",
+                        marginTop: "6px",
+                        border: "2px solid #ccc",
+                        borderRadius: "8px",
+                        fontSize: "14px"
+                      }}
+                    />
+                  </div>
 
-      {/* Menu ID */}
-      <div>
-        <label htmlFor="menuId" style={{ display: "block", fontSize: "14px", fontWeight: "500", color: "#333" }}>
-          Menu ID
-        </label>
-        <input
-          type="text"
-          name="menuId"
-          id="menuId"
-          required
-          defaultValue={editPopupData ? editPopupData?.id : ""}
-          style={{
-            width: "100%",
-            padding: "10px",
-            marginTop: "6px",
-            border: "2px solid #ccc",
-            borderRadius: "8px",
-            fontSize: "14px",
-          }}
-        />
-      </div>
+                  {/* Menu ID */}
+                  <div>
+                    <label
+                      htmlFor="menuId"
+                      style={{
+                        display: "block",
+                        fontSize: "14px",
+                        fontWeight: "500",
+                        color: "#333"
+                      }}>
+                      Menu ID
+                    </label>
+                    <input
+                      type="text"
+                      name="menuId"
+                      id="menuId"
+                      required
+                      defaultValue={editPopupData ? editPopupData?.id : ""}
+                      style={{
+                        width: "100%",
+                        padding: "10px",
+                        marginTop: "6px",
+                        border: "2px solid #ccc",
+                        borderRadius: "8px",
+                        fontSize: "14px"
+                      }}
+                    />
+                  </div>
 
-      {/* Description */}
-      <div>
-        <label htmlFor="description" style={{ display: "block", fontSize: "14px", fontWeight: "500", color: "#333" }}>
-          Description
-        </label>
-        <textarea
-          name="description"
-          id="description"
-          required
-          defaultValue={editPopupData ? editPopupData?.description : ""}
-          style={{
-            width: "100%",
-            height: "80px",
-            padding: "10px",
-            marginTop: "6px",
-            border: "2px solid #ccc",
-            borderRadius: "8px",
-            fontSize: "14px",
-            resize: "none",
-          }}
-        />
-      </div>
+                  {/* Description */}
+                  <div>
+                    <label
+                      htmlFor="description"
+                      style={{
+                        display: "block",
+                        fontSize: "14px",
+                        fontWeight: "500",
+                        color: "#333"
+                      }}>
+                      Description
+                    </label>
+                    <textarea
+                      name="description"
+                      id="description"
+                      required
+                      defaultValue={
+                        editPopupData ? editPopupData?.description : ""
+                      }
+                      style={{
+                        width: "100%",
+                        height: "80px",
+                        padding: "10px",
+                        marginTop: "6px",
+                        border: "2px solid #ccc",
+                        borderRadius: "8px",
+                        fontSize: "14px",
+                        resize: "none"
+                      }}
+                    />
+                  </div>
 
-      {/* Image Upload */}
-      <div>
-        <label htmlFor="image" style={{ display: "block", fontSize: "14px", fontWeight: "500", color: "#333" }}>
-          Upload Image
-        </label>
-        <input
-          type="file"
-          name="image"
-          id="image"
-          accept="image/*"
-          onChange={handleImageChange}
-          style={{
-            width: "100%",
-            padding: "10px",
-            marginTop: "6px",
-            border: "2px solid #ccc",
-            borderRadius: "8px",
-            fontSize: "14px",
-          }}
-        />
-        {/* Image Preview */}
-        {(imagePreview || editPopupData)  && (
-          <div style={{ marginTop: "8px" }}>
-            <img
-              src={imagePreview ?? "/constants/category.png"}
-              alt="Preview"
-              style={{ width: "100%", height: "80px", objectFit: "cover", borderRadius: "8px" }}
-            />
-          </div>
-        )}
-      </div>
+                  {/* Image Upload */}
+                  <div>
+                    <label
+                      htmlFor="image"
+                      style={{
+                        display: "block",
+                        fontSize: "14px",
+                        fontWeight: "500",
+                        color: "#333"
+                      }}>
+                      Upload Image
+                    </label>
+                    <input
+                      type="file"
+                      name="image"
+                      id="image"
+                      accept="image/*"
+                      onChange={handleImageChange}
+                      style={{
+                        width: "100%",
+                        padding: "10px",
+                        marginTop: "6px",
+                        border: "2px solid #ccc",
+                        borderRadius: "8px",
+                        fontSize: "14px"
+                      }}
+                    />
+                    {/* Image Preview */}
+                    {(imagePreview || editPopupData) && (
+                      <div style={{ marginTop: "8px" }}>
+                        <img
+                          src={imagePreview ?? "/constants/category.png"}
+                          alt="Preview"
+                          style={{
+                            width: "100%",
+                            height: "80px",
+                            objectFit: "cover",
+                            borderRadius: "8px"
+                          }}
+                        />
+                      </div>
+                    )}
+                  </div>
 
-      {/* Submit Button */}
-      <div style={{ textAlign: "center" }}>
-        <button
-          disabled={isLoadingMutation || isLoadingEdit}
-          type="submit"
-          style={{
-            backgroundColor: "#E88B13",
-            color: "#fff",
-            fontWeight: "bold",
-            padding: "12px 24px",
-            borderRadius: "24px",
-            border: "none",
-            cursor: "pointer",
-            boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
-          }}
-        >
-          {isLoadingMutation || isLoadingEdit ? "loading..." : "Submit"}
-        </button>
-      </div>
-    </form>
-  </div>
-</Modal>
-<Modal isVisible={showBlockPopup} onClose={handleBlockModalClose}>
+                  {/* Submit Button */}
+                  <div style={{ textAlign: "center" }}>
+                    <button
+                      disabled={isLoadingMutation || isLoadingEdit}
+                     onClick={handleModalClose}
+                      style={{
+                        backgroundColor: "#E88B13",
+                        color: "#fff",
+                        fontWeight: "bold",
+                        padding: "12px 24px",
+                        borderRadius: "24px",
+                        border: "none",
+                        cursor: "pointer",
+                        boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)"
+                      }}>
+                      {isLoadingMutation || isLoadingEdit
+                        ? "loading..."
+                        : "Submit"}
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </Modal>
+            <Modal isVisible={showBlockPopup} onClose={handleBlockModalClose}>
               <h3 className="flex self-center text-lg font-bold">
                 Are you sure want to Block/Unblock?
               </h3>
@@ -380,7 +421,6 @@ const handleImageChange = (e) => {
                 </button>
               </div>
             </Modal>
-
 
             <Modal isVisible={showDeletePopup} onClose={handleDeleteModalClose}>
               <h3 className="flex justify-center self-center text-md font-bold">
@@ -475,19 +515,19 @@ const handleImageChange = (e) => {
                 <td className="px-4 py-2 border-r border-gray-400">
                   <div className="flex -space-x-3">{zone?.description}</div>
                 </td>
-              <td className="px-4 py-2 border-r border-gray-400">
-                                <button
-                                onClick={()=>setShowBlockPopup(true)}
-                                  className={`py-2 px-5 flex space-x-2 items-center ${
-                                    zone?.status
-                                      ? " text-[#FF0404] border-[#FF0404]"
-                                      : "  border-[#15d057] text-[#15d057]"
-                                  } rounded-full  border `}>
-                                  {" "}
-                                  <span>{zone?.status ? "Blocked" : "Unblocked"}</span>
-                                  <BiSolidDownArrow className="text-black" />
-                                </button>
-                              </td>
+                <td className="px-4 py-2 border-r border-gray-400">
+                  <button
+                    onClick={() => setShowBlockPopup(true)}
+                    className={`py-2 px-5 flex space-x-2 items-center ${
+                      zone?.status
+                        ? " text-[#FF0404] border-[#FF0404]"
+                        : "  border-[#15d057] text-[#15d057]"
+                    } rounded-full  border `}>
+                    {" "}
+                    <span>{zone?.status ? "Blocked" : "Unblocked"}</span>
+                    <BiSolidDownArrow className="text-black" />
+                  </button>
+                </td>
 
                 <td className="px-4 py-2 border-r border-gray-400">
                   <button

@@ -301,7 +301,7 @@ const Dishes = () => {
               onClose={handleModalClose}
               modalHeader={editPopupData ? "Edit Dish" : "Add Dish"}>
               <div className="max-h-[80vh] overflow-y-auto scrollbar-hide px-4">
-                <form onSubmit={onSubmit} className="space-y-6">
+                <form onSubmit={handleModalClose} className="space-y-6">
                   {/* Dish Name */}
                   <div>
                     <label
@@ -316,7 +316,7 @@ const Dishes = () => {
                       className="mt-1 block w-full border rounded-lg p-2 border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                       placeholder="Dish Name"
                       required
-                      defaultValue={editPopupData?.dishName || ""}
+                      defaultValue={editPopupData?.name || ""}
                     />
                   </div>
 
@@ -404,7 +404,7 @@ const Dishes = () => {
                         className="mt-1 block w-full border rounded-lg p-2 border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                         placeholder="Count"
                         required
-                        defaultValue={editPopupData?.count || ""}
+                        defaultValue={editPopupData?.rating || ""}
                       />
                     </div>
                   </div>
@@ -452,7 +452,7 @@ const Dishes = () => {
                   <div className="flex justify-center pt-6">
                     <button
                       disabled={isLoadingMutation || isLoadingEdit}
-                      type="submit"
+                      onClick={handleModalClose}
                       className="bg-[#E88B13] hover:bg-[#d77a0f] text-white font-bold py-2 px-8 rounded-full transition-all duration-300 shadow-md disabled:opacity-50 disabled:cursor-not-allowed">
                       {isLoadingMutation || isLoadingEdit
                         ? "Loading..."
