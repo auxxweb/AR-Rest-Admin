@@ -103,7 +103,7 @@ function Header({ toggleSidebar }) {
 
       <div className="flex items-center space-x-2">
         <img src={avatar} className="h-9 w-9 object-contain rounded-full" />
-        <span className="text-white">Admin</span>
+        <span className="text-white">ADMIN</span>
         <div className=" group cursor-pointer relative">
           <div>
             <HiDotsVertical className="text-white h-5 w-5" />
