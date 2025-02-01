@@ -98,15 +98,15 @@ function Header({ toggleSidebar }) {
         </svg>
       </button>
 
-      <img src="/quranLogo.svg" alt="Description of Image" width="55" height="43" />
+      <img src="/arod-logo.svg" alt="Description of Image" width="55" height="43" />
 
 
       <div className="flex items-center space-x-2">
         <img src={avatar} className="h-9 w-9 object-contain rounded-full" />
-        <span className="text-white">Admin</span>
+        <span className="text-black">ADMIN</span>
         <div className=" group cursor-pointer relative">
           <div>
-            <HiDotsVertical className="text-white h-5 w-5" />
+            <HiDotsVertical className="text-black h-5 w-5" />
           </div>
           <div className="hidden cursor-default w-max max-w-xs group-hover:block absolute right-1 ">
             <div className="p-2  space-y-3  bg-white  rounded-md border border-slate-100 mt-2 shadow-lg  dark:border-slate-50/10 dark:bg-gray-800 dark:text-slate-200">
