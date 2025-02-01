@@ -225,7 +225,7 @@ const BundleDetails = () => {
           </div>
           <button
             onClick={() => handleEditClick(data?.bundle)}
-            className="bg-[#808080] hover:bg-[#F8BF40] text-white rounded-3xl pt-2 pb-2 pl-4 pr-4 cursor-pointer"
+            className="bg-[#E88B13] hover:bg-[#E88B13] text-white rounded-3xl pt-2 pb-2 pl-4 pr-4 cursor-pointer"
           >
             Insert new Question
           </button>
@@ -351,7 +351,7 @@ const BundleDetails = () => {
             <button
               disabled={isLoadingEdit}
               type="submit"
-              className="bg-[#808080] hover:bg-[#F8BF40] text-white font-bold py-2 px-6 rounded-3xl"
+              className="bg-[#E88B13] hover:bg-[#E88B13] text-white font-bold py-2 px-6 rounded-3xl"
             >
               Submit
             </button>

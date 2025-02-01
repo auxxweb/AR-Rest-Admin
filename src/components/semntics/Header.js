@@ -185,7 +185,7 @@ function Header({ toggleSidebar }) {
             <button
               disabled={isLoadingUpdatePassword}
               type="submit"
-              className="bg-[#808080] hover:bg-[#F8BF40] text-white font-bold py-2 px-6 rounded-3xl"
+              className="bg-[#E88B13] hover:bg-[#E88B13] text-white font-bold py-2 px-6 rounded-3xl"
             >
               {isLoadingUpdatePassword ? "loading..." : "Update"}
             </button>
