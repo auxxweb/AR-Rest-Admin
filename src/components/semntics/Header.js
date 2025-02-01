@@ -98,7 +98,7 @@ function Header({ toggleSidebar }) {
         </svg>
       </button>
 
-      <img src="/quranLogo.svg" alt="Description of Image" width="55" height="43" />
+      <img src="/arod-logo.svg" alt="Description of Image" width="55" height="43" />
 
 
       <div className="flex items-center space-x-2">
