@@ -23,6 +23,12 @@ import JudgeAvatar from "../../assets/images/person-placeholder.png";
 import { toast } from "sonner";
 import { PaymentTableData, PlansTableData, tableStatus } from "../../constants/tableData";
 
+
+const floorOptions = [
+  { value: "ground", label: "Ground Floor" },
+  { value: "first", label: "First Floor" },
+  { value: "second", label: "Second Floor" },
+];
 const Payments = () => {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState([]);
@@ -41,6 +47,11 @@ const Payments = () => {
   const [copied, setCopied] = useState("");
   const limit = 10;
   const isLoading=false
+  const [selectedFloor, setSelectedFloor] = useState(null);
+
+  const handleFloorChange = (selectedOption) => {
+    setSelectedFloor(selectedOption);
+  };
 
 //   const { data, isLoading, refetch } = useGetJudgesQuery({
 //     limit,
@@ -291,164 +302,107 @@ const Payments = () => {
         <div className="ml-auto flex items-center space-x-4">
           <span className="flex items-center">
             <span
-              className="bg-[#808080] hover:bg-[#F8BF40] text-white rounded-3xl pt-2 pb-2 pl-4 pr-4 cursor-pointer"
+            className="bg-[#E88B13] hover:bg-[#E88B13] text-white rounded-3xl pt-2 pb-2 pl-4 pr-4 cursor-pointer"
               onClick={toggleModal}>
               Add New Table
             </span>
 
             <Modal
-              isVisible={isModalVisible}
-              onClose={handleModalClose}
-              modalHeader={editPopupData ? "Edit Table" : "Add New Table"}>
-              <form onSubmit={onSubmit} className="space-y-4">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                  <div>
-                    <label
-                      htmlFor="name"
-                      className="block text-sm font-medium text-gray-700">
-                      Table No.
-                    </label>
-                    <input
-                      type="text"
-                      name="name"
-                      id="name"
-                      className="mt-1 block w-full border-2 p-1 border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                      placeholder="Item name"
-                      required
-                      defaultValue={
-                        editPopupData?.name ? editPopupData?.name : ""
-                      }
-                    />
-                  </div>
-                  <div>
-                    <label
-                      htmlFor="zone"
-                      className="block text-sm font-medium text-gray-700">
-                      Floor
-                    </label>
-                    <Select
-                      className="border-gray-400"
-                      options={[]}
-                      onChange={handleChange}
-                      value={zonesList}
-                      isMulti={false}
-                      // hideSelectedOptions
-                      closeMenuOnSelect={true} // Keep the dropdown open for multiple selections
-                      placeholder="Select Floor"
-                      components={{ MultiValue: () => null }} // Hide selected options in input
-                    />
-                    {/* <div className="pt-2">
-                      {zonesList.length > 0 && (
-                        <ul className="flex flex-wrap gap-1">
-                          {zonesList.map((zone) => (
-                            <li
-                              key={zone.value}
-                              className="bg-[#E88B13] flex items-center justify-between text-white rounded-full py-0.5 px-2 text-xs font-light"
-                            >
-                              <span>{zone.label}</span>
-                              <button
-                                type="button"
-                                onClick={() => handleRemoveZone(zone)}
-                                className="ml-2"
-                              >
-                                <IoIosClose className="text-lg" />
-                              </button>
-                            </li>
-                          ))}
-                        </ul>
-                      )}
-                    </div> */}
-                  </div>
-                </div>
+  isVisible={isModalVisible}
+  onClose={handleModalClose}
+  modalHeader={editPopupData ? "Edit Table" : "Add New Table"}
+>
+  <form onSubmit={onSubmit} className="space-y-4">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+      <div>
+        <label htmlFor="tableNo" className="block text-sm font-medium text-gray-700">
+          Table No.
+        </label>
+        <input
+          type="text"
+          name="tableNo"
+          id="tableNo"
+          className="mt-1 block w-full border-2 p-1 border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          placeholder="Table Number"
+          required
+          defaultValue={editPopupData?.tableNo || ""}
+        />
+      </div>
+      <div>
+        <label htmlFor="floor" className="block text-sm font-medium text-gray-700">
+          Floor
+        </label>
+        <Select
+          className="border-gray-400"
+          options={floorOptions}
+          onChange={handleChange}
+          value={selectedFloor}
+          isMulti={false}
+          closeMenuOnSelect={true}
+          placeholder="Select Floor"
+        />
+      </div>
+    </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                  {/* <div>
-                    <label
-                      htmlFor="email"
-                      className="block text-sm font-medium text-gray-700">
-                      Type  
-                    </label>
-                    <input
-                      type="email"
-                      name="email"
-                      id="email"
-                      className="mt-1 block w-full border-2 p-1 border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                      placeholder="Email address"
-                      required
-                      defaultValue={
-                        editPopupData?.email ? editPopupData?.email : ""
-                      }
-                    />
-                  </div> */}
-                  <div>
-                    <label
-                      htmlFor="phone"
-                      className="block text-sm font-medium text-gray-700">
-                      Seating
-                    </label>
-                    <input
-                      type="number"
-                      name="phone"
-                      id="phone"
-                      className="mt-1 block w-full border-2 p-1 border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                      placeholder="Enter Seats"
-                      required
-                      defaultValue={
-                        editPopupData?.phone ? editPopupData?.phone : ""
-                      }
-                    />
-                  </div>
-                </div>
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+      <div>
+        <label htmlFor="seats" className="block text-sm font-medium text-gray-700">
+          Seats
+        </label>
+        <input
+          type="number"
+          name="seats"
+          id="seats"
+          className="mt-1 block w-full border-2 p-1 border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          placeholder="Enter Seats"
+          required
+          defaultValue={editPopupData?.seats || ""}
+        />
+      </div>
+      <div>
+        <label htmlFor="status" className="block text-sm font-medium text-gray-700">
+          Status
+        </label>
+        <select
+          name="status"
+          id="status"
+          className="mt-1 block w-full border-2 p-1 border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          defaultValue={editPopupData?.status || ""}
+        >
+          <option value="available">Available</option>
+          <option value="occupied">Occupied</option>
+          <option value="reserved">Reserved</option>
+        </select>
+      </div>
+    </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-               
-                  <div>
-                    <div>
-                      <label
-                        htmlFor="gender"
-                        className="block text-sm font-medium text-gray-700">
-                        Category
-                      </label>
-                      <select
-                        name="gender"
-                        id="gender"
-                        className="mt-1 block w-full border-2 p-1 border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                        defaultValue={
-                          editPopupData?.gender ? editPopupData?.gender : ""
-                        }>
-                        <option value="male">AC</option>
-                        <option value="female">Non-Ac</option>
-                      </select>
-                    </div>
-                        
-                  </div>
-                </div>
-                {/* <div className="flex flex-row">
-                  <input
-                    type="checkbox"
-                    name="isMain"
-                    id="isMain"
-                    className="mr-2 border-2 p-1 border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                    defaultChecked={
-                      editPopupData ? editPopupData?.isMain : false
-                    }
-                  />
-                  <label className="block text-m font-medium text-gray-700">
-                    Main Judge
-                  </label>
-                </div> */}
-                <div className="flex justify-center p-6">
-                  <button
-                    disabled={isLoadingMutation || isLoadingEdit}
-                    type="submit"
-                    className="bg-[#808080] hover:bg-[#F8BF40] text-white font-bold py-2 px-6 rounded-3xl">
-                    {isLoadingMutation || isLoadingEdit
-                      ? "loading..."
-                      : "Submit"}
-                  </button>
-                </div>
-              </form>
-            </Modal>
+    <div>
+      <label htmlFor="category" className="block text-sm font-medium text-gray-700">
+        Category
+      </label>
+      <select
+        name="category"
+        id="category"
+        className="mt-1 block w-full border-2 p-1 border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+        defaultValue={editPopupData?.category || ""}
+      >
+        <option value="ac">AC</option>
+        <option value="non-ac">Non-AC</option>
+      </select>
+    </div>
+
+    <div className="flex justify-center p-6">
+      <button
+        disabled={isLoadingMutation || isLoadingEdit}
+        type="submit"
+        className="bg-[#808080] hover:bg-[#F8BF40] text-white font-bold py-2 px-6 rounded-3xl"
+      >
+        {isLoadingMutation || isLoadingEdit ? "Loading..." : "Submit"}
+      </button>
+    </div>
+  </form>
+</Modal>;
+
             <Modal isVisible={showDeletePopup} onClose={handleDeleteModalClose}>
               <h3 className="flex self-center text-lg font-bold">
                 Are you sure want to Delete?
@@ -508,7 +462,7 @@ const Payments = () => {
               />
             </span>
             <span className="flex items-center">
-              <span className="cursor-pointer bg-[#808080] hover:bg-[#F8BF40] text-white p-2 lg:w-[100px] text-center rounded-3xl">
+              <span className="cursor-pointer bg-[#E88B13] hover:bg-[#E88B13] text-white p-2 lg:w-[100px] text-center rounded-3xl">
                 Search
               </span>
             </span>

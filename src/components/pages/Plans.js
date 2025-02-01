@@ -11,7 +11,7 @@ import {
   useBlockJudgeMutation,
   useDeleteJudgeMutation,
   useEditJudgeMutation,
-  useGetJudgesQuery,
+  useGetJudgesQuery
 } from "../../api/judges";
 import { useGetZonesListQuery } from "../../api/common";
 import { IoIosClose, IoMdCopy } from "react-icons/io";
@@ -40,14 +40,14 @@ const Plans = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [copied, setCopied] = useState("");
   const limit = 10;
-  const isLoading=false
+  const isLoading = false;
 
-//   const { data, isLoading, refetch } = useGetJudgesQuery({
-//     limit,
-//     page: currentPage,
-//     search: searchValue,
-//     zones: selectedZones,
-//   });
+  //   const { data, isLoading, refetch } = useGetJudgesQuery({
+  //     limit,
+  //     page: currentPage,
+  //     search: searchValue,
+  //     zones: selectedZones,
+  //   });
   // const { data: zoneList, refetch: ZoneListsRefetch } = useGetZonesListQuery();
   const [addJudge, { isLoading: isLoadingMutation }] = useAddJudgeMutation({});
   const [deleteJudge, { isLoading: isLoadingDelete }] =
@@ -74,9 +74,9 @@ const Plans = () => {
         duration: 2000,
         style: {
           backgroundColor: "#e9c70b", // Custom red color for error
-          color: "#FFFFFF", // Text color
+          color: "#FFFFFF" // Text color
         },
-        dismissible: true,
+        dismissible: true
       });
       return; // Stop the form from submitting if no zone is selected
     }
@@ -89,7 +89,7 @@ const Plans = () => {
         formData?.append("judgeId", editPopupData?._id);
         const res = await EditJudge?.(formData);
         if (res?.data?.success) {
-         //  refetch();
+          //  refetch();
           // ZoneListsRefetch();
           setZonesList({});
           toggleModal();
@@ -100,15 +100,15 @@ const Plans = () => {
             duration: 2000,
             style: {
               backgroundColor: "#fb0909", // Custom green color for success
-              color: "#FFFFFF", // Text color
+              color: "#FFFFFF" // Text color
             },
-            dismissible: true,
+            dismissible: true
           });
         }
       } else {
         const res = await addJudge?.(formData);
         if (res?.data?.success) {
-         //  refetch();
+          //  refetch();
           // ZoneListsRefetch();
           setZonesList({});
           toggleModal();
@@ -118,9 +118,9 @@ const Plans = () => {
             duration: 2000,
             style: {
               backgroundColor: "#fb0909", // Custom green color for success
-              color: "#FFFFFF", // Text color
+              color: "#FFFFFF" // Text color
             },
-            dismissible: true,
+            dismissible: true
           });
         }
       }
@@ -143,11 +143,11 @@ const Plans = () => {
   const handleDelete = async () => {
     try {
       const body = {
-        judgeId: selectedJudgeId,
+        judgeId: selectedJudgeId
       };
       const deleteres = await deleteJudge?.(body);
       if (deleteres?.data?.success) {
-       //  refetch();
+        //  refetch();
         setSelectedJudgeId(null);
         setShowDeletePopup(false);
       } else {
@@ -156,9 +156,9 @@ const Plans = () => {
           duration: 2000,
           style: {
             backgroundColor: "#fb0909", // Custom green color for success
-            color: "#FFFFFF", // Text color
+            color: "#FFFFFF" // Text color
           },
-          dismissible: true,
+          dismissible: true
         });
       }
     } catch (error) {
@@ -181,11 +181,11 @@ const Plans = () => {
   const handleBlockJudge = async () => {
     try {
       const body = {
-        judgeId: selectedJudgeId,
+        judgeId: selectedJudgeId
       };
       const deleteres = await blockJudge?.(body);
       if (deleteres?.data?.success) {
-       //  refetch();
+        //  refetch();
         setShowBlockPopup(false);
       } else {
         toast.error(deleteres.data.message, {
@@ -193,9 +193,9 @@ const Plans = () => {
           duration: 2000,
           style: {
             backgroundColor: "#fb0909", // Custom green color for success
-            color: "#FFFFFF", // Text color
+            color: "#FFFFFF" // Text color
           },
-          dismissible: true,
+          dismissible: true
         });
       }
     } catch (error) {
@@ -242,9 +242,9 @@ const Plans = () => {
         duration: 2000,
         style: {
           backgroundColor: "#e5cc0e", // Custom red color for error
-          color: "#FFFFFF", // Text color
+          color: "#FFFFFF" // Text color
         },
-        dismissible: true,
+        dismissible: true
       });
       return; // Exit the function if there's no valid image
     }
@@ -291,212 +291,187 @@ const Plans = () => {
         <div className="ml-auto flex items-center space-x-4">
           <span className="flex items-center">
             <span
-              className="bg-[#808080] hover:bg-[#F8BF40] text-white rounded-3xl pt-2 pb-2 pl-4 pr-4 cursor-pointer"
-              onClick={toggleModal}
-            >
+              className="bg-[#E88B13] hover:bg-[#E88B13] text-white rounded-3xl pt-2 pb-2 pl-4 pr-4 cursor-pointer"
+              onClick={toggleModal}>
               Add Offers
             </span>
 
             <Modal
               isVisible={isModalVisible}
               onClose={handleModalClose}
-              modalHeader={editPopupData ? "Edit Judge" : "Add Judge"}
-            >
-              <form onSubmit={onSubmit} className="space-y-4">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                  <div>
-                    <label
-                      htmlFor="name"
-                      className="block text-sm font-medium text-gray-700"
-                    >
-                      Offer Title
-                    </label>
-                    <input
-                      type="text"
-                      name="name"
-                      id="name"
-                      className="mt-1 block w-full border-2 p-1 border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                      placeholder="Full name"
-                      required
-                      defaultValue={
-                        editPopupData?.name ? editPopupData?.name : ""
-                      }
-                    />
+              modalHeader={editPopupData ? "Edit Offer" : "Add Offer"}>
+              <form className="space-y-4">
+                {/* Modal Content Wrapper with Scroll */}
+                <div
+                  style={{
+                    maxHeight: "400px", // Adjust as needed
+                    overflowY: "auto", // Enable vertical scrolling
+                    scrollbarWidth: "none" // Hide scrollbar in Firefox
+                  }}>
+                  {/* Offer Title & Offer ID */}
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                    <div>
+                      <label
+                        htmlFor="offerTitle"
+                        className="block text-sm font-medium text-gray-700">
+                        Offer Title
+                      </label>
+                      <input
+                        type="text"
+                        name="offerTitle"
+                        id="offerTitle"
+                        className="mt-1 block w-full border-2 p-1 border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        placeholder="Offer Title"
+                        required
+                        defaultValue={editPopupData?.name || ""}
+                      />
+                    </div>
+                    <div>
+                      <label
+                        htmlFor="offerId"
+                        className="block text-sm font-medium text-gray-700">
+                        Offer ID
+                      </label>
+                      <input
+                        type="text"
+                        name="offerId"
+                        id="offerId"
+                        className="mt-1 block w-full border-2 p-1 border-gray-300 shadow-sm sm:text-sm bg-gray-100"
+                        placeholder="Offer ID"
+                        defaultValue={editPopupData?.id || ""}
+                        readOnly
+                      />
+                    </div>
                   </div>
-                  {/* <div>
-                    <label
-                      htmlFor="zone"
-                      className="block text-sm font-medium text-gray-700"
-                    >
-                      Zone
-                    </label>
-                    <Select
-                      className="border-gray-400"
-                      options={[]}
-                      onChange={handleChange}
-                      value={zonesList}
-                      isMulti={false}
-                      // hideSelectedOptions
-                      closeMenuOnSelect={true} // Keep the dropdown open for multiple selections
-                      placeholder="Select Zones"
-                      components={{ MultiValue: () => null }} // Hide selected options in input
-                    /> */}
-                    {/* <div className="pt-2">
-                      {zonesList.length > 0 && (
-                        <ul className="flex flex-wrap gap-1">
-                          {zonesList.map((zone) => (
-                            <li
-                              key={zone.value}
-                              className="bg-[#E88B13] flex items-center justify-between text-white rounded-full py-0.5 px-2 text-xs font-light"
-                            >
-                              <span>{zone.label}</span>
-                              <button
-                                type="button"
-                                onClick={() => handleRemoveZone(zone)}
-                                className="ml-2"
-                              >
-                                <IoIosClose className="text-lg" />
-                              </button>
-                            </li>
-                          ))}
-                        </ul>
-                      )}
-                    </div> */}
-                  {/* </div> */}
-                </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                  {/* Image Upload */}
                   <div>
                     <label
-                      htmlFor="email"
-                      className="block text-sm font-medium text-gray-700"
-                    >
-                      Validity
+                      htmlFor="image"
+                      className="block text-sm font-medium text-gray-700">
+                      Image
                     </label>
                     <input
-                      type="email"
-                      name="email"
-                      id="email"
+                      type="file"
+                      name="image"
+                      id="image"
                       className="mt-1 block w-full border-2 p-1 border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                      placeholder="validity"
-                      required
-                      defaultValue={
-                        editPopupData?.email ? editPopupData?.email : ""
-                      }
+                      onChange={handlePreviewImage}
                     />
+                    
+                    {/* {editPopupData?.image} */}
                   </div>
-                  <div>
-                    <label
-                      htmlFor="phone"
-                      className="block text-sm font-medium text-gray-700"
-                    >
-                      Actual Price
-                    </label>
-                    <input
-                      type="number"
-                      name="phone"
-                      id="phone"
-                      className="mt-1 block w-full border-2 p-1 border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                      placeholder="Actual Price"
-                      required
-                      defaultValue={
-                        editPopupData?.phone ? editPopupData?.phone : ""
-                      }
-                    />
-                  </div>
-                </div>
+                  {(imageUrl || editPopupData) && (
+                      <img
+                        className="mt-2 w-20 h-auto"
+                        src={imageUrl ?? editPopupData?.image}
+                        alt="Preview"
+                      />
+                    )}
 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                  {/* Description */}
                   <div>
                     <label
-                      htmlFor="address"
-                      className="block text-sm font-medium text-gray-700"
-                    >
+                      htmlFor="description"
+                      className="block text-sm font-medium text-gray-700">
                       Description
                     </label>
-                    <input
-                      type="text"
-                      name="address"
-                      id="address"
+                    <textarea
+                      name="description"
+                      id="description"
                       className="mt-1 h-28 block w-full border-2 p-1 border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                       placeholder="Description"
                       required
-                      defaultValue={
-                        editPopupData?.address ? editPopupData?.address : ""
-                      }
+                      defaultValue={editPopupData?.description || ""}
                     />
                   </div>
-                  <div>
-                  <div>
-                    <label
-                      htmlFor="phone"
-                      className="block text-sm font-medium text-gray-700"
-                    >
-                      Offer Price
-                    </label>
-                    <input
-                      type="number"
-                      name="phone"
-                      id="phone"
-                      className="mt-1 block w-full border-2 p-1 border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                      placeholder="Offer Price"
-                      required
-                      defaultValue={
-                        editPopupData?.phone ? editPopupData?.phone : ""
-                      }
-                    />
-                  </div>
-                    <div className="mt-5">
+
+                  {/* Validity & Actual Price */}
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                    <div>
                       <label
-                        htmlFor="image"
-                        className="block text-sm font-medium text-gray-700"
-                      >
-                        Image
+                        htmlFor="validity"
+                        className="block text-sm font-medium text-gray-700">
+                        Validity
                       </label>
                       <input
-                        type="file"
-                        name="image"
-                        id="image"
+                        type="text"
+                        name="validity"
+                        id="validity"
                         className="mt-1 block w-full border-2 p-1 border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                        onChange={handlePreviewImage}
+                        placeholder="Validity"
+                        required
+                        defaultValue={editPopupData?.validity || ""}
                       />
-                      {imageUrl && (
-                        <img
-                          className="mt-2 w-20 h-auto"
-                          src={imageUrl}
-                          alt="previewImage"
-                        />
-                      )}
+                    </div>
+                    <div>
+                      <label
+                        htmlFor="actualPrice"
+                        className="block text-sm font-medium text-gray-700">
+                        Actual Price
+                      </label>
+                      <input
+                        type="number"
+                        name="actualPrice"
+                        id="actualPrice"
+                        className="mt-1 block w-full border-2 p-1 border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        placeholder="Actual Price"
+                        required
+                        defaultValue={editPopupData?.actualPrice || ""}
+                      />
+                    </div>
+                  </div>
+
+                  {/* Offer Price & Status */}
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                    <div>
+                      <label
+                        htmlFor="offerPrice"
+                        className="block text-sm font-medium text-gray-700">
+                        Offer Price
+                      </label>
+                      <input
+                        type="number"
+                        name="offerPrice"
+                        id="offerPrice"
+                        className="mt-1 block w-full border-2 p-1 border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        placeholder="Offer Price"
+                        required
+                        defaultValue={editPopupData?.offerPrice || ""}
+                      />
+                    </div>
+                    <div>
+                      <label
+                        htmlFor="status"
+                        className="block text-sm font-medium text-gray-700">
+                        Status
+                      </label>
+                      <select
+                        name="status"
+                        id="status"
+                        className="mt-1 block w-full border-2 p-1 border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        defaultValue={editPopupData?.status || "active"}>
+                        <option value="active">Active</option>
+                        <option value="inactive">Inactive</option>
+                      </select>
                     </div>
                   </div>
                 </div>
-                {/* <div className="flex flex-row">
-                  <input
-                    type="checkbox"
-                    name="isMain"
-                    id="isMain"
-                    className="mr-2 border-2 p-1 border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                    defaultChecked={
-                      editPopupData ? editPopupData?.isMain : false
-                    }
-                  />
-                  <label className="block text-m font-medium text-gray-700">
-                    Main Judge
-                  </label>
-                </div> */}
+
+                {/* Submit Button */}
                 <div className="flex justify-center p-6">
                   <button
+                    onClick={handleModalClose}
                     disabled={isLoadingMutation || isLoadingEdit}
-                    type="submit"
-                    className="bg-[#808080] hover:bg-[#F8BF40] text-white font-bold py-2 px-6 rounded-3xl"
-                  >
+                    className="bg-[#808080] hover:bg-[#F8BF40] text-white font-bold py-2 px-6 rounded-3xl">
                     {isLoadingMutation || isLoadingEdit
-                      ? "loading..."
+                      ? "Loading..."
                       : "Submit"}
                   </button>
                 </div>
               </form>
             </Modal>
+
             <Modal isVisible={showDeletePopup} onClose={handleDeleteModalClose}>
               <h3 className="flex self-center text-lg font-bold">
                 Are you sure want to Delete?
@@ -505,15 +480,13 @@ const Plans = () => {
                 <button
                   onClick={handleDeleteModalClose}
                   type="submit"
-                  className="border border-green-500 text-green-600 hover:bg-green-700 hover:text-white font-bold  py-2 m-2 px-8 rounded-2xl"
-                >
+                  className="border border-green-500 text-green-600 hover:bg-green-700 hover:text-white font-bold  py-2 m-2 px-8 rounded-2xl">
                   No
                 </button>
                 <button
                   disabled={isLoadingDelete}
-                  onClick={handleDelete}
-                  className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 m-2 px-8 rounded-2xl"
-                >
+                  onClick={handleDeleteModalClose}
+                  className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 m-2 px-8 rounded-2xl">
                   YES
                 </button>
               </div>
@@ -522,23 +495,19 @@ const Plans = () => {
               <h3 className="flex self-center text-lg font-bold">
                 Are you sure want to Block/Unblock?
               </h3>
-              <h6 className="flex self-center text-sm text-red-500">
-                Judges cannot be unblocked while the competition is live.
-              </h6>
+
               <div className="flex justify-center p-6">
                 <button
                   disabled={isLoadingBlock}
                   onClick={handleBlockModalClose}
                   type="submit"
-                  className="border border-green-500 text-green-600 hover:bg-green-700 hover:text-white font-bold  py-2 m-2 px-8 rounded-2xl"
-                >
+                  className="border border-green-500 text-green-600 hover:bg-green-700 hover:text-white font-bold  py-2 m-2 px-8 rounded-2xl">
                   No
                 </button>
                 <button
                   disabled={isLoadingBlock}
-                  onClick={handleBlockJudge}
-                  className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 m-2 px-8 rounded-2xl"
-                >
+                  onClick={handleBlockModalClose}
+                  className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 m-2 px-8 rounded-2xl">
                   {isLoadingBlock ? "loading" : "YES"}
                 </button>
               </div>
@@ -560,7 +529,7 @@ const Plans = () => {
               />
             </span>
             <span className="flex items-center">
-              <span className="cursor-pointer bg-[#808080] hover:bg-[#F8BF40] text-white p-2 lg:w-[100px] text-center rounded-3xl">
+              <span className="cursor-pointer bg-[#E88B13] hover:bg-[#E88B13] text-white p-2 lg:w-[100px] text-center rounded-3xl">
                 Search
               </span>
             </span>
@@ -577,9 +546,7 @@ const Plans = () => {
             <th className="px-4 py-4 text-left border-r border-gray-400">
               Offer Title
             </th>
-            <th className="px-4 py-4 text-left border-r border-gray-400">
-              Id
-            </th>
+            <th className="px-4 py-4 text-left border-r border-gray-400">Id</th>
             <th className="px-4 py-4 text-left border-r border-gray-400">
               Image
             </th>
@@ -608,44 +575,29 @@ const Plans = () => {
             PlansTableData?.map((judge, index) => (
               <tr
                 className="odd:bg-[#FCD199] even:bg-grey border-[2px] border-opacity-50 border-[#9e9696]"
-                key={index}
-              >
-                <td
-                  onClick={() => navigate(`/judges/${judge?._id}`)}
-                  className="px-4 py-2 border-r border-gray-400"
-                >
+                key={index}>
+                <td className="px-4 py-2 border-r border-gray-400">
                   {index + 1}
                 </td>
-                <td
-                  onClick={() => navigate(`/judges/${judge?._id}`)}
-                  className="px-4 py-2 border-r border-gray-400"
-                >
+                <td className="px-4 py-2 border-r border-gray-400">
                   <u
                     style={{ cursor: "pointer" }}
                     onMouseOver={({ target }) => (target.style.color = "blue")}
-                    onMouseOut={({ target }) => (target.style.color = "black")}
-                  >
+                    onMouseOut={({ target }) => (target.style.color = "black")}>
                     {judge?.name}
                   </u>
                 </td>
-                <td
-                  onClick={() => navigate(`/judges/${judge?._id}`)}
-                  className="px-4 py-2 border-r border-gray-400"
-                >
+                <td className="px-4 py-2 border-r border-gray-400">
                   {judge?.id}
                 </td>
-                <td
-                  onClick={() => navigate(`/judges/${judge?._id}`)}
-                  className="px-4 py-2 border-r border-gray-400"
-                >
+                <td className="px-4 py-2 border-r border-gray-400">
                   <img
                     alt="img"
                     src={judge?.image ?? JudgeAvatar}
                     className="w-14 h-14 rounded-full mr-2 mt-2"
                   />
                 </td>
-              
-                
+
                 <td className="px-4 py-2 border-r border-gray-400">
                   <ul className="list-disc pl-5 space-y-1">
                     {judge?.description?.split(",")?.map((desc, index) => (
@@ -656,13 +608,14 @@ const Plans = () => {
                   </ul>
                 </td>
                 <td className="px-4 py-2 border-r border-gray-400">
-                  {judge?.validity}{judge?.validityType}
+                  {judge?.validity}
+                  {judge?.validityType}
                 </td>
                 <td className="px-4 py-2 border-r border-gray-400">
-              ₹{judge?.actualPrice}
+                  ₹{judge?.actualPrice}
                 </td>
                 <td className="px-4 py-2 border-r border-gray-400">
-              ₹{judge?.offerPrice}
+                  ₹{judge?.offerPrice}
                 </td>
                 <td className="px-4 py-2 border-r border-gray-400">
                   <button
@@ -670,9 +623,8 @@ const Plans = () => {
                     className={`py-2 px-5 flex space-x-2 items-center ${
                       judge?.status
                         ? " text-[#FF0404] border-[#FF0404]"
-                        : "  border-[#E88B13] text-[#E88B13]"
-                    } rounded-full  border `}
-                  >
+                        : "  border-[#1ea524] text-[#1ea524]"
+                    } rounded-full  border `}>
                     {" "}
                     <span>{judge?.status ? "Blocked" : "Unblocked"}</span>
                     <BiSolidDownArrow className="text-black" />
@@ -681,8 +633,7 @@ const Plans = () => {
                 <td className="px-4 py-2 border-r border-gray-400">
                   <button
                     disabled={isLoadingBlock}
-                    onClick={() => handleEditClick(judge)}
-                  >
+                    onClick={() => handleEditClick(judge)}>
                     <img
                       alt="pics"
                       src="/icons/edit.svg"
@@ -716,4 +667,3 @@ const Plans = () => {
 };
 
 export default Plans;
- 

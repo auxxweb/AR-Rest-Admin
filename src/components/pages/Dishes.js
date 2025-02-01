@@ -297,148 +297,171 @@ const Dishes = () => {
             </span>
 
             <Modal
-  isVisible={isModalVisible}
-  onClose={handleModalClose}
-  modalHeader={editPopupData ? "Edit Dish" : "Add Dish"}
->
-  <form onSubmit={onSubmit} className="space-y-6">
-    {/* Dish Name */}
-    <div>
-      <label htmlFor="dishName" className="block text-sm font-semibold text-gray-700">
-        Dish Name
-      </label>
-      <input
-        type="text"
-        name="dishName"
-        id="dishName"
-        className="mt-1 block w-full border rounded-lg p-2 border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-        placeholder="Dish Name"
-        required
-        defaultValue={editPopupData?.dishName || ""}
-      />
-    </div>
+              isVisible={isModalVisible}
+              onClose={handleModalClose}
+              modalHeader={editPopupData ? "Edit Dish" : "Add Dish"}>
+              <div className="max-h-[80vh] overflow-y-auto scrollbar-hide px-4">
+                <form onSubmit={onSubmit} className="space-y-6">
+                  {/* Dish Name */}
+                  <div>
+                    <label
+                      htmlFor="dishName"
+                      className="block text-sm font-semibold text-gray-700">
+                      Dish Name
+                    </label>
+                    <input
+                      type="text"
+                      name="dishName"
+                      id="dishName"
+                      className="mt-1 block w-full border rounded-lg p-2 border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                      placeholder="Dish Name"
+                      required
+                      defaultValue={editPopupData?.dishName || ""}
+                    />
+                  </div>
 
-    {/* Description */}
-    <div>
-      <label htmlFor="description" className="block text-sm font-semibold text-gray-700">
-        Description
-      </label>
-      <textarea
-        name="description"
-        id="description"
-        className="mt-1 block w-full border rounded-lg p-2 border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm h-28"
-        placeholder="Description"
-        required
-        defaultValue={editPopupData?.description || ""}
-      ></textarea>
-    </div>
+                  {/* Description */}
+                  <div>
+                    <label
+                      htmlFor="description"
+                      className="block text-sm font-semibold text-gray-700">
+                      Description
+                    </label>
+                    <textarea
+                      name="description"
+                      id="description"
+                      className="mt-1 block w-full border rounded-lg p-2 border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm h-28"
+                      placeholder="Description"
+                      required
+                      defaultValue={
+                        editPopupData?.description || ""
+                      }></textarea>
+                  </div>
 
-    {/* Price & Offer Price */}
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-      <div>
-        <label htmlFor="price" className="block text-sm font-semibold text-gray-700">
-          Price
-        </label>
-        <input
-          type="number"
-          name="price"
-          id="price"
-          className="mt-1 block w-full border rounded-lg p-2 border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-          placeholder="Price"
-          required
-          defaultValue={editPopupData?.price || ""}
-        />
-      </div>
-      <div>
-        <label htmlFor="offerPrice" className="block text-sm font-semibold text-gray-700">
-          Offer Price
-        </label>
-        <input
-          type="number"
-          name="offerPrice"
-          id="offerPrice"
-          className="mt-1 block w-full border rounded-lg p-2 border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-          placeholder="Offer Price"
-          defaultValue={editPopupData?.offerPrice || ""}
-        />
-      </div>
-    </div>
+                  {/* Price & Offer Price */}
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                    <div>
+                      <label
+                        htmlFor="price"
+                        className="block text-sm font-semibold text-gray-700">
+                        Price
+                      </label>
+                      <input
+                        type="number"
+                        name="price"
+                        id="price"
+                        className="mt-1 block w-full border rounded-lg p-2 border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        placeholder="Price"
+                        required
+                        defaultValue={editPopupData?.price || ""}
+                      />
+                    </div>
+                    <div>
+                      <label
+                        htmlFor="offerPrice"
+                        className="block text-sm font-semibold text-gray-700">
+                        Offer Price
+                      </label>
+                      <input
+                        type="number"
+                        name="offerPrice"
+                        id="offerPrice"
+                        className="mt-1 block w-full border rounded-lg p-2 border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        placeholder="Offer Price"
+                        defaultValue={editPopupData?.offerPrice || ""}
+                      />
+                    </div>
+                  </div>
 
-    {/* Type & Count */}
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-      <div>
-        <label htmlFor="type" className="block text-sm font-semibold text-gray-700">
-          Type
-        </label>
-        <input
-          type="text"
-          name="type"
-          id="type"
-          className="mt-1 block w-full border rounded-lg p-2 border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-          placeholder="Type"
-          required
-          defaultValue={editPopupData?.type || ""}
-        />
-      </div>
-      <div>
-        <label htmlFor="count" className="block text-sm font-semibold text-gray-700">
-          Count
-        </label>
-        <input
-          type="number"
-          name="count"
-          id="count"
-          className="mt-1 block w-full border rounded-lg p-2 border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-          placeholder="Count"
-          required
-          defaultValue={editPopupData?.count || ""}
-        />
-      </div>
-    </div>
+                  {/* Type & Count */}
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                    <div>
+                      <label
+                        htmlFor="type"
+                        className="block text-sm font-semibold text-gray-700">
+                        Type
+                      </label>
+                      <input
+                        type="text"
+                        name="type"
+                        id="type"
+                        className="mt-1 block w-full border rounded-lg p-2 border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        placeholder="Type"
+                        required
+                        defaultValue={editPopupData?.type || ""}
+                      />
+                    </div>
+                    <div>
+                      <label
+                        htmlFor="count"
+                        className="block text-sm font-semibold text-gray-700">
+                        Count
+                      </label>
+                      <input
+                        type="number"
+                        name="count"
+                        id="count"
+                        className="mt-1 block w-full border rounded-lg p-2 border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        placeholder="Count"
+                        required
+                        defaultValue={editPopupData?.count || ""}
+                      />
+                    </div>
+                  </div>
 
-    {/* AR Enabled */}
-    <div className="flex items-center gap-2">
-      <input
-        type="checkbox"
-        name="arEnabled"
-        id="arEnabled"
-        className="rounded border-gray-300 focus:ring-indigo-500"
-        defaultChecked={editPopupData?.ar || false}
-      />
-      <label htmlFor="arEnabled" className="text-sm font-medium text-gray-700">
-        AR Enabled
-      </label>
-    </div>
+                  {/* AR Enabled */}
+                  <div className="flex items-center gap-2">
+                    <input
+                      type="checkbox"
+                      name="arEnabled"
+                      id="arEnabled"
+                      className="rounded border-gray-300 focus:ring-indigo-500"
+                      defaultChecked={editPopupData?.ar || false}
+                    />
+                    <label
+                      htmlFor="arEnabled"
+                      className="text-sm font-medium text-gray-700">
+                      AR Enabled
+                    </label>
+                  </div>
 
-    {/* Image Upload */}
-    <div className="mt-4">
-      <label htmlFor="image" className="block text-sm font-semibold text-gray-700">
-        Upload Image
-      </label>
-      <input
-        type="file"
-        name="image"
-        id="image"
-        className="mt-1 block w-full border rounded-lg p-2 border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-        onChange={handlePreviewImage}
-      />
-      {(imageUrl || editPopupData) && (
-        <img className="mt-2 w-24 h-24 object-cover rounded-lg" src={imageUrl ?? editPopupData?.Image} alt="Preview" />
-      )}
-    </div>
+                  {/* Image Upload */}
+                  <div className="mt-4">
+                    <label
+                      htmlFor="image"
+                      className="block text-sm font-semibold text-gray-700">
+                      Upload Image
+                    </label>
+                    <input
+                      type="file"
+                      name="image"
+                      id="image"
+                      className="mt-1 block w-full border rounded-lg p-2 border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                      onChange={handlePreviewImage}
+                    />
+                    {(imageUrl || editPopupData) && (
+                      <img
+                        className="mt-2 w-24 h-24 object-cover rounded-lg"
+                        src={imageUrl ?? editPopupData?.Image}
+                        alt="Preview"
+                      />
+                    )}
+                  </div>
 
-    {/* Submit Button */}
-    <div className="flex justify-center pt-6">
-      <button
-        disabled={isLoadingMutation || isLoadingEdit}
-        type="submit"
-        className="bg-[#E88B13] hover:bg-[#d77a0f] text-white font-bold py-2 px-8 rounded-full transition-all duration-300 shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
-      >
-        {isLoadingMutation || isLoadingEdit ? "Loading..." : "Submit"}
-      </button>
-    </div>
-  </form>
-</Modal>
+                  {/* Submit Button */}
+                  <div className="flex justify-center pt-6">
+                    <button
+                      disabled={isLoadingMutation || isLoadingEdit}
+                      type="submit"
+                      className="bg-[#E88B13] hover:bg-[#d77a0f] text-white font-bold py-2 px-8 rounded-full transition-all duration-300 shadow-md disabled:opacity-50 disabled:cursor-not-allowed">
+                      {isLoadingMutation || isLoadingEdit
+                        ? "Loading..."
+                        : "Submit"}
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </Modal>
 
             <Modal isVisible={showDeletePopup} onClose={handleDeleteModalClose}>
               <h3 className="flex self-center text-lg font-bold">
