@@ -61,8 +61,8 @@ const DashBoardSection2 = () => {
     },
     {
       logo: participats,
-      count: 50,
-      title: "Vendors",
+      count: 12,
+      title: "Tables",
     },
   ];
 

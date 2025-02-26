@@ -57,16 +57,16 @@ const Login = () => {
     <>
       <div
         className="relative min-h-screen bg-cover bg-center "
-        style={{ backgroundImage: 'url("/quranBackground.jpeg")' }}
+        // style={{ backgroundImage: 'url("/quranBackground.jpeg")' }}
       >
         <div className="relative z-10 flex flex-col h-full items-center space-y-4 justify-center p-3 ">
           <div className="flex flex-row w-28 h-auto justify-center">
-            <img
+            {/* <img
               src="/quranLogo.svg"
               alt=" Logo"
               className="h-full w-full object-contain"
               priority
-            />
+            /> */}
           </div>
           <div className="w-full max-w-lg ">
             <form
